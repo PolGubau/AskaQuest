@@ -4,11 +4,12 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { conn } from "src/utils/database";
-import styles from "../styles/Home.module.css";
 import AppLayout from "src/components/AppLayout";
 import { PATH } from "src/utils/consts";
 import { colors } from "../styles/theme";
 import { setToStorage, getFromStorage } from "src/hooks/useStorage";
+import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
+import styles from "src/styles/Index.module.css";
 
 //
 const Index: NextPage = () => {
@@ -50,9 +51,9 @@ const Index: NextPage = () => {
         <div className={styles.container}>
           <section>
             <h1>AskAQuest</h1>
-            <section className="singupSection">
+            <section className={styles.singupSection}>
               {isLoading ? (
-                <div>Loading...</div>
+                <SquareLoader />
               ) : (
                 <>
                   {noUser ? (
@@ -93,23 +94,7 @@ const Index: NextPage = () => {
           </section>
         </div>
       </AppLayout>
-      {/* <style jsx>{`
-        .buttonsContainer {
-          display: flex;
-          flex-direction: row;
-          margin: 10px;
-        }
-        button {
-          margin: 5px 2px;
-          padding: 3px 6px;
-        }
-
-        h1 {
-          color: ${colors.secondary};
-          font-weight: 800;
-          margin-bottom: 16px;
-        }
-      `}</style> */}
+     
     </>
   );
 };

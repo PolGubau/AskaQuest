@@ -2,7 +2,7 @@ import { colors } from "src/styles/theme";
 import { addOpacityToColor } from "src/styles/utils";
 
 export default function CollectionsItem({ collection }) {
-  const { title, questions, tags } = collection;
+  const { title, tags = ["No info"] } = collection;
   return (
     <>
       <section>
@@ -15,7 +15,6 @@ export default function CollectionsItem({ collection }) {
               </span>
             ))} */}
           </p>
-          <p>{questions.length} questions</p>
         </div>
       </section>
 
