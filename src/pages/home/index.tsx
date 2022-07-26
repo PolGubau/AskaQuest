@@ -3,6 +3,7 @@ import Collections from "src/components/Collections/Collections";
 import { PATH } from "src/utils/consts";
 import AppLayout from "src/components/AppLayout";
 import Nav from "src/components/Nav";
+import styles from "src/pages/home/home.module.css";
 export default function HomePage({ responseCollection }:any) {
   
   return (
@@ -23,23 +24,7 @@ export default function HomePage({ responseCollection }:any) {
           </section>
         </main>
       </AppLayout>
-      <style jsx>{`
-        nav {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          align-content: center;
-          justify-content: space-between;
-          align-items: center;
-        }
-        .profile {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          align-content: center;
-          align-items: center;
-        }
-      `}</style>
+
     </>
   );
 }

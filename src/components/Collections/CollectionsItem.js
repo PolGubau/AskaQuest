@@ -1,8 +1,18 @@
 import { colors } from "src/styles/theme";
 import { addOpacityToColor } from "src/styles/utils";
 
+// type collection= {
+//     ID: number;
+//     title: string;
+//     creator_id: string;
+//     date_creation: string;
+//     likes: number;
+//     tags: string;
+// }
+
 export default function CollectionsItem({ collection }) {
-  const { title, tags = ["No info"] } = collection;
+  const { ID, title, creator_id, date_creation, likes, tags } = collection;
+  console.log(ID, title, creator_id, date_creation, likes, tags);
   return (
     <>
       <section>
