@@ -1,30 +1,32 @@
+import { useState } from "react";
 import { colors } from "src/styles/theme";
 import { addOpacityToColor } from "src/styles/utils";
-
-// type collection= {
-//     ID: number;
-//     title: string;
-//     creator_id: string;
-//     date_creation: string;
-//     likes: number;
-//     tags: string;
-// }
+import { useTimeAgo } from "rooks";
 
 export default function CollectionsItem({ collection }) {
-  const { ID, title, creator_id, date_creation, likes, tags } = collection;
-  console.log(ID, title, creator_id, date_creation, likes, tags);
+  
+  const [date, setDate] = useState(new Date());
+  
+  const timeAgo = useTimeAgo(date.getTime() - 1000 * 12, {
+    locale: "es_Es",
+  });
+
+  const { ID, title, creator_id, date_creation, likes } = collection;
+  console.log(collection);
+  // const tags = JSON.parse(collection.tags);
   return (
     <>
       <section>
         <div>
           <h3>{title}</h3>
-          <p>
-            {/* {tags.map((tag, index) => (
+          <h5>{timeAgo}</h5>
+          {/* <p>
+            {tags.map((tag, index) => (
               <span className="tag" key={index}>
                 {tag}
               </span>
-            ))} */}
-          </p>
+            ))}
+          </p> */}
         </div>
       </section>
 
