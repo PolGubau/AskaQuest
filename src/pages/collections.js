@@ -43,7 +43,7 @@ export default function collections({ responseCollection }) {
   );
 }
 export async function getServerSideProps() {
-  const res = await fetch(`${PATH}/api/colections`);
+  const res = await fetch(`${PATH.API}/colections`);
 
   const responseCollection = await res.json();
   return { props: { responseCollection } };

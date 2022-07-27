@@ -34,6 +34,6 @@
   },
   
   
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Collections/CollectionsItem.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Collections/CollectionsItem.js", "src/pages/index.tsx"],
   "exclude": ["node_modules"]
 }

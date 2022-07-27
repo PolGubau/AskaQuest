@@ -1,26 +1,26 @@
-import type { GetServerSideProps, NextPage } from "next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { conn } from "src/utils/database";
 import AppLayout from "src/components/AppLayout";
-import { PATH } from "src/utils/consts";
-import { colors } from "../styles/theme";
-import { setToStorage, getFromStorage } from "src/hooks/useStorage";
 import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
 import styles from "src/styles/Index.module.css";
 
+//auth
+import { useSession } from "next-auth/react";
 //
-const Index: NextPage = () => {
+const Index = () => {
+  // const Index: NextPage = () => {
   const router = useRouter();
-
+  const { data: session, status } = useSession();
+  console.log(session.user);
+  console.log(status);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [noUser, setnoUser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const response = await fetch(`/api/users/userName/${userName}`, {
@@ -61,13 +61,14 @@ const Index: NextPage = () => {
                   ) : (
                     <span>Already having an account?</span>
                   )}
-                  <form>
+                  <form className={styles.formulario}>
                     <input
                       type="text"
                       placeholder="Username"
                       autoComplete="username"
                       onChange={(e) => setUserName(e.target.value)}
                       value={userName}
+                      className={styles.input}
                     />
                     <input
                       type="password"
@@ -75,9 +76,11 @@ const Index: NextPage = () => {
                       autoComplete="current-password"
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
+                      className={styles.input}
                     />
                   </form>
                   <button onClick={handleSubmit}>Login</button>
+                  <button>Signin with Github</button>
                 </>
               )}
             </section>
@@ -94,7 +97,6 @@ const Index: NextPage = () => {
           </section>
         </div>
       </AppLayout>
-     
     </>
   );
 };

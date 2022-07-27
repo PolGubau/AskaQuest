@@ -1,16 +1,17 @@
 // user
-import { PATH } from '@s/consts'
-import AppLayout from '@c/AppLayout'
-import Head from 'next/head'
-import Collections from '@c/Collections/Collections'
-import Nav from '@c/Nav'
-import usePascalCase from '@h/usePascalCase'
+import { PATH } from "@s/consts";
+import AppLayout from "@c/AppLayout";
+import Head from "next/head";
+import Collections from "@c/Collections/Collections";
+import Nav from "@c/Nav";
+import usePascalCase from "@h/usePascalCase";
+import Image from "next/image";
 
 export default function userPage({ user, collectionsMatched }) {
-  let { userName, since, avatar } = user
+  let { userName, since, avatar } = user;
 
   // using usePascalCase to make the userName pascalCase
-  userName = usePascalCase(userName)
+  userName = usePascalCase(userName);
 
   return (
     <>
@@ -21,7 +22,7 @@ export default function userPage({ user, collectionsMatched }) {
       <Nav
         actualName={`${userName}'s profile`}
         path={[]}
-        actualLink={'profile/' + userName}
+        actualLink={"profile/" + userName}
       />
 
       <AppLayout>
@@ -32,7 +33,7 @@ export default function userPage({ user, collectionsMatched }) {
               <p>Here since {since}</p>
             </div>
             <div>
-              <img
+              <Image
                 className="avatar"
                 alt={`${userName}&apos;s avatar`}
                 src={avatar}
@@ -59,24 +60,24 @@ export default function userPage({ user, collectionsMatched }) {
         }
       `}</style>
     </>
-  )
+  );
 }
 
 export async function getServerSideProps(context) {
-  const { id } = context.query
+  const { id } = context.query;
 
-  const userRes = await fetch(`${PATH}/api/singleUser/${id}`)
-  const user = await userRes.json()
-  const collectionIdsByUser = user.collections
+  const userRes = await fetch(`${PATH.API}/singleUser/${id}`);
+  const user = await userRes.json();
+  const collectionIdsByUser = user.collections;
 
-  const collectionsRes = await fetch(`${PATH}/api/collections`)
-  const collectionsFromDB = await collectionsRes.json()
+  const collectionsRes = await fetch(`${PATH.API}/collections`);
+  const collectionsFromDB = await collectionsRes.json();
 
   // we need to find which collectionsFromDB.id matches with the collectionIdsByUser
 
   const collectionsMatched = collectionsFromDB.filter((collection) => {
-    return collectionIdsByUser.includes(collection.id)
-  })
+    return collectionIdsByUser.includes(collection.id);
+  });
 
-  return { props: { user, collectionsMatched } }
+  return { props: { user, collectionsMatched } };
 }

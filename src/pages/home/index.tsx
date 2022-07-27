@@ -4,7 +4,14 @@ import { PATH } from "src/utils/consts";
 import AppLayout from "src/components/AppLayout";
 import Nav from "src/components/Nav";
 import styles from "src/pages/home/home.module.css";
+
+import useRedirect from "src/hooks/useRedirect";
+
+
 export default function HomePage({ responseCollection }:any) {
+  
+  useRedirect(PATH.HOME);
+  
   
   return (
     <>
@@ -20,7 +27,7 @@ export default function HomePage({ responseCollection }:any) {
           </section>
           <section>
             <p>New Collections: </p>
-            <Collections allCollections={responseCollection} />
+            {/* <Collections allCollections={responseCollection} /> */}
           </section>
         </main>
       </AppLayout>
@@ -29,7 +36,7 @@ export default function HomePage({ responseCollection }:any) {
   );
 }
 export async function getServerSideProps() {
-  const res = await fetch(`${PATH}/api/colections`);
+  const res = await fetch(`${PATH.API}/colections`);
 
   const responseCollection = await res.json();
   return { props: { responseCollection } };
