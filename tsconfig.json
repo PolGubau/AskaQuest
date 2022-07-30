@@ -34,6 +34,6 @@
   },
   
   
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Collections/CollectionsItem.js", "src/pages/index.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Collections/CollectionsItem.js", "src/pages/login/index.tsx", "src/components/Nav/ProfileNav.js", "src/components/Nav/SkeletonProfile.js"],
   "exclude": ["node_modules"]
 }

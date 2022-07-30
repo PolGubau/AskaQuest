@@ -142,3 +142,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+body {
+  --primary-color: #0070f3;
+  --secondary-color: #96d5ff;
+  --white: #f5f5f5;
+  --black: #050505;
+}
