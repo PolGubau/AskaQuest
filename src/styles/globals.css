@@ -144,8 +144,12 @@ a {
 }
 
 body {
-  --primary-color: #0070f3;
-  --secondary-color: #96d5ff;
-  --white: #f5f5f5;
-  --black: #050505;
+  --black: #000000;
+  --white: #ffffff;
+  --primary-color: #0099ff;
+  --secondary-color: #1c5480;
+  --background: #96d5ff;
+  --clean-background: #daf1ff;
+  --right: #88ff9c;
+  --wrong: #ff8787;
 }

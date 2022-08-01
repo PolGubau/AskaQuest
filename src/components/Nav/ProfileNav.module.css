@@ -56,19 +56,52 @@
   flex-direction: row;
   justify-content: center;
   align-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   padding: 8px 10px;
   border-radius: 10px;
 }
 
 .profileLink:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--clean-background);
 }
 
-/* @media (min-width: ${breakpoints.mobile}) {
-  nav {
-    max-height: 90vh;
-    width: 95%;
-  }
-} */
+.rightNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.settingIcon {
+  width: 25px;
+  height: 25px;
+}
+.userName {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 1.1em;
+}
+.settings {
+  display: flex;
+  flex-direction: row;
+}
+.settingsButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.settingsButton:hover {
+  background-color: var(--clean-background);
+}

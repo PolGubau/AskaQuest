@@ -4,9 +4,9 @@ import AppLayout from "src/components/AppLayout";
 import Head from "next/head";
 import Collections from "src/components/Collections/Collections";
 import Nav from "src/components/Nav";
-import usePascalCase from "src/hooks/usePascalCase";
 import Image from "next/image";
 import styles from "./[id].module.css";
+import AddNewButton from "src/components/Buttons/AddNewButton";
 export default function userPage({ user, collectionsByUser }) {
   const { userName, since, avatar, followers, following, date_creation } = user;
   console.log(user);
@@ -50,6 +50,7 @@ export default function userPage({ user, collectionsByUser }) {
             ) : (
               <Collections allCollections={collectionsByUser} />
             )}
+            <AddNewButton />
           </section>
         </main>
       </AppLayout>

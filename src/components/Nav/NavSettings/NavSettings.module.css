@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 50px;
+  top: 100px;
+  background-color: var(--clean-background);
+  padding: 10px;
+  min-width: 150px;
+  border-radius: 10px;
+}
+.option {
+  cursor: pointer;
+  margin: 5px 5px;
+  padding: 5px 14px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--background);
+}
+.option:hover {
+  background-color: var(--secondary-color);
+  color: var(--white);
+}

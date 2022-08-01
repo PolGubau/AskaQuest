@@ -7,13 +7,7 @@ const backgroundColor = addOpacityToColor(colors.primary, 0.2);
 
 export const globalStyles = css.global`
   :root {
-  --black: "#000000",
-  --white: "#ffffff",
-  --primary: "#0099ff",
-  --secondary: "#1c5480",
-  --background: "#96d5ff",
-  --right: "#88ff9c",
-  --wrong: "#ff8787",
+  
       --opacity1: ${addOpacityToColor(colors.primary, 0.1)},
     --opacity3: ${addOpacityToColor(colors.primary, 0.3)},
     --opacity5: ${addOpacityToColor(colors.primary, 0.5)},
