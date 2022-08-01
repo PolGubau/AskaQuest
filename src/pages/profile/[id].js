@@ -6,12 +6,10 @@ import Collections from "src/components/Collections/Collections";
 import Nav from "src/components/Nav";
 import usePascalCase from "src/hooks/usePascalCase";
 import Image from "next/image";
-
-export default function userPage({ user, collectionsMatched }) {
-  let { userName, since, avatar } = user;
-
-  // using usePascalCase to make the userName pascalCase
-
+import styles from "./[id].module.css";
+export default function userPage({ user, collectionsByUser }) {
+  const { userName, since, avatar, followers, following, date_creation } = user;
+  console.log(user);
   return (
     <>
       <Head>
@@ -28,25 +26,30 @@ export default function userPage({ user, collectionsMatched }) {
         <main>
           <header>
             <div>
-              <h1>{userName}</h1>
-              <p>Here since {since}</p>
+              <h1 className={styles.heading1}>{userName}</h1>
+              {followers ? (
+                <p> Followed by {followers}</p>
+              ) : (
+                `Be the first one to follow ${userName}!`
+              )}
+              <p>Here since {date_creation}</p>
             </div>
             <div>
               <Image
                 className="avatar"
                 alt={`${userName}&apos;s avatar`}
-                src={
-                  avatar ||
-                  `https://api.multiavatar.com/askaquest.png
-`
-                }
+                src={avatar || `https://api.multiavatar.com/${userName}.svg`}
                 width={200}
                 height={200}
               />
             </div>
           </header>
           <section>
-            <Collections allCollections={collectionsMatched} />
+            {collectionsByUser.length === 0 ? (
+              <p>This user has not created anything 😥</p>
+            ) : (
+              <Collections allCollections={collectionsByUser} />
+            )}
           </section>
         </main>
       </AppLayout>
@@ -73,6 +76,8 @@ export async function getServerSideProps(context) {
 
   const userRes = await fetch(`${PATH.API}/users/userName/${id}`);
   const user = await userRes.json();
+  const collectionsRes = await fetch(`${PATH.API}/collections/userName/${id}`);
+  const collectionsByUser = await collectionsRes.json();
 
-  return { props: { user } };
+  return { props: { user, collectionsByUser } };
 }
