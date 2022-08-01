@@ -1,10 +1,10 @@
 import Link from "next/link";
 import ProfileNav from "./ProfileNav";
 import styles from "./ProfileNav.module.css";
-
+import { backgroundSmooth } from "src/styles/theme";
 export default function Nav({
   actualName = "",
-  actualRoot = "home",
+  actualRoot = "Home",
   path = [],
   actualLink = "/",
 }) {
@@ -12,10 +12,13 @@ export default function Nav({
     <>
       <section className={styles.section}>
         <nav className={styles.nav}>
-          <div className={styles.div}>
-            <Link href={`${"/" + actualRoot}`}>
-              <a>{actualRoot}</a>
+          <div className={styles.path}>
+            <Link href={`${"/"}`}>
+              <a className={styles.a} style={{ backgroundSmooth }}>
+                {actualRoot}
+              </a>
             </Link>
+
             {path &&
               path.map((item, index) => (
                 <div key={index}>

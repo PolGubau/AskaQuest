@@ -13,7 +13,6 @@ export default function Collections({
     },
   ],
 }) {
-  console.log(allCollections);
   return (
     <>
       <section>

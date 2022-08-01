@@ -8,49 +8,50 @@ import usePascalCase from "src/hooks/usePascalCase";
 import { PATH } from "src/utils/consts";
 import styles from "./ProfileNav.module.css";
 import { backgroundSmooth } from "src/styles/theme";
-import useUserSession from "src/hooks/useUserSession";
+import useSessionStorage from "src/hooks/useSessionStorage";
+import { signOut } from "next-auth/react";
 
 //
 export default function ProfileNav() {
   const router = useRouter();
-  const {
-    user: { name, image },
-    status,
-  } = useUserSession();
 
-  const PascalName = usePascalCase(name);
+  const { data, status } = useSessionStorage();
+  const { ID, date_creation, userName, password } = data;
+
+  const PascalName = usePascalCase(userName);
 
   switch (status) {
-    case "unauthorized":
+    case -1:
       router.push(PATH.SIGN_IN);
-      
-    case "loading":
+
+    case 0:
       return (
         <div className={styles.profile}>
           <SkeletonProfile />
         </div>
       );
-    case "authenticated":
-      if (name) {
+    case 1:
+      if (userName) {
         return (
-          <Link href={`${"/profile/" + name}`}>
+          <Link href={`/profile/${userName}`}>
             <a>
               <div className={styles.profileLink} style={{ backgroundSmooth }}>
                 <div className={styles.nameProfile}>
                   <p>
-                    <b>{PascalName}</b>
+                    <b>{userName}</b>
                   </p>
                   <p>
                     <small>Your Profile</small>
                   </p>
                 </div>
-                <Image
+                <button onClick={() => signOut()}>SignOut</button>
+                {/* <Image
                   src={`${image}`}
-                  alt={name}
+                  alt={userName}
                   width={49}
                   height={49}
                   className={styles.avatar}
-                />
+                /> */}
               </div>
             </a>
           </Link>
