@@ -6,47 +6,50 @@ import AppLayout from "src/components/AppLayout";
 import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
 import styles from "src/pages/login/login.module.css";
 import { PATH } from "src/utils/consts";
+import { getSession, signIn, getProviders } from "next-auth/react";
 
 //auth
 //
 const Login = () => {
   // const Index: NextPage = () => {
   const router = useRouter();
-  
-  
+  useEffect(() => {
+    (async () => {
+      const providers = await getProviders();
+    })();
+  }, []);
+
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [noUser, setnoUser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = async (e:any) => {
+  const messagesLogin = {
+    base: "Already having an account?",
+    userNoExist: "This user doesn&apos;t exist 🥀",
+    passwordIncorrect: "Your username or password are incorrect.",
+  };
+  const [message, setMessage] = useState(messagesLogin.base);
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
-    const response = await fetch(`/api/users/userName/${userName}`, {
-      method: "GET",
-    });
+    const response = await fetch(`/api/users/userName/${userName}`);
 
     const user = await response.json();
     setIsLoading(false);
 
     if (user.error) {
       console.log(user.error);
+      setMessage(messagesLogin.userNoExist);
       setnoUser(true);
     } else {
-      if ((user.password = password)) {
+      if (user.password === password) {
         console.log("User correct");
+        const jsonUser = JSON.stringify(user);
+        sessionStorage.setItem("user", jsonUser);
         router.push(PATH.HOME);
       }
     }
   };
-  
-  
-  const handleGithubLogin = async () => {
-  router.push(PATH.GITHUB_LOGIN);
-  }
-  
-  
-  
 
   return (
     <>
@@ -63,11 +66,7 @@ const Login = () => {
                 <SquareLoader />
               ) : (
                 <>
-                  {noUser ? (
-                    <span>This user doesn&apos;t exist 🥀</span>
-                  ) : (
-                    <span>Already having an account?</span>
-                  )}
+                  {message}
                   <form className={styles.formulario}>
                     <input
                       type="text"
@@ -87,7 +86,9 @@ const Login = () => {
                     />
                   </form>
                   <button onClick={handleSubmit}>Login</button>
-                  <button  onClick={handleGithubLogin}>Signin with Github</button>
+                  <button onClick={() => signIn("github")}>
+                    Signin with Github
+                  </button>
                 </>
               )}
             </section>
