@@ -3,6 +3,7 @@ export const PATH = {
   HOME: "http://localhost:3000",
   API: "http://localhost:3000/api",
   GITHUB_LOGIN: "http://localhost:3000/api/auth/signin/github",
+  SIGN_OUT: "http://localhost:3000/api/auth/signout",
 };
 
 export const MAX_CHARACTERS = 100;
