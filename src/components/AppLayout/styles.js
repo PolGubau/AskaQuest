@@ -1,23 +1,38 @@
-import css from 'styled-jsx/css'
+import css from "styled-jsx/css";
 
-import { breakpoints, colors, fonts } from '../../styles/theme'
-import { addOpacityToColor } from '../../styles/utils'
+import { breakpoints, colors, fonts } from "../../styles/theme";
+import { addOpacityToColor } from "../../styles/utils";
 
-const backgroundColor = addOpacityToColor(colors.primary, 0.2)
+const backgroundColor = addOpacityToColor(colors.primary, 0.2);
 
 export const globalStyles = css.global`
+  :root {
+  --black: "#000000",
+  --white: "#ffffff",
+  --primary: "#0099ff",
+  --secondary: "#1c5480",
+  --background: "#96d5ff",
+  --right: "#88ff9c",
+  --wrong: "#ff8787",
+      --opacity1: ${addOpacityToColor(colors.primary, 0.1)},
+    --opacity3: ${addOpacityToColor(colors.primary, 0.3)},
+    --opacity5: ${addOpacityToColor(colors.primary, 0.5)},
+  }
   html,
   body {
     background-image: radial-gradient(${backgroundColor} 2px, #fdfdfd 1px),
       radial-gradient(${backgroundColor} 1px, #fdfdfd 1px);
     background-position: 0 0, 5px 25px;
     background-size: 50px 50px;
-    padding: 0;
     margin: 0;
     overflow: hidden;
     font-family: ${fonts.base};
   }
+  body {
+    margin: 30px 60px;
 
+
+  }
   * {
     box-sizing: border-box;
   }
@@ -25,15 +40,28 @@ export const globalStyles = css.global`
   input {
     font-family: ${fonts.base};
   }
-`
+`;
 
 export default css`
   div {
-    display: grid;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -moz-box-orient: horizontal;
+    -moz-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
     height: 100vh;
     width: 100%;
     padding: 20px;
-    place-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-start;
   }
 
   main {
@@ -42,7 +70,7 @@ export default css`
     background: #fff;
     border-radius: 10px;
     min-height: fit-content;
-    height: 60vh;
+    min-height: 60vh;
     border: solid 1px ${colors.primary};
     /* box-shadow: 0px 6px 0px -4px ${colors.primary}; */
     width: 100%;
@@ -57,4 +85,4 @@ export default css`
       width: ${breakpoints.tablet};
     }
   }
-`
+`;
