@@ -1,30 +1,29 @@
-import { colors, fontSizes } from '../../styles/theme'
-import { useState } from 'react'
-import AppLayout from '@c/AppLayout'
-import Button from '@c/Button'
+import { colors, fontSizes } from "src/styles/theme";
+import { useState } from "react";
+import AppLayout from "src/components/AppLayout";
+import Button from "src/components/Button";
 
-import { addOpacityToColor } from '@sty/utils'
 export default function Question({
   id = 0,
-  title = 'Your connection did not work, do you know why?',
+  title = "Your connection did not work, do you know why?",
   answers,
-  solution = 'yes',
-  creator = 'unknown',
+  solution = "yes",
+  creator = "unknown",
 
   nextQuestion,
   questionIndex,
   results,
   setResults,
 }) {
-  const [selectedIndex, setSelectedIndex] = useState(undefined)
+  const [selectedIndex, setSelectedIndex] = useState(undefined);
   const select = (index) => {
     selectedIndex === index
       ? setSelectedIndex(undefined)
-      : setSelectedIndex(index)
-  }
+      : setSelectedIndex(index);
+  };
   const handleSubmit = () => {
-    const yourAnswer = answers[selectedIndex]
-    const isCorrect = yourAnswer === solution
+    const yourAnswer = answers[selectedIndex];
+    const isCorrect = yourAnswer === solution;
 
     // concat in results array the index of question, its solution and if you did it right
     setResults([
@@ -35,10 +34,10 @@ export default function Question({
         solution,
         isCorrect,
       },
-    ])
+    ]);
 
-    nextQuestion()
-  }
+    nextQuestion();
+  };
   return (
     <>
       <AppLayout>
@@ -67,7 +66,7 @@ export default function Question({
                   >
                     <span>{answer}</span>
                   </div>
-                )
+                );
               })}
             </div>
             <Button text="Next" start={handleSubmit} />
@@ -114,5 +113,5 @@ export default function Question({
         }
       `}</style>
     </>
-  )
+  );
 }

@@ -17,17 +17,7 @@ export default function Collections({
     <>
       <section>
         {allCollections.map((collection) => (
-          <Link
-            key={collection.ID}
-            href={{
-              pathname: "/collection/[id]",
-              query: { id: collection._id },
-            }}
-          >
-            <a>
-              <CollectionsItem collection={collection} />
-            </a>
-          </Link>
+          <CollectionsItem collection={collection} key={collection.ID} />
         ))}
       </section>
 

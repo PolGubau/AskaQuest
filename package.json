@@ -16,7 +16,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-loading-skeleton": "^3.1.0",
-    "rooks": "^5.14.0"
+    "rooks": "^5.14.0",
+    "vercel": "^27.3.3"
   },
   "devDependencies": {
     "@types/node": "18.0.6",

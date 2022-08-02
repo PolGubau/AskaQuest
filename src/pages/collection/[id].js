@@ -1,20 +1,21 @@
-import { PATH } from "@s/consts";
-import CollectionCover from "@c/Question/CollectionCover";
+import { PATH } from "src/utils/consts";
+import CollectionCover from "src/components/Question/CollectionCover";
 import { useState, useEffect } from "react";
-import Nav from "@c/Nav";
-import Question from "@c/Question";
-import Results from "@c/Results/Results";
+import Nav from "src/components/Nav";
+import Question from "src/components/Question";
+import Results from "src/components/Results/Results";
 //
 export default function CollectionPage({
-  collection,
-  collectionId,
-  questionsMatched,
+  error = false,
   user,
+  collection,
+  questions,
 }) {
-  console.log(user);
-
-  const MAX_QUESTION = Number(questionsMatched.length);
-  const ARRAY_QUESTIONS = questionsMatched;
+  if (error) {
+    return <h1>Error</h1>;
+  }
+  const MAX_QUESTION = Number(questions.length);
+  const ARRAY_QUESTIONS = questions;
   const [questionIndex, setQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(
     ARRAY_QUESTIONS[questionIndex]
@@ -29,19 +30,15 @@ export default function CollectionPage({
   useEffect(() => {
     setCurrentQuestion(ARRAY_QUESTIONS[questionIndex]);
   }, [questionIndex]);
-  console.log(questionIndex, " - ", MAX_QUESTION);
 
   return (
     <>
-      <Nav
-        path={["collections", collectionId]}
-        actualLink={"collection/" + collectionId}
-      />
+      <Nav />
       {!started && (
         <CollectionCover
           id={collection.id}
           userId={collection.userId}
-          userName={user.userName}
+          // userName={user.userName}
           title={collection.title}
           tags={collection.tags}
           questions={collection.questions}
@@ -77,30 +74,22 @@ export default function CollectionPage({
   );
 }
 export async function getServerSideProps(context) {
-  let { id } = context.query;
-  const collectionId = id;
-  // taking apis
-  const resCollection = await fetch(`${PATH.API}/collections/${id}`);
-  const collection = await resCollection.json();
-  const questions = collection.questions;
-  console.log(collection);
-  const resQuests = await fetch(`${PATH.API}/quests`);
-  // passing apis to json
-  const allQuests = await resQuests.json();
+  const { id } = context.query;
+  // we have an id from a collection
+  const collectionRes = await fetch(`${PATH.API}/collections/${id}`);
+  if (!collectionRes) {
+    return { props: { error: true } };
+  }
+  const collection = await collectionRes.json();
 
-  // filtering questions
+  const questionsRes = await fetch(
+    `${PATH.API}/questions/MatchingByCollection/${id}`
+  );
+  const questions = await questionsRes.json();
 
-  // we need to find which questions matches with the allQuests.id
-  // const questionsMatched = questsOfCollection.map((quest) => {
-  //   const questMatch = allQuests.find((DBquest) => DBquest.id === quest)
-  //   return questMatch
-  // })
-  // const { userId } = collection
+  const userID = collection.creator_id;
+  const userRes = await fetch(`${PATH.API}/users/id/${userID}`);
+  const user = await userRes.json();
 
-  // id = userId
-  // // finding the user that created the collection
-  // const resUsers = await fetch(`${PATH}/api/singleUser/${id}`)
-  // const user = await resUsers.json()
-
-  // return { props: { collection, collectionId, questionsMatched, user } }
+  return { props: { user, collection, questions } };
 }

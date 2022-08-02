@@ -7,15 +7,14 @@ import Nav from "src/components/Nav";
 import Image from "next/image";
 import styles from "./[id].module.css";
 import AddNewButton from "src/components/Buttons/AddNewButton";
+
 export default function userPage({ user, collectionsByUser }) {
   const { userName, since, avatar, followers, following, date_creation } = user;
-  console.log(user);
+
+  let date = new Date(date_creation).toLocaleString("es-ES");
+
   return (
     <>
-      <Head>
-        <title>{userName}&apos;s Profile / AskaQuest </title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Nav
         actualName={`${userName}'s profile`}
         path={[]}
@@ -24,7 +23,7 @@ export default function userPage({ user, collectionsByUser }) {
 
       <AppLayout>
         <main>
-          <header>
+          <header className={styles.header}>
             <div>
               <h1 className={styles.heading1}>{userName}</h1>
               {followers ? (
@@ -32,11 +31,11 @@ export default function userPage({ user, collectionsByUser }) {
               ) : (
                 `Be the first one to follow ${userName}!`
               )}
-              <p>Here since {date_creation}</p>
+              {date_creation && <p>Here since {date}</p>}
             </div>
             <div>
               <Image
-                className="avatar"
+                className={styles.avatar}
                 alt={`${userName}&apos;s avatar`}
                 src={avatar || `https://api.multiavatar.com/${userName}.svg`}
                 width={200}
@@ -54,20 +53,6 @@ export default function userPage({ user, collectionsByUser }) {
           </section>
         </main>
       </AppLayout>
-      <style jsx>{`
-        header {
-          display: flex;
-          justify-content: space-between;
-          align-content: center;
-          flex-wrap: wrap;
-          flex-direction: row;
-          align-items: center;
-        }
-        .avatar {
-          border-radius: 50%;
-          width: 100px;
-        }
-      `}</style>
     </>
   );
 }

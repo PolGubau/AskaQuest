@@ -53,10 +53,7 @@ const Login = () => {
 
   return (
     <>
-      <Head>
-        <title>AskAQuest</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    
       <AppLayout>
         <div className={styles.container}>
           <section>
@@ -67,7 +64,7 @@ const Login = () => {
               ) : (
                 <>
                   {message}
-                  <form className={styles.formulario}>
+                  <form className={styles.formulario} onClick={handleSubmit}>
                     <input
                       type="text"
                       placeholder="Username"
@@ -84,8 +81,8 @@ const Login = () => {
                       value={password}
                       className={styles.input}
                     />
+                  <input type="submit" value='Sign In' />
                   </form>
-                  <button onClick={handleSubmit}>Login</button>
                   <button onClick={() => signIn("github")}>
                     Signin with Github
                   </button>

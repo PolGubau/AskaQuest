@@ -3,3 +3,16 @@
   font-weight: bold;
   color: #000;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.avatar {
+  border-radius: 50%;
+  width: 100px;
+}

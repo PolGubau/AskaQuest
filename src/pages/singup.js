@@ -7,10 +7,7 @@ import { colors } from "../styles/theme";
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>AskAQuest</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  
       <AppLayout>
         <div className={styles.container}>
           <section>

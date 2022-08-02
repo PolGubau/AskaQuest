@@ -8,36 +8,34 @@ import { useSession, signIn } from "next-auth/react";
 
 export default function HomePage({ trendyCollections }: any) {
   const { data: session } = useSession();
-  
-  
-return(
-<>
-  <Nav actualRoot="home" />
-        <AppLayout>
-          <Head>
-            <title>Home / AskaQuest </title>
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-          <Logo />
-          <main>
-            <section>
-              {!session && <>
+
+  return (
+    <>
+      <Nav actualRoot="home" />
+      <AppLayout>
+        <Head>
+          <title>Home / AskaQuest </title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Logo />
+        <main>
+          <section>
+            {!session && (
+              <>
                 You can <button onClick={() => signIn()}>Sign in</button>
               </>
-              }
-              
-              
-              <p>New Collections: </p>
-              <Collections allCollections={trendyCollections} />
-            </section>
-          </main>
-        </AppLayout>
-      </>
-    );
-  }
-  
+            )}
 
-export async function getServerSideProps(context: object) {
+            <p>New Collections: </p>
+            <Collections allCollections={trendyCollections} />
+          </section>
+        </main>
+      </AppLayout>
+    </>
+  );
+}
+
+export async function getServerSideProps() {
   const res = await fetch(`${PATH.API}/collections`);
   const trendyCollections = await res.json();
 

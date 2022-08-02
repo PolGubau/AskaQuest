@@ -15,7 +15,7 @@ export default async function handler(
   switch (method) {
     case "GET":
       try {
-        const query = `SELECT * FROM public."Questions" WHERE "ID" = $1`;
+        const query = `SELECT * FROM public."Questions" WHERE "collection_id" = $1`;
         const values = [id];
         const result = await conn.query(query, values);
 
@@ -31,7 +31,7 @@ export default async function handler(
     case "PUT":
       try {
         const { likes } = body;
-        const query = `UPDATE public."Questions" SET likes = $1, WHERE ID = $2 RETURNING *`;
+        const query = `UPDATE public."Questions" SET likes = $1, WHERE collection_id = $2 RETURNING *`;
         const values = [likes, id];
         const result = await conn.query(query, values);
         if (result.rows.length === 0) {

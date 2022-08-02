@@ -1,19 +1,18 @@
-import AppLayout from '@c/AppLayout'
-import { addOpacityToColor } from '@sty/utils'
-import { colors, fontSizes, breakpoints } from '../../styles/theme'
-import CorrectedQuest from './CorrectedQuest'
-import Link from 'next/link'
-import Button from '@c/Button'
+import AppLayout from "src/components/AppLayout";
+import { colors, fontSizes, breakpoints } from "src/styles/theme";
+import CorrectedQuest from "./CorrectedQuest";
+import Link from "next/link";
+import Button from "src/components/Button";
 
 export default function Results({
   results,
-  userName = 'Anonymous',
-  title = 'Unnamed quest',
+  userName = "Anonymous",
+  title = "Unnamed quest",
 }) {
-  const questNumber = Number(results.length)
-  const correctAnswers = results.filter((result) => result.isCorrect).length // how much questions you answered correctly
+  const questNumber = Number(results.length);
+  const correctAnswers = results.filter((result) => result.isCorrect).length; // how much questions you answered correctly
   //   const incorrectAnswers = results.filter((result) => !result.isCorrect).length  // how much questions you answered wrong
-  const allAnswersAreGood = correctAnswers === questNumber
+  const allAnswersAreGood = correctAnswers === questNumber;
   return (
     <>
       <article className="container">
@@ -27,11 +26,11 @@ export default function Results({
               </h3>
               <div className="explication">
                 <ol
-                  style={{ listStyle: 'none', marginLeft: 0, paddingLeft: 0 }}
+                  style={{ listStyle: "none", marginLeft: 0, paddingLeft: 0 }}
                 >
                   {results.map((result, index) => {
-                    const { isCorrect, solution, question } = result
-                    const color = isCorrect ? colors.right : colors.wrong
+                    const { isCorrect, solution, question } = result;
+                    const color = isCorrect ? colors.right : colors.wrong;
                     return (
                       <CorrectedQuest
                         key={index}
@@ -41,7 +40,7 @@ export default function Results({
                         isCorrect={isCorrect}
                         solution={solution}
                       />
-                    )
+                    );
                   })}
                 </ol>
               </div>
@@ -55,7 +54,7 @@ export default function Results({
                 </b>
               </div>
               <div className="message">
-                {allAnswersAreGood && 'wow, you are a master!'}
+                {allAnswersAreGood && "wow, you are a master!"}
               </div>
               <div className="buttonsContainer">
                 <Link
@@ -177,5 +176,5 @@ export default function Results({
         }
       `}</style>
     </>
-  )
+  );
 }

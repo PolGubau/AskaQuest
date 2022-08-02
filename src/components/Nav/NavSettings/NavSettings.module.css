@@ -21,3 +21,26 @@
   background-color: var(--secondary-color);
   color: var(--white);
 }
+
+.settingIcon {
+  width: 25px;
+  height: 25px;
+}
+.settings {
+  display: flex;
+  flex-direction: row;
+}
+.settingsButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.settingsButton:hover {
+  background-color: var(--clean-background);
+}

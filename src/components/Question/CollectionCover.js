@@ -1,12 +1,12 @@
-import AppLayout from '@c/AppLayout'
-import Button from '@c/Button'
-import { addOpacityToColor } from '@sty/utils'
-import Link from 'next/link'
-import { colors, fontSizes } from '../../styles/theme'
+import AppLayout from "src/components/AppLayout";
+import Button from "src/components/Button";
+import Link from "next/link";
+import { colors, fontSizes } from "src/styles/theme";
+import { addOpacityToColor } from "src/styles/utils";
 export default function CollectionCover({
   id,
   userId,
-  userName = 'unknow',
+  userName = "unknow",
   title,
   tags,
   questions,
@@ -15,8 +15,8 @@ export default function CollectionCover({
   // we have a questions array, they are links, we want to send the first one when start button is pressed
 
   const start = () => {
-    setStarted(true)
-  }
+    setStarted(true);
+  };
   return (
     <>
       <article key={id} className="container">
@@ -126,5 +126,5 @@ export default function CollectionCover({
         }
       `}</style>
     </>
-  )
+  );
 }

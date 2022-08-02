@@ -1,13 +1,13 @@
-import Question from '@c/Question'
-import { PATH } from '@s/consts'
-import { useRouter } from 'next/router'
-import AppLayout from '@c/AppLayout'
+import Question from "src/components/Question";
+import { PATH } from "src/utils/consts";
+import { useRouter } from "next/router";
+import AppLayout from "src/components/AppLayout";
 export default function singleQuestionPage({ quests }) {
-  const router = useRouter()
-  const { id } = router.query
+  const router = useRouter();
+  const { id } = router.query;
 
   // find the question with the id in the url
-  const quest = quests.find((quest) => quest.id === id)
+  const quest = quests.find((quest) => quest.id === id);
   return (
     <>
       <AppLayout>
@@ -24,12 +24,12 @@ export default function singleQuestionPage({ quests }) {
         />
       </AppLayout>
     </>
-  )
+  );
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`${PATH}/api/quests`)
-  const quests = await res.json()
-  console.log(quests)
-  return { props: { quests } }
+  const res = await fetch(`${PATH}/api/quests`);
+  const quests = await res.json();
+  console.log(quests);
+  return { props: { quests } };
 }
