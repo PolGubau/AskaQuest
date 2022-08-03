@@ -1,4 +1,4 @@
-import AppLayout from "src/components/AppLayout";
+import AppLayout from "src/components/Layout/AppLayout";
 import { colors, fontSizes, breakpoints } from "src/styles/theme";
 import CorrectedQuest from "./CorrectedQuest";
 import Link from "next/link";

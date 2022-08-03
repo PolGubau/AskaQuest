@@ -1,7 +1,7 @@
 import css from "styled-jsx/css";
 
-import { breakpoints, colors, fonts } from "../../styles/theme";
-import { addOpacityToColor } from "../../styles/utils";
+import { breakpoints, colors, fonts } from "../../../styles/theme";
+import { addOpacityToColor } from "../../../styles/utils";
 
 const backgroundColor = addOpacityToColor(colors.primary, 0.2);
 
@@ -37,6 +37,11 @@ export const globalStyles = css.global`
 `;
 
 export default css`
+  .settings {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
   div {
     display: -webkit-box;
     display: -webkit-flex;

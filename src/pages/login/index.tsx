@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import AppLayout from "src/components/AppLayout";
+import AppLayout from "src/components/Layout/AppLayout";
 import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
 import styles from "src/pages/login/login.module.css";
 import { PATH } from "src/utils/consts";
 import { getSession, signIn, getProviders } from "next-auth/react";
+import Swal from "sweetalert2";
 
 //auth
 //
@@ -21,7 +22,8 @@ const Login = () => {
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [noUser, setnoUser] = useState(false);
+  const [failedUser, setFailedUser] = useState(false);
+  const [failedPassword, setFailedPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const messagesLogin = {
     base: "Already having an account?",
@@ -33,18 +35,34 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     const response = await fetch(`/api/users/userName/${userName}`);
-
-    const user = await response.json();
-    setIsLoading(false);
-
-    if (user.error) {
-      console.log(user.error);
+    
+    console.log(response);
+    
+    if (response.ok===false) {
+      Swal.fire(
+        "Ouups!",
+        messagesLogin.userNoExist,
+        "error"
+      );
+      setFailedUser(true);
       setMessage(messagesLogin.userNoExist);
-      setnoUser(true);
+      setIsLoading(false);
     } else {
-      if (user.password === password) {
-        console.log("User correct");
+      const user = await response.json();
+
+      if (user.password !== password) {
+        Swal.fire(
+          "Ouups!",
+          messagesLogin.passwordIncorrect,
+          "error"
+        );
+        setFailedPassword(true)
+        setMessage(messagesLogin.passwordIncorrect);
+        setIsLoading(false);
+     
+      }else{
         const jsonUser = JSON.stringify(user);
+        
         sessionStorage.setItem("user", jsonUser);
         router.push(PATH.HOME);
       }
@@ -53,7 +71,6 @@ const Login = () => {
 
   return (
     <>
-    
       <AppLayout>
         <div className={styles.container}>
           <section>
@@ -64,14 +81,14 @@ const Login = () => {
               ) : (
                 <>
                   {message}
-                  <form className={styles.formulario} onClick={handleSubmit}>
+                  <form className={styles.formulario} onSubmit={handleSubmit}>
                     <input
                       type="text"
                       placeholder="Username"
                       autoComplete="username"
                       onChange={(e) => setUserName(e.target.value)}
                       value={userName}
-                      className={styles.input}
+                      className={failedUser ? styles.inputError : styles.input}
                     />
                     <input
                       type="password"
@@ -79,9 +96,9 @@ const Login = () => {
                       autoComplete="current-password"
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
-                      className={styles.input}
+                      className={failedPassword ? styles.inputError : styles.input}
                     />
-                  <input type="submit" value='Sign In' />
+                    <input type="submit" value="Sign In" />
                   </form>
                   <button onClick={() => signIn("github")}>
                     Signin with Github

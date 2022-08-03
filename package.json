@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "next": "12.2.2",
     "next-auth": "^4.10.2",
     "pg": "^8.7.3",
@@ -17,6 +18,7 @@
     "react-icons": "^4.4.0",
     "react-loading-skeleton": "^3.1.0",
     "rooks": "^5.14.0",
+    "sweetalert2": "^11.4.24",
     "vercel": "^27.3.3"
   },
   "devDependencies": {

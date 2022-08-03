@@ -34,6 +34,6 @@
   },
   
   
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Collections/CollectionsItem.js", "src/pages/login/index.tsx", "src/components/Nav/ProfileNav.js", "src/components/Nav/SkeletonProfile.js", "src/hooks/useSessionStorage.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Collections/CollectionsItem.js", "src/interfaces/pages/login/index.tsx", "src/components/Nav/ProfileNav.js", "src/components/Nav/SkeletonProfile.js", "src/hooks/useSessionStorage.tsx", "src/pages/profile/[id].js", "src/hooks/useTimeAgo.js"],
   "exclude": ["node_modules"]
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import ProfileNav from "./ProfileNav";
 import styles from "./ProfileNav.module.css";
 import { backgroundSmooth } from "src/styles/theme";
-import NavSettings from "./NavSettings";
+import NavSettings from "../NavSettings";
 import { useRouter } from "next/router";
 import { PATH } from "src/utils/consts";
 export default function Nav({
@@ -11,7 +11,6 @@ export default function Nav({
   path = [],
   actualLink = "/",
 }) {
-
   const router = useRouter();
   return (
     <>
@@ -44,9 +43,6 @@ export default function Nav({
           </div>
           <div className={styles.rightNav}>
             <ProfileNav />
-            <div className={styles.settings}>
-              <NavSettings />
-            </div>
           </div>
         </nav>
       </section>

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Collections from "src/componen/Collections/Collections";
-import AppLayout from "src/components/AppLayout";
+import AppLayout from "src/components/Layout/AppLayout";
 import Nav from "src/components/Nav";
 
 export default function collections({ responseCollection }) {

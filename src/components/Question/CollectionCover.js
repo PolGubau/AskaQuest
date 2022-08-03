@@ -1,4 +1,4 @@
-import AppLayout from "src/components/AppLayout";
+import AppLayout from "src/components/Layout/AppLayout";
 import Button from "src/components/Button";
 import Link from "next/link";
 import { colors, fontSizes } from "src/styles/theme";

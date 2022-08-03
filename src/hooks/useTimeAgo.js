@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
-type dateUnitType = Array<[string, number]>;
-
-const DATE_UNITS: dateUnitType = [
+const DATE_UNITS = [
   ["years", 31536000],
   ["months", 2419200],
   ["days", 86400],
@@ -11,7 +9,7 @@ const DATE_UNITS: dateUnitType = [
   ["seconds", 1],
   ["milisecons", 0.001],
 ];
-const getDateDiffs = (timestamp: number) => {
+const getDateDiffs = (timestamp) => {
   const now = Date.now();
   const elapsed = (timestamp - now) / 1000;
 
@@ -23,7 +21,7 @@ const getDateDiffs = (timestamp: number) => {
   }
 };
 
-export default function useTimeAgo(timestamp: number) {
+export default function useTimeAgo(timestamp) {
   const [timeAgo, setTimeAgo] = useState(() => getDateDiffs(timestamp));
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export default function useTimeAgo(timestamp: number) {
   if (timeAgo !== undefined) {
     const { value, unit } = timeAgo;
     return rtf.format(value, unit);
-  }else{
+  } else {
     return "Date not defined";
   }
 }

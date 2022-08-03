@@ -1,6 +1,6 @@
 import { colors, fontSizes } from "src/styles/theme";
 import { useState } from "react";
-import AppLayout from "src/components/AppLayout";
+import AppLayout from "src/components/Layout/AppLayout";
 import Button from "src/components/Button";
 
 export default function Question({

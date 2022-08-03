@@ -3,11 +3,15 @@
   flex-direction: column;
   position: absolute;
   right: 50px;
-  top: 100px;
+  top: 130px;
   background-color: var(--clean-background);
   padding: 10px;
   min-width: 150px;
   border-radius: 10px;
+  z-index: 1;
+}
+.title {
+  margin: 10px;
 }
 .option {
   cursor: pointer;
@@ -31,6 +35,10 @@
   flex-direction: row;
 }
 .settingsButton {
+  position: absolute;
+  top: 90px;
+  right: 50px;
+  width: 49px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -43,4 +51,10 @@
 }
 .settingsButton:hover {
   background-color: var(--clean-background);
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.1;
 }

@@ -1,7 +1,7 @@
 import Question from "src/components/Question";
 import { PATH } from "src/utils/consts";
 import { useRouter } from "next/router";
-import AppLayout from "src/components/AppLayout";
+import AppLayout from "src/components/Layout/AppLayout";
 export default function singleQuestionPage({ quests }) {
   const router = useRouter();
   const { id } = router.query;

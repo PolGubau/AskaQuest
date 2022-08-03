@@ -1,14 +1,26 @@
 import Head from "next/head";
 import Collections from "src/components/Collections/Collections";
 import { PATH } from "src/utils/consts";
-import AppLayout from "src/components/AppLayout";
+import AppLayout from "src/components/Layout/AppLayout";
 import Nav from "src/components/Nav";
 import Logo from "src/components/Logo/Logo";
-import { useSession, signIn } from "next-auth/react";
+import Swal from "sweetalert2";
+import useSessionStorage from "src/hooks/useSessionStorage";
+import { useRouter } from "next/router";
+import SignInPannel from "src/components/Pannel/SignInPannel";
+import Intro from "src/components/Layout/Intro";
 
 export default function HomePage({ trendyCollections }: any) {
-  const { data: session } = useSession();
+  const router = useRouter();
+  const {
+    con: { data, status },
+  } = useSessionStorage();
 
+  // const alert = Swal.fire(
+  //   "Hi!",
+  //   "This is an open beta, you can suggest changes to our developers! Thank you.",
+  //   "info"
+  // );
   return (
     <>
       <Nav actualRoot="home" />
@@ -17,14 +29,12 @@ export default function HomePage({ trendyCollections }: any) {
           <title>Home / AskaQuest </title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Logo />
         <main>
           <section>
-            {!session && (
-              <>
-                You can <button onClick={() => signIn()}>Sign in</button>
-              </>
-            )}
+            <Intro>
+              <Logo />
+              {status !== 1 && <SignInPannel />}
+            </Intro>
 
             <p>New Collections: </p>
             <Collections allCollections={trendyCollections} />

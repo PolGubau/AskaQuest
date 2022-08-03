@@ -4,22 +4,19 @@ import { PATH } from "src/utils/consts";
 
 export default function useSessionStorage() {
   const router = useRouter();
-  const [status, setStatus] = useState<number>(0);
-  const [data, setData] = useState<object | string>({});
+  const [con, setCon] = useState({ status: 0, data: {} });
 
   useEffect(() => {
     const takingUser = sessionStorage.getItem("user");
 
-    const jsonUser = takingUser;
-    if (jsonUser) {
-      const user = JSON.parse(jsonUser);
-      setData(user);
-      setStatus(1);
+    if (takingUser) {
+      const user = JSON.parse(takingUser);
+
+      setCon({ status: 1, data: user });
     } else {
-      setStatus(-1);
-      setData("No user found");
-      router.replace(PATH.SIGN_IN);
+      setCon({ status: -1, data: {error: 'User not given'} });
+      // router.replace(PATH.SIGN_IN);
     }
-  }, [router,status,data]);
-  return { data, status };
+  }, [router]);
+  return { con };
 }

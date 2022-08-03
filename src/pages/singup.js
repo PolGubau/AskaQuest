@@ -1,13 +1,12 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import AppLayout from "src/components/AppLayout";
+import AppLayout from "src/components/Layout/AppLayout";
 
 import { colors } from "../styles/theme";
 
 export default function Home() {
   return (
     <>
-  
       <AppLayout>
         <div className={styles.container}>
           <section>
