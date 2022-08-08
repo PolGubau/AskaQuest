@@ -11,3 +11,6 @@ https://sweetalert2.github.io/
       "This is an open beta, you can suggest changes to our developers! Thank you.",
       "info"
     );
+    
+    
+    ICONS https://react-icons.github.io/react-icons/icons?name=bi
