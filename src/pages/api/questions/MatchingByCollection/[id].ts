@@ -22,7 +22,7 @@ export default async function handler(
         if (result.rows.length === 0) {
           return res.status(404).json({ error: "not found" });
         }
-        return res.json(result.rows[0]);
+        return res.json(result.rows);
       } catch (error) {
         return res.status(400).json({ error });
       }
