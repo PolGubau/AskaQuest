@@ -19,7 +19,6 @@ export default function CollectionCover({
   setStarted,
 }) {
   // we have a questions array, they are links, we want to send the first one when start button is pressed
-  console.log(questions);
   const start = () => {
     setStarted(true);
   };
@@ -38,7 +37,7 @@ export default function CollectionCover({
                     height={30}
                   />
                   <small className={styles.creatorUserNameBy}>
-                    By{" "}
+                    By
                     <span className={styles.creatorUserName}>{userName}</span>
                   </small>
                 </a>

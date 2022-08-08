@@ -2,12 +2,12 @@ import Question from "src/components/Question";
 import { PATH } from "src/utils/consts";
 import { useRouter } from "next/router";
 import AppLayout from "src/components/Layout/AppLayout";
-export default function singleQuestionPage({ quests }) {
+export default function singleQuestionPage({ questions }) {
   const router = useRouter();
   const { id } = router.query;
 
   // find the question with the id in the url
-  const quest = quests.find((quest) => quest.id === id);
+  const quest = questions[id];
   return (
     <>
       <AppLayout>
@@ -18,7 +18,7 @@ export default function singleQuestionPage({ quests }) {
           answers={quest.answers}
           solution={quest.solution}
           creator={quest.creator}
-          createdAt={quest.createdAt}
+          createdAt={quest.createdAt}s
           likes={quest.likes}
           incorrect={quest.incorrect}
         />
@@ -28,8 +28,7 @@ export default function singleQuestionPage({ quests }) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`${PATH}/api/quests`);
-  const quests = await res.json();
-  console.log(quests);
-  return { props: { quests } };
+  const res = await fetch(`${PATH.API}/questions`);
+  const questions = await res.json();
+  return { props: { questions } };
 }

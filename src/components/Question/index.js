@@ -93,19 +93,19 @@ export default function Question({
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          background: ${colors.background};
+          background-color: var(--clean-background);
           margin: 5px 0;
           padding: 10px;
           border-radius: 25px;
         }
         .answer:hover {
-          background-color: ${colors.secondary};
+          background-color: var(--background);
         }
         .title {
-          font-size: ${fontSizes.subheader};
+          font-size: var(--fontBig);
         }
         .send {
-          background: ${addOpacityToColor(colors.primary, 0.5)};
+          background-color: var(--background);
           width: fit-content;
           border-radius: 10px;
           padding: 5px 15px;
