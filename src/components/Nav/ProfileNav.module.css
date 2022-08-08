@@ -2,13 +2,12 @@
   display: flex;
   justify-content: center;
 }
-.a {
-  padding: 2px 5px;
-}
-.a:hover {
-  text-decoration: underline;
-
+.navPath {
+  padding: 4px 8px;
   border-radius: 5px;
+}
+.navPath:hover {
+  background-color: var(--clean-background);
 }
 .nav {
   display: flex;

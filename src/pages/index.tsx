@@ -9,12 +9,12 @@ import useSessionStorage from "src/hooks/useSessionStorage";
 import { useRouter } from "next/router";
 import SignInPannel from "src/components/Pannel/SignInPannel";
 import Intro from "src/components/Layout/Intro";
+import WellcomeBack from "src/components/Pannel/WellcomeBack";
 
 export default function HomePage({ trendyCollections }: any) {
   const router = useRouter();
-  const {
-    con: { data, status },
-  } = useSessionStorage();
+  const {con}= useSessionStorage();
+  const  {status, data } = con;
 
   // const alert = Swal.fire(
   //   "Hi!",
@@ -34,6 +34,7 @@ export default function HomePage({ trendyCollections }: any) {
             <Intro>
               <Logo />
               {status !== 1 && <SignInPannel />}
+              {status === 1 && <WellcomeBack user={data} />}
             </Intro>
 
             <p>New Collections: </p>

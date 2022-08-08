@@ -10,15 +10,22 @@ export default function SignInPannel() {
         <h3 className={styles.title}>Do you have an account?</h3>
         <p className={styles.text}>
           You can use <span>Askaquest</span> without having an account, but you
-          can try to <span>SignIn</span> or create an account for a complete
+          can try to <span>Sign in</span> or create an account for a complete
           experience.
         </p>
+        <div className={styles.buttonGroup}>
         <button
           className={styles.button}
           onClick={() => router.push(PATH.SIGN_IN)}
         >
-          Sign In
+          Sign in
         </button>
+        <button
+          className={styles.button}
+          onClick={() => router.push(PATH.SIGN_IN)}
+        >
+          Create an account
+        </button></div>
       </section>
     </>
   );

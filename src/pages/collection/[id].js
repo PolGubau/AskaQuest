@@ -14,7 +14,7 @@ export default function CollectionPage({
   if (error) {
     return <h1>Error</h1>;
   }
-  const MAX_QUESTION = Number(questions.length);
+  const MAX_QUESTION = Number(questions.lenght);
   const ARRAY_QUESTIONS = questions;
   const [questionIndex, setQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(
@@ -31,6 +31,7 @@ export default function CollectionPage({
     setCurrentQuestion(ARRAY_QUESTIONS[questionIndex]);
   }, [questionIndex]);
 
+  console.log(questions);
   return (
     <>
       <Nav />
@@ -38,8 +39,12 @@ export default function CollectionPage({
         <CollectionCover
           id={collection.id}
           userId={collection.userId}
-          // userName={user.userName}
+          userName={user.userName}
+          userImage={
+            user.image || `https://api.multiavatar.com/${user.userName}.svg`
+          }
           title={collection.title}
+          likes={collection.likes}
           tags={collection.tags}
           questions={collection.questions}
           setStarted={setStarted}
@@ -85,8 +90,11 @@ export async function getServerSideProps(context) {
   const questionsRes = await fetch(
     `${PATH.API}/questions/MatchingByCollection/${id}`
   );
+  if (!questionsRes) {
+    return { props: { error: true } };
+  }
   const questions = await questionsRes.json();
-
+  console.log(questions);
   const userID = collection.creator_id;
   const userRes = await fetch(`${PATH.API}/users/id/${userID}`);
   const user = await userRes.json();

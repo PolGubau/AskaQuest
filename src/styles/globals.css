@@ -152,4 +152,9 @@ body {
   --clean-background: #daf1ff;
   --right: #88ff9c;
   --wrong: #ff8787;
+
+  --fontSmall: 14px;
+  --fontText: 18px;
+  --fontBig: 24px;
+  --fontHeader: 48px;
 }

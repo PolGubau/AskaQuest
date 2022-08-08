@@ -67,7 +67,7 @@ export default css`
     overflow-y: auto;
     padding: 15px;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 20px;
     min-height: fit-content;
     min-height: 60vh;
     border: solid 1px ${colors.primary};

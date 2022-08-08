@@ -2,7 +2,6 @@ import Link from "next/link";
 import ProfileNav from "./ProfileNav";
 import styles from "./ProfileNav.module.css";
 import { backgroundSmooth } from "src/styles/theme";
-import NavSettings from "../NavSettings";
 import { useRouter } from "next/router";
 import { PATH } from "src/utils/consts";
 export default function Nav({
@@ -19,7 +18,7 @@ export default function Nav({
           <div className={styles.path}>
             <p
               onClick={() => router.push(PATH.HOME)}
-              className={styles.a}
+              className={styles.navPath}
               style={{ backgroundSmooth }}
             >
               {actualRoot}
@@ -30,18 +29,18 @@ export default function Nav({
                 <div key={index}>
                   <span>/</span>
                   <Link href={`${"/" + item}`}>
-                    <a>{item}</a>
+                    <a className={styles.navPath}>{item}</a>
                   </Link>
                 </div>
               ))}
-            <Link href={`${actualLink}`}>
-              <a>
-                <span>/</span>
+            <Link href={`${actualLink}`} style={{ backgroundSmooth }}>
+              <a className={styles.navPath}>
+                {actualName && <span>/ </span>}
                 {actualName}
               </a>
             </Link>
           </div>
-          <div className={styles.rightNav}>
+          <div>
             <ProfileNav />
           </div>
         </nav>

@@ -3,128 +3,66 @@ import Button from "src/components/Button";
 import Link from "next/link";
 import { colors, fontSizes } from "src/styles/theme";
 import { addOpacityToColor } from "src/styles/utils";
+import styles from "./CollectionCover.module.css";
+import { FaArrowRight } from "react-icons/fa";
+
+import Image from "next/image";
 export default function CollectionCover({
   id,
   userId,
   userName = "unknow",
+  userImage = "https://api.multiavatar.com/unknow.svg",
   title,
   tags,
+  likes,
   questions,
   setStarted,
 }) {
   // we have a questions array, they are links, we want to send the first one when start button is pressed
-
+  console.log(questions);
   const start = () => {
     setStarted(true);
   };
   return (
     <>
-      <article key={id} className="container">
+      <article key={id}>
         <AppLayout>
-          <header className="names">
-            <Link href={`/profile/${userName}`}>
-              <a>
-                <small>@{userName}</small>
-              </a>
-            </Link>
-          </header>
-          <div className="content">
-            <h3 className="title">{title}</h3>
-            <span>Tags: </span>
-            {tags.map((tag, index) => (
-              <span key={index} className="tag">
-                {tag}
-              </span>
-            ))}
-            <div className="answers">
-              This test has <b>{questions.length}</b> questions.
+          <section className={styles.container}>
+            <header className={styles.names}>
+              <Link href={`/profile/${userName}`}>
+                <a className={styles.creator}>
+                  <Image
+                    src={userImage}
+                    alt="Creator avatar"
+                    width={30}
+                    height={30}
+                  />
+                  <small className={styles.creatorUserNameBy}>
+                    By{" "}
+                    <span className={styles.creatorUserName}>{userName}</span>
+                  </small>
+                </a>
+              </Link>
+            </header>
+            <div className={styles.content}>
+              <h3 className={styles.title}>{title}</h3>
+              <div className={styles.tags}>
+                <span>Tags: </span>
+                {tags.map((tag, index) => (
+                  <span key={index} className={styles.tag}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <p className={styles.likesP}>This quest has {likes} likes.</p>
+              <button onClick={start} className={styles.startButton}>
+                <span className={styles.startButtonText}> Start</span>
+                <FaArrowRight />
+              </button>
             </div>
-            <Button text="Start" start={start} />
-          </div>
+          </section>
         </AppLayout>
       </article>
-
-      <style jsx>{`
-        article {
-          width: 100%;
-        }
-        .container {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          padding: 10px 15px;
-        }
-
-        header {
-          display: flex;
-          justify-content: space-between;
-        }
-        .names {
-          font-size: ${fontSizes.small};
-        }
-        .answer {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          background: ${colors.background};
-          margin: 5px 0;
-          padding: 10px;
-          border-radius: 25px;
-          text-align: center;
-        }
-        .answer:hover {
-          background-color: ${colors.secondary};
-        }
-        .title {
-          font-size: ${fontSizes.header};
-          margin: 0;
-          margin-bottom: 15px;
-        }
-        .tag {
-          margin: 0 5px;
-          background-color: ${addOpacityToColor(colors.primary, 0.1)};
-          padding: 3px 6px;
-          border-radius: 5px;
-        }
-        .answers {
-          margin-top: 15px;
-        }
-        .sendCont {
-          display: flex;
-          justify-content: flex-start;
-          width: 100%;
-          align-items: center;
-          flex-wrap: wrap;
-          flex-direction: row;
-          align-content: center;
-        }
-        .send {
-          margin: 0;
-          cursor: pointer;
-          display: flex;
-          background-color: ${addOpacityToColor(colors.primary, 0.4)};
-          width: fit-content;
-          border-radius: 7px;
-          font-size: ${fontSizes.subheader};
-          padding: 5px 15px;
-        }
-        .send:hover {
-          background-color: ${addOpacityToColor(colors.primary, 0.7)};
-        }
-        .buttonsContainer {
-          position: absolute;
-          bottom: 20px;
-          right: 20px;
-          display: flex;
-          justify-content: flex-end;
-          align-items: flex-end;
-          flex-wrap: wrap;
-          flex-direction: column;
-          align-content: flex-end;
-        }
-      `}</style>
     </>
   );
 }

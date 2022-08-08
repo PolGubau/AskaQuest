@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { PATH } from "src/utils/consts";
 
 export default function useSessionStorage() {
   const router = useRouter();
@@ -15,8 +14,8 @@ export default function useSessionStorage() {
       setCon({ status: 1, data: user });
     } else {
       setCon({ status: -1, data: {error: 'User not given'} });
-      // router.replace(PATH.SIGN_IN);
     }
-  }, [router]);
+  }, [router]);      
+
   return { con };
 }

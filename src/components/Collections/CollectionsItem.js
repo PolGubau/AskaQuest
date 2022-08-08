@@ -40,7 +40,7 @@ export default function CollectionsItem({ collection }) {
         <div
           className={styles.startButton}
           onClick={() => {
-            router.push("/Question/[id]", `/Question/${ID}`);
+            router.push("/Collection/[id]", `/Collection/${ID}`);
           }}
         >
           <p className={styles.startButtonText}>Start</p> <FaArrowRight />
