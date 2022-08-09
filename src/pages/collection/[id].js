@@ -1,9 +1,10 @@
 import { PATH } from "src/utils/consts";
-import CollectionCover from "src/components/Question/CollectionCover";
+import CollectionCover from "src/components/Question/CollectionCover/CollectionCover";
 import { useState, useEffect } from "react";
 import Nav from "src/components/Nav";
 import Question from "src/components/Question";
-import Results from "src/components/Results/Results";
+import Results from "src/components/Question/Results/Results";
+import AppLayout from "src/components/Layout/AppLayout";
 //
 export default function CollectionPage({
   error = false,
@@ -35,46 +36,52 @@ export default function CollectionPage({
   return (
     <>
       <Nav />
-      {!started && (
-        <CollectionCover
-          id={collection.id}
-          userId={collection.userId}
-          userName={user.userName}
-          userImage={
-            user.image || `https://api.multiavatar.com/${user.userName}.svg`
-          }
-          title={collection.title}
-          likes={collection.likes}
-          tags={collection.tags}
-          questions={collection.questions}
-          setStarted={setStarted}
-        />
-      )}
-      {started && questionIndex < MAX_QUESTION && (
-        <div>
-          <Question
-            id={currentQuestion.id}
-            title={currentQuestion.title}
-            answers={currentQuestion.answers}
-            solution={currentQuestion.solution}
-            creator={currentQuestion.creator}
-            createdAt={currentQuestion.createdAt}
-            likes={currentQuestion.likes}
-            incorrect={currentQuestion.incorrect}
-            questionIndex={questionIndex}
-            nextQuestion={nextQuestion}
-            results={results}
-            setResults={setResults}
+      <AppLayout>
+        {!started && (
+          <CollectionCover
+            id={collection.id}
+            userId={collection.userId}
+            userName={user.userName}
+            userImage={
+              user.image || `https://api.multiavatar.com/${user.userName}.svg`
+            }
+            title={collection.title}
+            likes={collection.likes}
+            tags={collection.tags}
+            questions={collection.questions}
+            setStarted={setStarted}
           />
-        </div>
-      )}
-      {questionIndex >= MAX_QUESTION && (
-        <Results
-          results={results}
-          userName={user.userName}
-          title={collection.title}
-        />
-      )}
+        )}
+        {started && questionIndex < MAX_QUESTION && (
+          <div>
+            <Question
+              id={currentQuestion.id}
+              userName={user.userName}
+              userImage={
+                user.image || `https://api.multiavatar.com/${user.userName}.svg`
+              }
+              title={currentQuestion.title}
+              answers={currentQuestion.answers}
+              solution={currentQuestion.solution}
+              creator={currentQuestion.creator}
+              createdAt={currentQuestion.createdAt}
+              likes={currentQuestion.likes}
+              incorrect={currentQuestion.incorrect}
+              questionIndex={questionIndex}
+              nextQuestion={nextQuestion}
+              results={results}
+              setResults={setResults}
+            />
+          </div>
+        )}
+        {questionIndex >= MAX_QUESTION && (
+          <Results
+            results={results}
+            userName={user.userName}
+            title={collection.title}
+          />
+        )}
+      </AppLayout>
     </>
   );
 }

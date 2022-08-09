@@ -1,15 +1,18 @@
-import { colors, fontSizes } from "src/styles/theme";
+import { colors } from "src/styles/theme";
 import { useState } from "react";
-import AppLayout from "src/components/Layout/AppLayout";
 import Button from "src/components/Button";
+import styles from "./Question.module.css";
+import Link from "next/link";
+import Image from "next/image";
 
+//
 export default function Question({
   id = 0,
   title = "Your connection did not work, do you know why?",
   answers,
   solution = "yes",
-  creator = "unknown",
-
+  userName = "unknow",
+  userImage = "https://api.multiavatar.com/unknow.svg",
   nextQuestion,
   questionIndex,
   results,
@@ -40,78 +43,50 @@ export default function Question({
   };
   return (
     <>
-      <AppLayout>
-        <article key={id} className="container">
-          <header className="names">
-            <small>@{creator}</small>
-          </header>
-          <div className="content">
-            <p className="title">
-              {id}.{title}
-            </p>
-            <div className="answers">
-              {answers.map((answer, index) => {
-                return (
-                  <div
-                    onClick={() => select(index)}
-                    className="answer"
-                    style={{
-                      backgroundColor:
-                        selectedIndex === index
-                          ? colors.primary
-                          : colors.background,
-                    }}
-                    key={index}
-                    id={`answer${index}`}
-                  >
-                    <span>{answer}</span>
-                  </div>
-                );
-              })}
-            </div>
-            <Button text="Next" start={handleSubmit} />
+      <article key={id} className={styles.container}>
+        <header className={styles.names}>
+          <Link href={`/profile/${userName}`}>
+            <a className={styles.creator}>
+              <Image
+                src={userImage}
+                alt="Creator avatar"
+                width={30}
+                height={30}
+              />
+              <small className={styles.creatorUserNameBy}>
+                By
+                <span className={styles.creatorUserName}>{userName}</span>
+              </small>
+            </a>
+          </Link>
+        </header>
+        <div className={styles.content}>
+          <p className={styles.title}>
+            {id}.{title}
+          </p>
+          <div className={styles.answers}>
+            {answers.map((answer, index) => {
+              return (
+                <div
+                  onClick={() => select(index)}
+                  className={styles.answer}
+                  style={{
+                    backgroundColor:
+                      selectedIndex === index
+                        ? colors.primary
+                        : colors.background,
+                  }}
+                  key={index}
+                  id={`answer${index}`}
+                >
+                  <span>{answer}</span>
+                </div>
+              );
+            })}
           </div>
-        </article>
-      </AppLayout>
-      <style jsx>{`
-        .container {
-          display: flex;
-          flex-direction: column;
-          padding: 10px 15px;
-        }
-        .container:hover {
-          background-color: #f5f8fa;
-        }
-
-        header {
-          display: flex;
-          justify-content: space-between;
-        }
-        .answer {
-          cursor: pointer;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          background-color: var(--clean-background);
-          margin: 5px 0;
-          padding: 10px;
-          border-radius: 25px;
-        }
-        .answer:hover {
-          background-color: var(--background);
-        }
-        .title {
-          font-size: var(--fontBig);
-        }
-        .send {
-          background-color: var(--background);
-          width: fit-content;
-          border-radius: 10px;
-          padding: 5px 15px;
-          cursor: pointer;
-        }
-      `}</style>
+          <Button text="Next" start={handleSubmit} />
+        </div>
+      </article>
     </>
   );
 }

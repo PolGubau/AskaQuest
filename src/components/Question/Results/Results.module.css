@@ -1,0 +1,91 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+}
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-left: 20px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.names {
+  font-size: var(--fontBig);
+}
+
+.title {
+  font-size: var(--fontBig);
+  margin: 0;
+  margin-bottom: 15px;
+}
+.results {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+  font-size: var(--fontBig);
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+.results span {
+  color: var(--background);
+  margin: 0 3px;
+}
+.message {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+  font-size: var(--fontBig);
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+.buttonsContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: flex-end;
+  gap: 10px;
+}
+.buttonsContainer p {
+  margin: 1px 0;
+}
+.goUser {
+  border-bottom: 1px solid black;
+  cursor: pointer;
+}
+.goHome {
+  cursor: pointer;
+  display: flex;
+  background-color: var(--background);
+  width: fit-content;
+  border-radius: 7px;
+  font-size: var(--fontBig);
+  padding: 5px 15px;
+}
+.send:hover {
+  background-color: var(--background);
+}
+@media (max-width: 540px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+.results {
+  justify-content: flex-start;
+}
