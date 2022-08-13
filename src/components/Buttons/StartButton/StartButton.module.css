@@ -1,0 +1,20 @@
+.startButton {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: var(--background);
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 10px 15px;
+  height: 49px;
+  border-radius: 10px;
+  width: 100%;
+}
+.startButtonText {
+  margin-right: 10px;
+}
+.startButton:hover {
+  background-color: var(--secondary);
+  color: var(--white);
+}

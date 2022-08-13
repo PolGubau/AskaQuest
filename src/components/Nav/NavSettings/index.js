@@ -21,12 +21,17 @@ function SettingsPannel({ show = false, changeShow = changeShow }) {
         <>
           <div className={styles.container}>
             <p className={styles.title}>Settings</p>
-
             <button
               className={styles.option}
               onClick={() => router.push(PATH.HOME)}
             >
               Go Home
+            </button>
+            <button
+              className={styles.option}
+              onClick={() => router.push(PATH.PROFILE)}
+            >
+              Your Profile
             </button>
             <button className={styles.option} onClick={handleSignOut}>
               Sign Out
@@ -44,6 +49,7 @@ function SettingsPannel({ show = false, changeShow = changeShow }) {
     </>
   );
 }
+
 function NavSettings() {
   const [showSettings, setShowSettings] = useState(false);
 

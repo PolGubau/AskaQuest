@@ -1,19 +1,28 @@
+.RightNav {
+  display: flex;
+}
+
 .container {
+  position: absolute;
+  right: 65px;
+  top: 80px;
   display: flex;
   flex-direction: column;
   position: absolute;
-  right: 50px;
-  top: 130px;
   background-color: var(--clean-background);
   padding: 10px;
   min-width: 150px;
   border-radius: 10px;
   z-index: 1;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  align-items: stretch;
 }
 .title {
   margin: 10px;
 }
 .option {
+  text-align: left;
   cursor: pointer;
   margin: 5px 5px;
   padding: 5px 14px;
@@ -22,7 +31,7 @@
   background-color: var(--background);
 }
 .option:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
   color: var(--white);
 }
 
@@ -35,10 +44,6 @@
   flex-direction: row;
 }
 .settingsButton {
-  position: absolute;
-  top: 90px;
-  right: 50px;
-  width: 49px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -54,7 +59,11 @@
 }
 
 .background {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  opacity: 0.1;
+  background-color: var(--black);
+  opacity: 0.3;
 }

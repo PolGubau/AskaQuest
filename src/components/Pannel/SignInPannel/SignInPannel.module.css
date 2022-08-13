@@ -32,5 +32,5 @@
   cursor: pointer;
 
   background-color: var(--background);
-  border: 1px solid var(--secondary-color);
+  border: 1px solid var(--secondary);
 }

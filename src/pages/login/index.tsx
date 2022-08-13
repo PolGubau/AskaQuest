@@ -1,24 +1,17 @@
-import { useState, useEffect } from "react";
-import Head from "next/head";
+import { useState } from "react";
 import { useRouter } from "next/router";
 
 import AppLayout from "src/components/Layout/AppLayout";
 import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
 import styles from "src/pages/login/login.module.css";
 import { PATH } from "src/utils/consts";
-import { getSession, signIn, getProviders } from "next-auth/react";
 import Swal from "sweetalert2";
 
-//auth
-//
+import { AiOutlineUser } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
+
 const Login = () => {
-  // const Index: NextPage = () => {
   const router = useRouter();
-  useEffect(() => {
-    (async () => {
-      const providers = await getProviders();
-    })();
-  }, []);
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -35,15 +28,11 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     const response = await fetch(`/api/users/userName/${userName}`);
-    
+
     console.log(response);
-    
-    if (response.ok===false) {
-      Swal.fire(
-        "Ouups!",
-        messagesLogin.userNoExist,
-        "error"
-      );
+
+    if (response.ok === false) {
+      Swal.fire("Ouups!", messagesLogin.userNoExist, "error");
       setFailedUser(true);
       setMessage(messagesLogin.userNoExist);
       setIsLoading(false);
@@ -51,18 +40,13 @@ const Login = () => {
       const user = await response.json();
 
       if (user.password !== password) {
-        Swal.fire(
-          "Ouups!",
-          messagesLogin.passwordIncorrect,
-          "error"
-        );
-        setFailedPassword(true)
+        Swal.fire("Ouups!", messagesLogin.passwordIncorrect, "error");
+        setFailedPassword(true);
         setMessage(messagesLogin.passwordIncorrect);
         setIsLoading(false);
-     
-      }else{
+      } else {
         const jsonUser = JSON.stringify(user);
-        
+
         sessionStorage.setItem("user", jsonUser);
         router.push(PATH.HOME);
       }
@@ -82,33 +66,49 @@ const Login = () => {
                 <>
                   {message}
                   <form className={styles.formulario} onSubmit={handleSubmit}>
+                    <div className={styles.inputBig}>
+                      <div className={styles.inputIcon}>
+                        <AiOutlineUser size={18}/>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Username"
+                        autoComplete="username"
+                        onChange={(e) => setUserName(e.target.value)}
+                        value={userName}
+                        className={
+                          failedUser ? styles.inputError : styles.input
+                        }
+                      />
+                    </div>
+                    <div className={styles.inputBig}> 
+                    <div className={styles.inputIcon}>
+                        <RiLockPasswordLine  size={18}/>
+                      </div>
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        autoComplete="current-password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        className={
+                          failedPassword ? styles.inputError : styles.input
+                        }
+                      />
+                    </div>
                     <input
-                      type="text"
-                      placeholder="Username"
-                      autoComplete="username"
-                      onChange={(e) => setUserName(e.target.value)}
-                      value={userName}
-                      className={failedUser ? styles.inputError : styles.input}
+                      type="submit"
+                      value="Sign In"
+                      className={styles.SignInButton}
                     />
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      autoComplete="current-password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      value={password}
-                      className={failedPassword ? styles.inputError : styles.input}
-                    />
-                    <input type="submit" value="Sign In" />
                   </form>
-                  <button onClick={() => signIn("github")}>
-                    Signin with Github
-                  </button>
                 </>
               )}
             </section>
 
-            <section className="buttonsContainer">
+            <section className={styles.buttonsContainer}>
               <button
+                className={styles.CreateAccountButton}
                 onClick={(e) => {
                   router.push("/singup");
                 }}

@@ -4,6 +4,8 @@ import styles from "./ProfileNav.module.css";
 import { backgroundSmooth } from "src/styles/theme";
 import { useRouter } from "next/router";
 import { PATH } from "src/utils/consts";
+import { BiHomeAlt } from "react-icons/bi";
+
 export default function Nav({
   actualName = "",
   actualRoot = "Home",
@@ -21,6 +23,7 @@ export default function Nav({
               className={styles.navPath}
               style={{ backgroundSmooth }}
             >
+              <BiHomeAlt />
               {actualRoot}
             </p>
 
@@ -42,6 +45,7 @@ export default function Nav({
           </div>
           <div>
             <ProfileNav />
+            
           </div>
         </nav>
       </section>

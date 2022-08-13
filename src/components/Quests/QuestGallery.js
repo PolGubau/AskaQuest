@@ -1,15 +1,14 @@
-import CollectionsItem from "./CollectionsItem";
-import Link from "next/link";
+import EachQuest from "src/components/Quests/EachQuest/EachQuest";
 
-export default function Collections({
+export default function QuestGallery({
   allCollections = [
     {
       ID: 0,
       title: "No conection",
-      creator_id: "1",
+      creator_id: undefined,
       date_creation: "2022-07-23 10:06:32.953831",
       likes: 0,
-      tags: '["internet","connection"]',
+      tags: ["internet", "connection"],
     },
   ],
 }) {
@@ -17,7 +16,7 @@ export default function Collections({
     <>
       <section>
         {allCollections.map((collection) => (
-          <CollectionsItem collection={collection} key={collection.ID} />
+          <EachQuest collection={collection} key={collection.ID} />
         ))}
       </section>
 

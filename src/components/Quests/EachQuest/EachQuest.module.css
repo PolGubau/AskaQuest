@@ -7,8 +7,7 @@
   border-radius: 10px;
   align-content: flex-start;
   justify-content: space-between;
-  align-items: flex-start;
-
+  align-items: stretch;
   flex-wrap: wrap;
 }
 
@@ -25,28 +24,10 @@
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  margin: 10px 0;
 }
 .tag {
-  margin: 10px 5px 10px 0;
+  margin: 7px 7px 0px 0;
   padding: 10px 15px;
   border-radius: 8px;
-}
-.startButton {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  transition: 0.1s ease;
-  background-color: var(--background);
-  font-size: 1.5em;
-  font-weight: bold;
-  padding: 10px 15px;
-  border-radius: 10px;
-  width: 100%;
-}
-.startButtonText {
-  margin-right: 10px;
-}
-.startButton:hover {
-  background-color: var(--secondary-color);
-  color: var(--white);
 }

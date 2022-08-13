@@ -1,7 +1,7 @@
 import CorrectedQuest from "./CorrectedQuest";
 import Link from "next/link";
 import styles from "./Results.module.css";
-import Button from "src/components/Button";
+import Button from "src/components/Buttons/Button";
 
 export default function Results({
   results,

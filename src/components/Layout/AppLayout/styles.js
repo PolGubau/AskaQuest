@@ -1,47 +1,6 @@
 import css from "styled-jsx/css";
 
-import { breakpoints, colors, fonts } from "../../../styles/theme";
-import { addOpacityToColor } from "../../../styles/utils";
-
-const backgroundColor = addOpacityToColor(colors.primary, 0.2);
-
-export const globalStyles = css.global`
-  :root {
-  
-      --opacity1: ${addOpacityToColor(colors.primary, 0.1)},
-    --opacity3: ${addOpacityToColor(colors.primary, 0.3)},
-    --opacity5: ${addOpacityToColor(colors.primary, 0.5)},
-  }
-  html,
-  body {
-    background-image: radial-gradient(${backgroundColor} 2px, #fdfdfd 1px),
-      radial-gradient(${backgroundColor} 1px, #fdfdfd 1px);
-    background-position: 0 0, 5px 25px;
-    background-size: 50px 50px;
-    margin: 0;
-    overflow: hidden;
-    font-family: ${fonts.base};
-  }
-  body {
-    margin: 30px 60px;
-
-
-  }
-  * {
-    box-sizing: border-box;
-  }
-  textarea,
-  input {
-    font-family: ${fonts.base};
-  }
-`;
-
 export default css`
-  .settings {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-  }
   div {
     display: -webkit-box;
     display: -webkit-flex;
@@ -57,7 +16,6 @@ export default css`
     flex-direction: row;
     height: 100vh;
     width: 100%;
-    padding: 20px;
     justify-content: center;
     align-content: center;
     align-items: flex-start;
@@ -68,20 +26,24 @@ export default css`
     padding: 15px;
     background: #fff;
     border-radius: 20px;
-    min-height: fit-content;
+    height: 100%;
     min-height: 60vh;
-    border: solid 1px ${colors.primary};
-    /* box-shadow: 0px 6px 0px -4px ${colors.primary}; */
+    border: solid 1px var(--primary);
+    box-shadow: 0px 0px 20px -10px var(--black);
     width: 100%;
     position: relative;
   }
 
-  //midas de pc
-  @media (min-width: ${breakpoints.tablet}) {
+  // PC
+  @media (min-width: 1000px) {
+    body {
+      margin: 30px 60px;
+    }
     main {
       height: fit-content;
+      min-height: 60vh;
       max-height: 90vh;
-      width: ${breakpoints.tablet};
+      width: 1000px;
     }
   }
 `;

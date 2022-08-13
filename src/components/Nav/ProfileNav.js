@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import SkeletonProfile from "./SkeletonProfile";
 import "react-loading-skeleton/dist/skeleton.css";
 import { PATH } from "src/utils/consts";
 import styles from "./ProfileNav.module.css";
 import { backgroundSmooth } from "src/styles/theme";
-import useSessionStorage from "src/hooks/useSessionStorage";
 
+import useSessionStorage from "src/hooks/useSessionStorage";
+import NavSettings from "src/components/Nav/NavSettings";
+import logo from "src/assets/logo.svg";
 //
 export default function ProfileNav() {
   const router = useRouter();
@@ -19,23 +20,37 @@ export default function ProfileNav() {
   switch (status) {
     case 1:
       return (
-        <Link href={`/profile/${userName}`}>
-          <a>
-            <div className={styles.profileLink} style={{ backgroundSmooth }}>
-              <div className={styles.nameProfile}>
-                <p className={styles.userName}>{userName}</p>
-                <span>Your Profile</span>
-              </div>
-              <Image
-                src={avatar || `https://api.multiavatar.com/${userName}.svg`}
-                alt={userName}
-                width={55}
-                height={55}
-                className={styles.avatar}
-              />
-            </div>
-          </a>
-        </Link>
+        <>
+          <div className={styles.RightNav}>
+            <Link href={`/profile/${userName}`}>
+              <a>
+                <div
+                  className={styles.profileLink}
+                  style={{ backgroundSmooth }}
+                >
+                  <div className={styles.nameProfile}>
+                    <p className={styles.userName}>{userName}</p>
+                    <span>Your Profile</span>
+                  </div>
+                  <Image
+                    src={
+                      avatar ||
+                      `https://api.multiavatar.com/${userName}.svg` ||
+                      logo
+                    }
+                    alt={userName}
+                    width={55}
+                    height={55}
+                    className={styles.avatar}
+                  />
+                </div>
+              </a>
+            </Link>
+            <section className="settings">
+              <NavSettings />
+            </section>
+          </div>
+        </>
       );
   }
   return (
@@ -49,7 +64,7 @@ export default function ProfileNav() {
         <span>Click for Sign in</span>
       </div>
       <Image
-        src={`https://api.multiavatar.com/a.svg`}
+        src={`https://api.multiavatar.com/a.svg` || logo}
         alt={"Anonymous avatar"}
         width={55}
         height={55}

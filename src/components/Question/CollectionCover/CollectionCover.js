@@ -14,7 +14,6 @@ export default function CollectionCover({
   questions,
   setStarted,
 }) {
-  // we have a questions array, they are links, we want to send the first one when start button is pressed
   const start = () => {
     setStarted(true);
   };
@@ -22,22 +21,8 @@ export default function CollectionCover({
     <>
       <article key={id}>
         <section className={styles.container}>
-          <header className={styles.names}>
-            <Link href={`/profile/${userName}`}>
-              <a className={styles.creator}>
-                <Image
-                  src={userImage}
-                  alt="Creator avatar"
-                  width={30}
-                  height={30}
-                />
-                <small className={styles.creatorUserNameBy}>
-                  By
-                  <span className={styles.creatorUserName}>{userName}</span>
-                </small>
-              </a>
-            </Link>
-          </header>
+          <userHeader name={userName} image={userImage} />
+
           <div className={styles.content}>
             <h3 className={styles.title}>{title}</h3>
             <div className={styles.tags}>

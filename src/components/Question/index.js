@@ -1,6 +1,6 @@
 import { colors } from "src/styles/theme";
 import { useState } from "react";
-import Button from "src/components/Button";
+import Button from "src/components/Buttons/Button";
 import styles from "./Question.module.css";
 import Link from "next/link";
 import Image from "next/image";

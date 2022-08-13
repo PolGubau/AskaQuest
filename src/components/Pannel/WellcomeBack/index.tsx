@@ -9,7 +9,7 @@ export default function SignInPannel({ user }: any) {
   return (
     <>
       <section className={styles.container}>
-        <h3 className={styles.title}>Wellcome back {user.userName}! </h3>
+        <h3 className={styles.title}>Welcome back {user.userName}! </h3>
         <p className={styles.text}></p>
         <div className={styles.buttonGroup}>
           <button

@@ -1,15 +1,19 @@
+const DOMINIO= 'http://localhost:3000';
+// 
+
 export const PATH = {
-  SIGN_IN: "http://localhost:3000/login",
-  HOME: "http://localhost:3000",
-  USER: "http://localhost:3000/profile",
-  ALL_QUESTS: "http://localhost:3000/quests",
-  CREATE_QUEST:"http://localhost:3000",
-  RANDOM_QUEST:"http://localhost:3000",
-  
+  HOME: `${DOMINIO}`,
+  SIGN_IN: `${DOMINIO}/login`,
+  CREATE_ACCOUNT: `${DOMINIO}/signup`,
+  USER: `${DOMINIO}/profile`,
+  PROFILE: `${DOMINIO}/profile/`,
+  ALL_QUESTS: `${DOMINIO}/quests`,
+  CREATE_QUEST:`${DOMINIO}`,
+  RANDOM_QUEST:`${DOMINIO}`,
   // 
-  API: "http://localhost:3000/api",
-  GITHUB_LOGIN: "http://localhost:3000/api/auth/signin/github",
-  SIGN_OUT: "http://localhost:3000/api/auth/signout",
+  API: `${DOMINIO}/api`,
+  GITHUB_LOGIN: `${DOMINIO}/api/auth/signin/github`,
+  SIGN_OUT: `${DOMINIO}/api/auth/signout`,
 };
 
 export const MAX_CHARACTERS = 100;

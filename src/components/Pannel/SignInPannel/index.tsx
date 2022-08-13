@@ -22,7 +22,7 @@ export default function SignInPannel() {
         </button>
         <button
           className={styles.button}
-          onClick={() => router.push(PATH.SIGN_IN)}
+          onClick={() => router.push(PATH.CREATE_ACCOUNT)}
         >
           Create an account
         </button></div>

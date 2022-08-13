@@ -76,6 +76,6 @@
   margin-right: 10px;
 }
 .startButton:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
   color: var(--white);
 }

@@ -146,8 +146,8 @@ a {
 body {
   --black: #000000;
   --white: #ffffff;
-  --primary-color: #0099ff;
-  --secondary-color: #1c5480;
+  --primary: #0099ff;
+  --secondary: #1c5480;
   --background: #96d5ff;
   --clean-background: #daf1ff;
   --right: #88ff9c;
@@ -157,4 +157,14 @@ body {
   --fontText: 18px;
   --fontBig: 24px;
   --fontHeader: 48px;
+
+  --breakpoint-md: 768px;
+}
+
+body {
+  background-image: radial-gradient(var(--clean-background) 3px, #fdfdfd 1px);
+  background-position: 0 0, 40px 5px;
+  background-size: 60px 60px;
+  margin: 0;
+  overflow: hidden;
 }

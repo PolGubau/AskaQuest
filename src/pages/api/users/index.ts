@@ -7,6 +7,7 @@ type Data = {
 
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
   const { method, body } = req
+  
   switch (method) {
     case 'GET':
       try {
@@ -18,10 +19,14 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
       }
 
     case 'POST':
+      const content=JSON.parse(body)
       try {
-        const { userName, password } = body
-        const query = `INSERT INTO public."Users"("userName", password)VALUES ('$1', '$2');`
-        const values = [userName, password]
+        const { userName, email, password } = content      
+
+        const query = `INSERT INTO public."Users"("userName", email,password)VALUES ('$1', '$2', '$3') RETURNING *;`
+        const values = [userName,email, password]        
+        console.log(values)
+
         const responsePOST = await conn.query(query, values)
 
         return res.status(200).json(responsePOST)

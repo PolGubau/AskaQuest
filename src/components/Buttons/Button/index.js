@@ -1,5 +1,5 @@
-import { colors, fontSizes } from '../../styles/theme'
-import { addOpacityToColor } from '../../styles/utils'
+import { colors, fontSizes } from '../../../styles/theme'
+import { addOpacityToColor } from '../../../styles/utils'
 export default function Button({ disabled = false, start, text = 'button' }) {
   return (
     <>
