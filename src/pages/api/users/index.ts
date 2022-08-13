@@ -23,11 +23,15 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
       try {
         const { userName, email, password } = content      
 
-        const query = `INSERT INTO public."Users"("userName", email,password)VALUES ('$1', '$2', '$3') RETURNING *;`
-        const values = [userName,email, password]        
-        console.log(values)
+        const query = `INSERT INTO public."Users"(
+          "userName", password, email)
+          VALUES ($1, $2, $3)
+            RETURNING *;`
+        const values = [userName, password,email]        
 
         const responsePOST = await conn.query(query, values)
+        
+        console.log(responsePOST.rows)
 
         return res.status(200).json(responsePOST)
       } catch (error) {
