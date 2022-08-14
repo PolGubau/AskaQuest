@@ -15,14 +15,13 @@ export default function UserHeader({
         <Link href={`/profile/${username}`}>
           <a className={styles.creator}>
             <Image
+              className={styles.creatorImage}
               src={userimage}
               alt="Creator avatar"
               width={30}
               height={30}
             />
-            <small className={styles.creatorUserNameBy}>
-              <span className={styles.creatorUserName}>{username}</span>
-            </small>
+            <span className={styles.creatorUserName}>{username}</span>
           </a>
         </Link>
         {likes && (

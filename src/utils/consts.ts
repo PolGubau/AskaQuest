@@ -1,5 +1,6 @@
 const DOMINIO= 'http://localhost:3000';
-// 
+
+const DEV_URL= process.env.DEV_URL;
 
 export const PATH = {
   HOME: `${DOMINIO}`,
@@ -7,9 +8,10 @@ export const PATH = {
   CREATE_ACCOUNT: `${DOMINIO}/signup`,
   USER: `${DOMINIO}/profile`,
   PROFILE: `${DOMINIO}/profile/`,
-  ALL_QUESTS: `${DOMINIO}/quests`,
+  ALL_QUESTS: `${DOMINIO}/allQuests`,
   CREATE_QUEST:`${DOMINIO}`,
-  RANDOM_QUEST:`${DOMINIO}`,
+  RANDOM_QUEST:`${DOMINIO}/Quest`,
+  
   // API ENDPOINTS
   API: `${DOMINIO}/api`,
   API_QUESTS: `${DOMINIO}/api/quests`,

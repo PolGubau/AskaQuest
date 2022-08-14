@@ -5,10 +5,7 @@ import UserHeader from "src/components/userHeader/UserHeader";
 import returnUserById from "src/services/returnUserById";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import useSWR from "swr";
-import { PATH } from "src/utils/consts";
-
+import UserHeaderLoading from "src/components/userHeader/UserHeaderLoading";
 export default function EachQuest({ collection }) {
   const router = useRouter();
 
@@ -25,7 +22,7 @@ export default function EachQuest({ collection }) {
             likes={likes || null}
           />
         ) : (
-          "loading"
+          <UserHeaderLoading />
         )}
 
         <div>
