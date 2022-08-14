@@ -7,13 +7,12 @@ import Image from "next/image";
 import styles from "./profile.module.css";
 import AddNewButton from "src/components/Buttons/AddNew/AddNewButton";
 import { useRouter } from "next/router";
+import TimeAgo from "timeago-react";
 
 export default function userPage({ user, collectionsByUser }) {
   const router = useRouter();
   const { ID, userName, since, avatar, followers, following, date_creation } =
     user;
-
-  let date = new Date(date_creation).toLocaleString("es-ES");
 
   return (
     <>
@@ -54,7 +53,13 @@ export default function userPage({ user, collectionsByUser }) {
               ) : (
                 `Be the first one to follow ${userName}!`
               )}
-              {date_creation && <p>Here since {date}</p>}
+              {date_creation && (
+                <p>
+                  {`Here since `}
+                  <TimeAgo datetime={date_creation} locale="es.ts" />
+                  {`.`}
+                </p>
+              )}
             </div>
             <div>
               <Image

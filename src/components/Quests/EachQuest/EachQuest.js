@@ -1,11 +1,11 @@
 import { colors } from "src/styles/theme";
 import styles from "./EachQuest.module.css";
 import TimeAgo from "timeago-react";
-import UserHeader from "src/components/userHeader/UserHeader";
+import UserHeader from "src/components/UserHeader/UserHeader";
 import returnUserById from "src/services/returnUserById";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import { useRouter } from "next/router";
-import UserHeaderLoading from "src/components/userHeader/UserHeaderLoading";
+import UserHeaderLoading from "src/components/UserHeader/UserHeaderLoading";
 export default function EachQuest({ collection }) {
   const router = useRouter();
 
@@ -18,7 +18,7 @@ export default function EachQuest({ collection }) {
         {user ? (
           <UserHeader
             username={user.userName || "Anonymous"}
-            userimage={`https://api.multiavatar.com/${creator_id}.svg`}
+            userimage={`https://api.multiavatar.com/${user.userName}.svg`}
             likes={likes || null}
           />
         ) : (

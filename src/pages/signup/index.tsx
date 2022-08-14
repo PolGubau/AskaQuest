@@ -10,9 +10,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import Swal from "sweetalert2";
 //auth
-//
 const SignUp = () => {
-  // const Index: NextPage = () => {
   const router = useRouter();
 
   const [userName, setUserName] = useState("");

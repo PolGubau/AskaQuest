@@ -18,6 +18,7 @@ export const PATH = {
   API_USERS: `${DOMINIO}/api/users`,
   API_USER_BY_ID: `${DOMINIO}/api/users/id`,
   API_USER_BY_USERNAME: `${DOMINIO}/api/users/userName`,
+  API_ALL_COLLECTIONS: `${DOMINIO}/api/collections`,
   
   
   

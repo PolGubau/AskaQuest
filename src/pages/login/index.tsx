@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 
+import Logo from "src/components/Logo/Logo";
 import AppLayout from "src/components/Layout/AppLayout";
 import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
 import styles from "src/pages/login/login.module.css";
 import { PATH } from "src/utils/consts";
+import { messagesLogin } from "src/utils/text";
+
+
 import Swal from "sweetalert2";
+var bcrypt = require("bcryptjs");
 
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
-import Logo from "src/components/Logo/Logo";
+
 
 const Login = () => {
   const router = useRouter();
@@ -19,33 +24,31 @@ const Login = () => {
   const [failedUser, setFailedUser] = useState(false);
   const [failedPassword, setFailedPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const messagesLogin = {
-    base: "Already having an account?",
-    userNoExist: `This user doesn't exist 🥀`,
-    passwordIncorrect: "Your username or password are incorrect.",
-  };
   const [message, setMessage] = useState(messagesLogin.base);
+  
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
     const response = await fetch(`/api/users/userName/${userName}`);
 
-    console.log(response);
 
-    if (response.ok === false) {
+    if (response.ok === false) { // user not found
       Swal.fire("Ouups!", messagesLogin.userNoExist, "error");
       setFailedUser(true);
       setMessage(messagesLogin.userNoExist);
       setIsLoading(false);
-    } else {
+    } else { // user found
       const user = await response.json();
 
-      if (user.password !== password) {
+      
+
+      if (! bcrypt.compareSync(password, user.password)) { // password not match
         Swal.fire("Ouups!", messagesLogin.passwordIncorrect, "error");
         setFailedPassword(true);
         setMessage(messagesLogin.passwordIncorrect);
         setIsLoading(false);
-      } else {
+      } else { // password match
         
         const Toast = Swal.mixin({
           toast: true,

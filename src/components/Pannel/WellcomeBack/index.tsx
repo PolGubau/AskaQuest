@@ -4,11 +4,14 @@ import { PATH } from "src/utils/consts";
 import styles from "./SignInPannel.module.css";
 import { BsPlusLg } from "react-icons/bs";
 import { BiDice5, BiGridAlt } from "react-icons/bi";
-import { randomInt } from "crypto";
+import randomCollection from "src/services/randomCollectionID";
+
 
 export default function SignInPannel({ user }: any) {
-  const randomQuest=()=>{
-    
+  const randomCollectionID = randomCollection();
+  
+  const handleRandom =()=>{
+    console.log(`${PATH.RANDOM_QUEST}/${randomCollectionID}`)
   }
   return (
     <>
@@ -16,8 +19,6 @@ export default function SignInPannel({ user }: any) {
         <h3 className={styles.title}>Welcome back {user.userName}! </h3>
         <p className={styles.text}></p>
         <div className={styles.buttonGroup}>
-          
-          
           {/* ALL */}
 
           <button
@@ -46,8 +47,7 @@ export default function SignInPannel({ user }: any) {
           {/* RANDOM */}
           <button
             className={styles.button}
-            onClick={() => router.push(`${PATH.RANDOM_QUEST}/${randomQuest()}`)}
-          >
+            onClick={handleRandom}>
             <p className={styles.icon}>
               <BiDice5 size={20} />
             </p>
