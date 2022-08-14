@@ -10,8 +10,16 @@ export const PATH = {
   ALL_QUESTS: `${DOMINIO}/quests`,
   CREATE_QUEST:`${DOMINIO}`,
   RANDOM_QUEST:`${DOMINIO}`,
-  // 
+  // API ENDPOINTS
   API: `${DOMINIO}/api`,
+  API_QUESTS: `${DOMINIO}/api/quests`,
+  API_USERS: `${DOMINIO}/api/users`,
+  API_USER_BY_ID: `${DOMINIO}/api/users/id`,
+  API_USER_BY_USERNAME: `${DOMINIO}/api/users/userName`,
+  
+  
+  
+  // 
   GITHUB_LOGIN: `${DOMINIO}/api/auth/signin/github`,
   SIGN_OUT: `${DOMINIO}/api/auth/signout`,
 };

@@ -31,9 +31,9 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 
         const responsePOST = await conn.query(query, values)
         
-        console.log(responsePOST.rows)
+        const user = responsePOST.rows
 
-        return res.status(200).json(responsePOST)
+        return res.status(200).json({user,success:true})
       } catch (error) {
         console.log(error)
         return res.status(400).json({ error: error })

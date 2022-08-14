@@ -1,13 +1,11 @@
 // user
 import { PATH } from "src/utils/consts";
 import AppLayout from "src/components/Layout/AppLayout";
-import Head from "next/head";
-import Collections from "src/components/Collections/Collections";
+import QuestGallery from "src/components/Quests/QuestGallery";
 import Nav from "src/components/Nav";
 import Image from "next/image";
-import styles from "./[id].module.css";
-import AddNewButton from "src/components/Buttons/AddNewButton";
-import { useState } from "react";
+import styles from "./profile.module.css";
+import AddNewButton from "src/components/Buttons/AddNew/AddNewButton";
 import { useRouter } from "next/router";
 
 export default function userPage({ user, collectionsByUser }) {
@@ -72,7 +70,7 @@ export default function userPage({ user, collectionsByUser }) {
             {collectionsByUser.length === 0 ? (
               <p>This user has not created anything 😥</p>
             ) : (
-              <Collections allCollections={collectionsByUser} />
+              <QuestGallery allCollections={collectionsByUser} />
             )}
             <AddNewButton />
           </section>

@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
+import Logo from "src/components/Logo/Logo";
 
 const Login = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesLogin = {
     base: "Already having an account?",
-    userNoExist: "This user doesn&apos;t exist 🥀",
+    userNoExist: `This user doesn't exist 🥀`,
     passwordIncorrect: "Your username or password are incorrect.",
   };
   const [message, setMessage] = useState(messagesLogin.base);
@@ -45,6 +46,23 @@ const Login = () => {
         setMessage(messagesLogin.passwordIncorrect);
         setIsLoading(false);
       } else {
+        
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully'
+        })
         const jsonUser = JSON.stringify(user);
 
         sessionStorage.setItem("user", jsonUser);
@@ -58,7 +76,7 @@ const Login = () => {
       <AppLayout>
         <div className={styles.container}>
           <section>
-            <h1>AskAQuest</h1>
+          <Logo />
             <section className={styles.singupSection}>
               {isLoading ? (
                 <SquareLoader />
@@ -106,15 +124,19 @@ const Login = () => {
               )}
             </section>
 
-            <section className={styles.buttonsContainer}>
+            <section className={styles.buttonSection}>  
+            <div className={styles.buttonsSectionContainer}>
+            <p>Not having an accout yet?</p>
               <button
                 className={styles.CreateAccountButton}
                 onClick={(e) => {
-                  router.push("/singup");
+                  router.push(PATH.CREATE_ACCOUNT);
                 }}
               >
                 Create an account
-              </button>
+              </button>            
+              </div>
+
             </section>
           </section>
         </div>

@@ -5,33 +5,29 @@ import UserHeader from "src/components/userHeader/UserHeader";
 import returnUserById from "src/services/returnUserById";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+import { PATH } from "src/utils/consts";
 
-//
 export default function EachQuest({ collection }) {
-  const {
-    ID,
-    title,
-    creator_id: creatorid,
-    date_creation,
-    likes,
-    tags,
-  } = collection;
-  const user = creatorid ? returnUserById(creatorid) : {};
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push("/Quest/[id]", `/Quest/${ID}`);
-  };
+  const { ID, title, creator_id, date_creation, likes, tags } = collection;
+
+  const user = returnUserById(creator_id);
   return (
     <>
       <section className={styles.section}>
-        <UserHeader
-          username={user.userName || "Anonymous"}
-          userimage={
-            user.image || `https://api.multiavatar.com/${user.userName}.svg`
-          }
-          likes={likes || null}
-        />
+        {user ? (
+          <UserHeader
+            username={user.userName || "Anonymous"}
+            userimage={`https://api.multiavatar.com/${creator_id}.svg`}
+            likes={likes || null}
+          />
+        ) : (
+          "loading"
+        )}
+
         <div>
           <h3 className={styles.title}>{title}</h3>
 
@@ -58,7 +54,7 @@ export default function EachQuest({ collection }) {
               ))}
           </div>
         </div>
-        <div onClick={handleClick}>
+        <div onClick={() => router.push("/Quest/[id]", `/Quest/${ID}`)}>
           <StartButton />
         </div>
       </section>

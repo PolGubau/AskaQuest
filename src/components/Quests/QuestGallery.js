@@ -15,9 +15,11 @@ export default function QuestGallery({
   return (
     <>
       <section>
-        {allCollections.map((collection) => (
-          <EachQuest collection={collection} key={collection.ID} />
-        ))}
+        {allCollections &&
+          !allCollections.error &&
+          allCollections.map((collection) => (
+            <EachQuest collection={collection} key={collection.ID} />
+          ))}
       </section>
 
       <style jsx>{`

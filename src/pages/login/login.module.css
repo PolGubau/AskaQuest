@@ -62,11 +62,21 @@
   color: var(--white);
   cursor: pointer;
 }
-.buttonsContainer {
+.buttonSection {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 15px;
+}
+.buttonsSectionContainer {
+  display: flex;
+  gap: 10px;
+  width: 40%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
 }
 .CreateAccountButton {
   background-color: var(--clean-background);
