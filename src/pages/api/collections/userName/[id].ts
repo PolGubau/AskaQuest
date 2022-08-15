@@ -17,7 +17,7 @@ export default async function handler(
         const idmatched = responseId.rows[0].ID;
 
         const query =
-          'SELECT * FROM public."Colections" WHERE "creator_id" = $1;';
+          'SELECT * FROM public."Collections" WHERE "creator_id" = $1;';
         const values = [idmatched];
         let response = await conn.query(query, values);
         return res.json(response.rows);

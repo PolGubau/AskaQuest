@@ -4,11 +4,11 @@ let conn:any;
 
 if(!conn){
     conn=new Pool({
-        host: 'localhost',
-        database: 'askaquest',
+        host: 'postgresql-pol.alwaysdata.net',
+        database: 'pol_askaquest',
         port: 5432,
         user: 'pol',
-        password: 'pol'
+        password: 'gubaupol2002'
     });
     
 }

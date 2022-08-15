@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
   switch (method) {
     case 'GET':
       try {
-        const query = 'SELECT * FROM public."Colections";'
+        const query = 'SELECT * FROM public."Collections";'
         const response = await conn.query(query)
         return res.json(response.rows)
       } catch (error) {
@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
     case 'POST':
       try {
         const { creatorID, likes } = body
-        const query = `INSERT INTO public."Colections"( creator_id, likes)
+        const query = `INSERT INTO public."Collections"( creator_id, likes)
           VALUES (?, ?, ?, ?);`
         const values = [creatorID, likes]
         const responsePOST = await conn.query(query, values)

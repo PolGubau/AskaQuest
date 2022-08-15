@@ -1,4 +1,4 @@
-.names {
+.container {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -19,10 +19,14 @@
   align-items: center;
   justify-content: flex-start;
 }
+.creator:hover {
+  background-color: var(--background);
+  color: var(--white);
+}
+
 .userName {
   min-width: 30px;
   font-weight: 600;
-
   margin-left: 5px;
 }
 

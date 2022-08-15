@@ -31,10 +31,10 @@ export default async function handler(
         const hashPassword = bcrypt.hashSync(password, salt);
 
         const query = `INSERT INTO public."Users"(
-          "userName", password, email)
-          VALUES ($1, $2, $3)
+          "userName", password, email,date_creation)
+          VALUES ($1, $2, $3,$4)
             RETURNING *;`;
-        const values = [userName, hashPassword, email];
+        const values = [userName, hashPassword, email, new Date()];
 
         const responsePOST = await conn.query(query, values);
 

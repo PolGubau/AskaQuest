@@ -11,7 +11,7 @@ export default function UserHeader({
 }) {
   return (
     <>
-      <header className={styles.names}>
+      <header className={styles.container}>
         <Link href={`/profile/${username}`}>
           <a className={styles.creator}>
             <Image

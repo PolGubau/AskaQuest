@@ -6,7 +6,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 export default function UserHeaderLoading() {
   return (
     <>
-      <header className={styles.names}>
+      <header className={styles.container}>
         <div className={styles.creator}>
           <span className={styles.creatorUserName}>
             <Skeleton className={styles.creatorImage} circle />
@@ -14,7 +14,7 @@ export default function UserHeaderLoading() {
           <Skeleton className={styles.userName} />
         </div>
         <div className={styles.likes}>
-            <Skeleton className={styles.likesNumber} />
+          <Skeleton className={styles.likesNumber} />
           <AiFillHeart className={styles.likesIcon} color="red" />
         </div>
       </header>
