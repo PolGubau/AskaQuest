@@ -5,7 +5,12 @@ import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
 import { Card } from "@nextui-org/react";
 
 //
-export default function StartButton() {
+export default function StartButton({
+  text = "Start",
+  icon = "arrow",
+  type = "button",
+  fontSize = "1.5rem",
+}) {
   const [loading, setLoading] = useState(false);
 
   //
@@ -15,18 +20,28 @@ export default function StartButton() {
   //
   return (
     <Card isPressable isHoverable>
-      <div className={styles.startButton} onClick={handleClick}>
-        {!loading ? (
-          <>
-            <p className={styles.startButtonText}>Start</p>
-            <p className={styles.startButtonIcon}>
-              <FaArrowRight />
-            </p>
-          </>
-        ) : (
-          <SquareLoader squaresColor="#fff" />
-        )}
-      </div>
+      <button
+        type={type}
+        style={{ outline: "none", border: "none", padding: 0 }}
+      >
+        <div className={styles.startButton} onClick={handleClick}>
+          {!loading ? (
+            <>
+              <p
+                className={styles.startButtonText}
+                style={{ fontSize: fontSize }}
+              >
+                {text}
+              </p>
+              <p className={styles.startButtonIcon}>
+                {icon === "arrow" && <FaArrowRight />}
+              </p>
+            </>
+          ) : (
+            <SquareLoader squaresColor="#fff" />
+          )}
+        </div>
+      </button>
     </Card>
   );
 }

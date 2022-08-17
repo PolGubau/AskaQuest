@@ -8,12 +8,17 @@ import styles from "./profile.module.css";
 import AddNewButton from "src/components/Buttons/AddNew/AddNewButton";
 import { useRouter } from "next/router";
 import TimeAgo from "timeago-react";
+import useSessionStorage from "src/hooks/useSessionStorage";
 
-export default function userPage({ user, collectionsByUser }) {
+export default function userPage({ id, user, collectionsByUser }) {
   const router = useRouter();
   const { ID, userName, since, avatar, followers, following, date_creation } =
     user;
+  const {
+    con: { data, status },
+  } = useSessionStorage();
 
+  const { userName: userNameLogedIn } = data;
   return (
     <>
       <Nav
@@ -77,7 +82,7 @@ export default function userPage({ user, collectionsByUser }) {
             ) : (
               <QuestGallery allCollections={collectionsByUser} />
             )}
-            <AddNewButton />
+            {id === userNameLogedIn && <AddNewButton />}
           </section>
         </main>
       </AppLayout>
@@ -94,5 +99,5 @@ export async function getServerSideProps(context) {
   const collectionsRes = await fetch(`${PATH.API}/collections/userName/${id}`);
   const collectionsByUser = await collectionsRes.json();
 
-  return { props: { user, collectionsByUser } };
+  return { props: { id, user, collectionsByUser } };
 }

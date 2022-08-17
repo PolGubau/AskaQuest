@@ -12,7 +12,13 @@
   width: 100%;
 }
 .startButtonText {
+  display: flex;
   margin-right: 10px;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
 }
 .startButton:hover {
   background-color: var(--secondary);

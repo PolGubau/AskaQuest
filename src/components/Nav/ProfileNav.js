@@ -9,43 +9,50 @@ import { backgroundSmooth } from "src/styles/theme";
 import useSessionStorage from "src/hooks/useSessionStorage";
 import NavSettings from "src/components/Nav/NavSettings";
 import logo from "src/assets/logo.svg";
+import { useState } from "react";
+import SquareLoader from "../loaders/SquaresLoader/SquareLoader";
 //
 export default function ProfileNav() {
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
   const {
     con: { data, status },
   } = useSessionStorage();
+  
   const { userName, avatar } = data;
   switch (status) {
     case 1:
       return (
         <>
           <div className={styles.RightNav}>
-            <Link href={`/profile/${userName}`}>
-              <a>
-                <div
-                  className={styles.profileLink}
-                  style={{ backgroundSmooth }}
-                >
-                  <div className={styles.nameProfile}>
-                    <p className={styles.userName}>{userName}</p>
-                    <span>Your Profile</span>
+            {loading && <SquareLoader />}
+            {!loading && (
+              <Link href={`/profile/${userName}`}>
+                <a>
+                  <div
+                    onClick={() => setLoading(true)}
+                    className={styles.profileLink}
+                    style={{ backgroundSmooth }}
+                  >
+                    <div className={styles.nameProfile}>
+                      <p className={styles.userName}>{userName}</p>
+                      <span>Your Profile</span>
+                    </div>
+                    <Image
+                      src={
+                        avatar ||
+                        `https://api.multiavatar.com/${userName}.svg` ||
+                        logo
+                      }
+                      alt={userName}
+                      width={55}
+                      height={55}
+                      className={styles.avatar}
+                    />
                   </div>
-                  <Image
-                    src={
-                      avatar ||
-                      `https://api.multiavatar.com/${userName}.svg` ||
-                      logo
-                    }
-                    alt={userName}
-                    width={55}
-                    height={55}
-                    className={styles.avatar}
-                  />
-                </div>
-              </a>
-            </Link>
+                </a>
+              </Link>
+            )}
             <section className="settings">
               <NavSettings />
             </section>

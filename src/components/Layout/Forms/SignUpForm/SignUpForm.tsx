@@ -4,15 +4,14 @@ import React, { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
+import StartButton from "src/components/Buttons/StartButton/StartButton";
 import { TopToastMessage } from "src/components/Messages/Toasts";
 import { PATH } from "src/utils/consts";
 import { messageSignUp } from "src/utils/text";
 import Swal from "sweetalert2";
 import styles from "./SignUpForm.module.css";
 
-
-
-// 
+//
 
 export default function SignUpForm() {
   const [userName, setUserName] = useState("");
@@ -22,7 +21,7 @@ export default function SignUpForm() {
   const [error, setError] = useState("");
 
   const [failedAllFields, setFailedAllFields] = useState(false);
- 
+
   const [message, setMessage] = useState(messageSignUp.base);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -121,13 +120,8 @@ export default function SignUpForm() {
           }
         />
       </div>
-
-      <input
-        onClick={handleSubmit}
-        type={"submit"}
-        value="Create account"
-        className={styles.CreateAccountButton}
-      />
+      
+        <StartButton type="submit" text="Sign Up" fontSize="1.2rem"/>
     </form>
   );
 }
