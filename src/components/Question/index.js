@@ -1,32 +1,32 @@
-import { colors } from "src/styles/theme";
-import { useState } from "react";
-import Button from "src/components/Buttons/Button";
-import styles from "./Question.module.css";
-import Link from "next/link";
-import Image from "next/image";
+import { colors } from 'src/styles/theme'
+import { useState } from 'react'
+import Button from 'src/components/Buttons/Button'
+import styles from './Question.module.css'
+import Link from 'next/link'
+import Image from 'next/image'
 
 //
 export default function Question({
   id = 0,
-  title = "Your connection did not work, do you know why?",
+  title = 'Your connection did not work, do you know why?',
   answers,
-  solution = "yes",
-  userName = "unknow",
-  userImage = "https://api.multiavatar.com/unknow.svg",
+  solution = 'yes',
+  userName = 'unknow',
+  userImage = 'https://api.multiavatar.com/unknow.svg',
   nextQuestion,
   questionIndex,
   results,
-  setResults,
+  setResults
 }) {
-  const [selectedIndex, setSelectedIndex] = useState(undefined);
+  const [selectedIndex, setSelectedIndex] = useState(undefined)
   const select = (index) => {
     selectedIndex === index
       ? setSelectedIndex(undefined)
-      : setSelectedIndex(index);
-  };
+      : setSelectedIndex(index)
+  }
   const handleSubmit = () => {
-    const yourAnswer = answers[selectedIndex];
-    const isCorrect = yourAnswer === solution;
+    const yourAnswer = answers[selectedIndex]
+    const isCorrect = yourAnswer === solution
 
     // concat in results array the index of question, its solution and if you did it right
     setResults([
@@ -35,12 +35,12 @@ export default function Question({
         index: questionIndex,
         question: title,
         solution,
-        isCorrect,
-      },
-    ]);
+        isCorrect
+      }
+    ])
 
-    nextQuestion();
-  };
+    nextQuestion()
+  }
   return (
     <>
       <article key={id} className={styles.container}>
@@ -74,19 +74,19 @@ export default function Question({
                     backgroundColor:
                       selectedIndex === index
                         ? colors.primary
-                        : colors.background,
+                        : colors.background
                   }}
                   key={index}
                   id={`answer${index}`}
                 >
                   <span>{answer}</span>
                 </div>
-              );
+              )
             })}
           </div>
           <Button text="Next" start={handleSubmit} />
         </div>
       </article>
     </>
-  );
+  )
 }

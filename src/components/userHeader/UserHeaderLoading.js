@@ -1,7 +1,7 @@
-import styles from "./userHeader.module.css";
-import { AiFillHeart } from "react-icons/ai";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+import styles from './userHeader.module.css'
+import { AiFillHeart } from 'react-icons/ai'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function UserHeaderLoading() {
   return (
@@ -19,5 +19,5 @@ export default function UserHeaderLoading() {
         </div>
       </header>
     </>
-  );
+  )
 }

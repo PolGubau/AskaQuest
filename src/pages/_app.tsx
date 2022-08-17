@@ -1,11 +1,11 @@
-import "../styles/globals.css";
+import '../styles/globals.css'
 
-import type { AppProps } from "next/app";
-import { SessionProvider } from "next-auth/react";
-import { NextUIProvider } from "@nextui-org/react";
-import Head from "next/head";
+import type { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react'
+import { NextUIProvider } from '@nextui-org/react'
+import Head from 'next/head'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp ({ Component, pageProps }: AppProps) {
   return (
     <NextUIProvider>
       <SessionProvider>
@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </SessionProvider>
     </NextUIProvider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp

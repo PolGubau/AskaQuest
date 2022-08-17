@@ -1,38 +1,38 @@
-import { PATH } from "src/utils/consts";
-import CollectionCover from "src/components/Question/CollectionCover/CollectionCover";
-import { useState, useEffect } from "react";
-import Nav from "src/components/Nav";
-import Question from "src/components/Question";
-import Results from "src/components/Question/Results/Results";
-import AppLayout from "src/components/Layout/AppLayout";
+import { PATH } from 'src/utils/consts'
+import CollectionCover from 'src/components/Question/CollectionCover/CollectionCover'
+import { useState, useEffect } from 'react'
+import Nav from 'src/components/Nav'
+import Question from 'src/components/Question'
+import Results from 'src/components/Question/Results/Results'
+import AppLayout from 'src/components/Layout/AppLayout'
 //
-export default function CollectionPage({
+export default function CollectionPage ({
   error = false,
   user,
   collection,
-  questions,
+  questions
 }) {
   if (error) {
-    return <h1>Error</h1>;
+    return <h1>Error</h1>
   }
-  const MAX_QUESTION = Number(questions.length);
-  const ARRAY_QUESTIONS = questions;
-  const [questionIndex, setQuestionIndex] = useState(0);
+  const MAX_QUESTION = Number(questions.length)
+  const ARRAY_QUESTIONS = questions
+  const [questionIndex, setQuestionIndex] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(
     ARRAY_QUESTIONS[questionIndex]
-  );
-  const [started, setStarted] = useState(false);
-  const [results, setResults] = useState([]);
+  )
+  const [started, setStarted] = useState(false)
+  const [results, setResults] = useState([])
 
   //
   const nextQuestion = () => {
-    setQuestionIndex(questionIndex + 1);
-  };
+    setQuestionIndex(questionIndex + 1)
+  }
   useEffect(() => {
-    setCurrentQuestion(ARRAY_QUESTIONS[questionIndex]);
-  }, [questionIndex]);
+    setCurrentQuestion(ARRAY_QUESTIONS[questionIndex])
+  }, [questionIndex])
 
-  console.log(ARRAY_QUESTIONS);
+  console.log(ARRAY_QUESTIONS)
   return (
     <>
       <Nav />
@@ -83,27 +83,27 @@ export default function CollectionPage({
         )}
       </AppLayout>
     </>
-  );
+  )
 }
-export async function getServerSideProps(context) {
-  const { id } = context.query;
+export async function getServerSideProps (context) {
+  const { id } = context.query
   // we have an id from a collection
-  const collectionRes = await fetch(`${PATH.API}/collections/${id}`);
+  const collectionRes = await fetch(`${PATH.API}/collections/${id}`)
   if (!collectionRes) {
-    return { props: { error: true } };
+    return { props: { error: true } }
   }
-  const collection = await collectionRes.json();
+  const collection = await collectionRes.json()
 
   const questionsRes = await fetch(
     `${PATH.API}/questions/MatchingByCollection/${id}`
-  );
+  )
   if (!questionsRes) {
-    return { props: { error: true } };
+    return { props: { error: true } }
   }
-  const questions = await questionsRes.json();
-  const userID = collection.creator_id;
-  const userRes = await fetch(`${PATH.API}/users/id/${userID}`);
-  const user = await userRes.json();
+  const questions = await questionsRes.json()
+  const userID = collection.creator_id
+  const userRes = await fetch(`${PATH.API}/users/id/${userID}`)
+  const user = await userRes.json()
 
-  return { props: { user, collection, questions } };
+  return { props: { user, collection, questions } }
 }

@@ -1,20 +1,20 @@
-import { signOut } from "next-auth/react";
-import React from "react";
-import styles from "./NavSettings.module.css";
-import { IoIosSettings } from "react-icons/io";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { PATH } from "src/utils/consts";
-import { colors } from "src/styles/theme";
+import { signOut } from 'next-auth/react'
+import React, { useState } from 'react'
+import styles from './NavSettings.module.css'
+import { IoIosSettings } from 'react-icons/io'
 
-function SettingsPannel({ show = false, changeShow = changeShow }) {
-  const router = useRouter();
+import { useRouter } from 'next/router'
+import { PATH } from 'src/utils/consts'
+import { colors } from 'src/styles/theme'
+
+function SettingsPannel({ show = false, changeShow }) {
+  const router = useRouter()
 
   const handleSignOut = () => {
-    signOut();
-    sessionStorage.clear();
-    router.replace(PATH.SIGN_IN);
-  };
+    signOut()
+    sessionStorage.clear()
+    router.replace(PATH.SIGN_IN)
+  }
   return (
     <>
       {show && (
@@ -41,19 +41,19 @@ function SettingsPannel({ show = false, changeShow = changeShow }) {
           <div
             className={styles.background}
             onClick={() => {
-              changeShow();
+              changeShow()
             }}
           ></div>
         </>
       )}
     </>
-  );
+  )
 }
 
 function NavSettings() {
-  const [showSettings, setShowSettings] = useState(false);
+  const [showSettings, setShowSettings] = useState(false)
 
-  const changeShow = () => setShowSettings(!showSettings);
+  const changeShow = () => setShowSettings(!showSettings)
 
   return (
     <>
@@ -63,14 +63,14 @@ function NavSettings() {
             ? { backgroundColor: colors.background }
             : { backgroundColor: colors.white }
         }
-        className={`${styles.settingsButton} ${showSettings ? "active" : ""}`}
+        className={`${styles.settingsButton} ${showSettings ? 'active' : ''}`}
         onClick={changeShow}
       >
         <IoIosSettings className={styles.settingIcon} />
       </span>
       <SettingsPannel show={showSettings} changeShow={changeShow} />
     </>
-  );
+  )
 }
 
-export default NavSettings;
+export default NavSettings

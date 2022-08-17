@@ -1,20 +1,15 @@
-import QuestGallery from 'src/components/Quests/QuestGallery';
-import Logo from "src/components/Logo/Logo";
-import useSessionStorage from "src/hooks/useSessionStorage";
+import QuestGallery from 'src/components/Quests/QuestGallery'
+import Logo from 'src/components/Logo/Logo'
+import useSessionStorage from 'src/hooks/useSessionStorage'
 
 // pannel
-import SignInPannel from "src/components/Pannel/SignInPannel";
-import Intro from "src/components/Layout/Intro";
-import WellcomeBack from "src/components/Pannel/WellcomeBack";
+import SignInPannel from 'src/components/Pannel/SignInPannel'
+import Intro from 'src/components/Layout/Intro'
+import WellcomeBack from 'src/components/Pannel/WellcomeBack'
 
-
-
-
-export default function BodyComponent({ collections }: any) {
-  
-  
-  const {con}= useSessionStorage();
-  const  {status, data } = con;
+export default function BodyComponent ({ collections }: any) {
+  const { con } = useSessionStorage()
+  const { status, data } = con
   return (
     <section>
       <Intro>
@@ -26,6 +21,5 @@ export default function BodyComponent({ collections }: any) {
       <p>New Collections: </p>
       <QuestGallery allCollections={collections} />
     </section>
-  );
+  )
 }
-

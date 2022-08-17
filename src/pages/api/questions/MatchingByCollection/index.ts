@@ -1,11 +1,8 @@
+/* eslint-disable @typescript-eslint/space-before-function-paren */
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {conn} from 'src/utils/database';
+import { conn } from 'src/utils/database'
 
-type Data = {
-  name: string
-}
-
-export default async function handler(req: NextApiRequest,res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body } = req
   switch (method) {
     case 'GET':
@@ -14,7 +11,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
         const response = await conn.query(query)
         return res.json(response.rows)
       } catch (error) {
-        return res.status(400).json({ error: error })
+        return res.status(400).json({ error })
       }
 
     case 'POST':
@@ -27,7 +24,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 
         return res.status(200).json(responsePOST)
       } catch (error) {
-        return res.status(400).json({ error: error })
+        return res.status(400).json({ error })
       }
 
     default:

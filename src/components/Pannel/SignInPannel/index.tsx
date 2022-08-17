@@ -1,9 +1,10 @@
-import router from "next/router";
-import React from "react";
-import { PATH } from "src/utils/consts";
-import styles from "./SignInPannel.module.css";
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import router from 'next/router'
+import React from 'react'
+import { PATH } from 'src/utils/consts'
+import styles from './SignInPannel.module.css'
 
-export default function SignInPannel() {
+export default function SignInPannel () {
   return (
     <>
       <section className={styles.container}>
@@ -16,17 +17,17 @@ export default function SignInPannel() {
         <div className={styles.buttonGroup}>
         <button
           className={styles.button}
-          onClick={() => router.push(PATH.SIGN_IN)}
+          onClick={async () => await router.push(PATH.SIGN_IN)}
         >
           Sign in
         </button>
         <button
           className={styles.button}
-          onClick={() => router.push(PATH.CREATE_ACCOUNT)}
+          onClick={async () => await router.push(PATH.CREATE_ACCOUNT)}
         >
           Create an account
         </button></div>
       </section>
     </>
-  );
+  )
 }

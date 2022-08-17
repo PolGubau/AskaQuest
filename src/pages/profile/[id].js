@@ -1,29 +1,29 @@
 // user
-import { PATH } from "src/utils/consts";
-import AppLayout from "src/components/Layout/AppLayout";
-import QuestGallery from "src/components/Quests/QuestGallery";
-import Nav from "src/components/Nav";
-import Image from "next/image";
-import styles from "./profile.module.css";
-import AddNewButton from "src/components/Buttons/AddNew/AddNewButton";
-import { useRouter } from "next/router";
-import TimeAgo from "timeago-react";
-import useSessionStorage from "src/hooks/useSessionStorage";
+import { PATH } from 'src/utils/consts'
+import AppLayout from 'src/components/Layout/AppLayout'
+import QuestGallery from 'src/components/Quests/QuestGallery'
+import Nav from 'src/components/Nav'
+import Image from 'next/image'
+import styles from './profile.module.css'
+import AddNewButton from 'src/components/Buttons/AddNew/AddNewButton'
+import { useRouter } from 'next/router'
+import TimeAgo from 'timeago-react'
+import useSessionStorage from 'src/hooks/useSessionStorage'
 
-export default function userPage({ id, user, collectionsByUser }) {
-  const router = useRouter();
-  const { ID, userName, since, avatar, followers, following, date_creation } =
-    user;
+export default function userPage ({ id, user, collectionsByUser }) {
+  const router = useRouter()
+  const { userName, avatar, followers, date_creation: dateCreation } =
+    user
   const {
-    con: { data, status },
-  } = useSessionStorage();
+    con: { data }
+  } = useSessionStorage()
 
-  const { userName: userNameLogedIn } = data;
+  const { userName: userNameLogedIn } = data
   return (
     <>
       <Nav
         actualName={`${userName}'s profile`}
-        actualLink={"profile/" + userName}
+        actualLink={'profile/' + userName}
       />
 
       <AppLayout>
@@ -32,9 +32,10 @@ export default function userPage({ id, user, collectionsByUser }) {
             <div>
               <h1 className={styles.heading1}>{userName}</h1>
 
-              {followers ? (
+              {followers
+                ? (
                 <>
-                  <p>Some of {userName}'s followers:</p>
+                  <p>{`Some of ${userName}'s followers:`}</p>
 
                   <div className={styles.followersContainer}>
                     {followers.map((follower) => (
@@ -55,14 +56,15 @@ export default function userPage({ id, user, collectionsByUser }) {
                     ))}
                   </div>
                 </>
-              ) : (
+                  )
+                : (
                 `Be the first one to follow ${userName}!`
-              )}
-              {date_creation && (
+                  )}
+              {dateCreation && (
                 <p>
-                  {`Here since `}
-                  <TimeAgo datetime={date_creation} locale="es.ts" />
-                  {`.`}
+                  {'Here since '}
+                  <TimeAgo datetime={dateCreation} locale="es.ts" />
+                  {'.'}
                 </p>
               )}
             </div>
@@ -77,27 +79,29 @@ export default function userPage({ id, user, collectionsByUser }) {
             </div>
           </header>
           <section>
-            {collectionsByUser.length === 0 ? (
+            {collectionsByUser.length === 0
+              ? (
               <p>This user has not created anything 😥</p>
-            ) : (
+                )
+              : (
               <QuestGallery allCollections={collectionsByUser} />
-            )}
+                )}
             {id === userNameLogedIn && <AddNewButton />}
           </section>
         </main>
       </AppLayout>
     </>
-  );
+  )
 }
 
-export async function getServerSideProps(context) {
-  const { id } = context.query;
+export async function getServerSideProps (context) {
+  const { id } = context.query
 
-  const userRes = await fetch(`${PATH.API}/users/userName/${id}`);
-  const user = await userRes.json();
+  const userRes = await fetch(`${PATH.API}/users/userName/${id}`)
+  const user = await userRes.json()
 
-  const collectionsRes = await fetch(`${PATH.API}/collections/userName/${id}`);
-  const collectionsByUser = await collectionsRes.json();
+  const collectionsRes = await fetch(`${PATH.API}/collections/userName/${id}`)
+  const collectionsByUser = await collectionsRes.json()
 
-  return { props: { id, user, collectionsByUser } };
+  return { props: { id, user, collectionsByUser } }
 }

@@ -1,18 +1,18 @@
-import Link from "next/link";
-import ProfileNav from "./ProfileNav";
-import styles from "./ProfileNav.module.css";
-import { backgroundSmooth } from "src/styles/theme";
-import { useRouter } from "next/router";
-import { PATH } from "src/utils/consts";
-import { BiHomeAlt } from "react-icons/bi";
+import Link from 'next/link'
+import ProfileNav from './ProfileNav'
+import styles from './ProfileNav.module.css'
+import { backgroundSmooth } from 'src/styles/theme'
+import { useRouter } from 'next/router'
+import { PATH } from 'src/utils/consts'
+import { BiHomeAlt } from 'react-icons/bi'
 
 export default function Nav({
-  actualRoot = "Home",
-  actualName = "",
-  actualLink = "",
-  seeProfile = true,
+  actualRoot = 'Home',
+  actualName = '',
+  actualLink = '',
+  seeProfile = true
 }) {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <>
       <section className={styles.section}>
@@ -44,5 +44,5 @@ export default function Nav({
         </nav>
       </section>
     </>
-  );
+  )
 }

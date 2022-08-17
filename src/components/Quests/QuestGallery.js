@@ -1,16 +1,16 @@
-import EachQuest from "src/components/Quests/EachQuest/EachQuest";
+import EachQuest from 'src/components/Quests/EachQuest/EachQuest'
 
 export default function QuestGallery({
   allCollections = [
     {
       ID: 0,
-      title: "No conection",
+      title: 'No conection',
       creator_id: undefined,
-      date_creation: "2022-07-23 10:06:32.953831",
+      date_creation: '2022-07-23 10:06:32.953831',
       likes: 0,
-      tags: ["internet", "connection"],
-    },
-  ],
+      tags: ['internet', 'connection']
+    }
+  ]
 }) {
   return (
     <>
@@ -32,5 +32,5 @@ export default function QuestGallery({
         }
       `}</style>
     </>
-  );
+  )
 }

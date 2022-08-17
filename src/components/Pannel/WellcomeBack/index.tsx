@@ -1,16 +1,17 @@
-import router from "next/router";
-import React from "react";
-import { PATH } from "src/utils/consts";
-import styles from "./SignInPannel.module.css";
-import { BsPlusLg } from "react-icons/bs";
-import { BiDice5, BiGridAlt } from "react-icons/bi";
-import randomCollection from "src/services/randomCollectionID";
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+import router from 'next/router'
+import React from 'react'
+import { PATH } from 'src/utils/consts'
+import styles from './SignInPannel.module.css'
+import { BsPlusLg } from 'react-icons/bs'
+import { BiDice5, BiGridAlt } from 'react-icons/bi'
+import randomCollection from 'src/services/randomCollectionID'
 
+export default function SignInPannel ({ user }: any) {
+  const randomCollectionID = randomCollection()
 
-export default function SignInPannel({ user }: any) {
-  const randomCollectionID = randomCollection();
-  
-  const handleRandom =()=>{
+  const handleRandom = () => {
     console.log(`${PATH.RANDOM_QUEST}/${randomCollectionID}`)
   }
   return (
@@ -23,7 +24,7 @@ export default function SignInPannel({ user }: any) {
 
           <button
             className={styles.button}
-            onClick={() => router.push(PATH.ALL_QUESTS)}
+            onClick={async () => await router.push(PATH.ALL_QUESTS)}
           >
             <p className={styles.icon}>
               <BiGridAlt size={20} />
@@ -35,7 +36,7 @@ export default function SignInPannel({ user }: any) {
 
           <button
             className={styles.button}
-            onClick={() => router.push(PATH.CREATE_QUEST)}
+            onClick={async () => await router.push(PATH.CREATE_QUEST)}
           >
             <p className={styles.icon}>
               <BsPlusLg size={20} />
@@ -56,5 +57,5 @@ export default function SignInPannel({ user }: any) {
         </div>
       </section>
     </>
-  );
+  )
 }

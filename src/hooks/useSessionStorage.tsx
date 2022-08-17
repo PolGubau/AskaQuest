@@ -1,21 +1,21 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
-export default function useSessionStorage() {
-  const router = useRouter();
-  const [con, setCon] = useState({ status: 0, data: {} });
+export default function useSessionStorage () {
+  const router = useRouter()
+  const [con, setCon] = useState({ status: 0, data: {} })
 
   useEffect(() => {
-    const takingUser = sessionStorage.getItem("user");
+    const takingUser = sessionStorage.getItem('user')
 
-    if (takingUser) {
-      const user = JSON.parse(takingUser);
+    if (takingUser != null) {
+      const user = JSON.parse(takingUser)
 
-      setCon({ status: 1, data: user });
+      setCon({ status: 1, data: user })
     } else {
-      setCon({ status: -1, data: {error: 'User not given'} });
+      setCon({ status: -1, data: { error: 'User not given' } })
     }
-  }, [router]);      
+  }, [router])
 
-  return { con };
+  return { con }
 }

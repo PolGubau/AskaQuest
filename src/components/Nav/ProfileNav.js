@@ -1,25 +1,25 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import "react-loading-skeleton/dist/skeleton.css";
-import { PATH } from "src/utils/consts";
-import styles from "./ProfileNav.module.css";
-import { backgroundSmooth } from "src/styles/theme";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { PATH } from 'src/utils/consts'
+import styles from './ProfileNav.module.css'
+import { backgroundSmooth } from 'src/styles/theme'
 
-import useSessionStorage from "src/hooks/useSessionStorage";
-import NavSettings from "src/components/Nav/NavSettings";
-import logo from "src/assets/logo.svg";
-import { useState } from "react";
-import SquareLoader from "../loaders/SquaresLoader/SquareLoader";
+import useSessionStorage from 'src/hooks/useSessionStorage'
+import NavSettings from 'src/components/Nav/NavSettings'
+import logo from 'src/assets/logo.svg'
+import { useState } from 'react'
+import SquareLoader from '../loaders/SquaresLoader/SquareLoader'
 //
-export default function ProfileNav() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
+export default function ProfileNav () {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const {
-    con: { data, status },
-  } = useSessionStorage();
+    con: { data, status }
+  } = useSessionStorage()
 
-  const { userName, avatar } = data;
+  const { userName, avatar } = data
   switch (status) {
     case 1:
       return (
@@ -58,9 +58,7 @@ export default function ProfileNav() {
             </section>
           </div>
         </>
-      );
-    default:
-      return "";
+      )
   }
   return (
     <div
@@ -73,12 +71,12 @@ export default function ProfileNav() {
         <span>Click for Sign in</span>
       </div>
       <Image
-        src={`https://api.multiavatar.com/a.svg` || logo}
-        alt={"Anonymous avatar"}
+        src={'https://api.multiavatar.com/a.svg' || logo}
+        alt={'Anonymous avatar'}
         width={55}
         height={55}
         className={styles.avatar}
       />
     </div>
-  );
+  )
 }

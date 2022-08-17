@@ -25,10 +25,11 @@
     "vercel": "27.3.3"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^12.2.5",
     "@types/node": "18.0.6",
     "@types/pg": "8.6.5",
-    "@types/react": "18.0.15",
-    "@types/react-dom": "18.0.6",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "5.31.0",
     "eslint": "^8.22.0",

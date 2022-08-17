@@ -1,7 +1,7 @@
-import Skeleton from "react-loading-skeleton";
-import { backgroundSmooth } from "src/styles/theme";
+import Skeleton from 'react-loading-skeleton'
+import { backgroundSmooth } from 'src/styles/theme'
 
-export default function SkeletonProfile(params) {
+export default function SkeletonProfile() {
   return (
     <>
       <Skeleton
@@ -9,9 +9,9 @@ export default function SkeletonProfile(params) {
         height={20}
         style={{
           background: backgroundSmooth,
-          margin: "0 auto",
-          marginTop: "10px",
-          marginBottom: "10px",
+          margin: '0 auto',
+          marginTop: '10px',
+          marginBottom: '10px'
         }}
       />
       <Skeleton
@@ -26,12 +26,12 @@ export default function SkeletonProfile(params) {
         circle={true}
         style={{
           background: backgroundSmooth,
-          borderRadius: "50%",
-          margin: "0 auto",
-          marginTop: "10px",
-          marginBottom: "10px",
+          borderRadius: '50%',
+          margin: '0 auto',
+          marginTop: '10px',
+          marginBottom: '10px'
         }}
       />
     </>
-  );
+  )
 }

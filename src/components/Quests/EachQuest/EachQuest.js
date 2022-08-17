@@ -1,39 +1,44 @@
-import { colors } from "src/styles/theme";
-import styles from "./EachQuest.module.css";
-import TimeAgo from "timeago-react";
-import UserHeader from "src/components/UserHeader/UserHeader";
-import returnUserById from "src/services/returnUserById";
-import StartButton from "src/components/Buttons/StartButton/StartButton";
-import { useRouter } from "next/router";
-import UserHeaderLoading from "src/components/UserHeader/UserHeaderLoading";
-
+import { colors } from 'src/styles/theme'
+import styles from './EachQuest.module.css'
+import TimeAgo from 'timeago-react'
+import UserHeader from 'src/components/UserHeader/UserHeader'
+import returnUserById from 'src/services/returnUserById'
+import StartButton from 'src/components/Buttons/StartButton/StartButton'
+import { useRouter } from 'next/router'
+import UserHeaderLoading from 'src/components/UserHeader/UserHeaderLoading'
+import { AiOutlineCalendar } from 'react-icons/ai'
+//
 export default function EachQuest({ collection }) {
-  const router = useRouter();
+  const router = useRouter()
 
-  const { ID, title, creator_id, date_creation, likes, tags } = collection;
+  const { ID, title, creator_id: creatorId, date_creation: dateCreation, likes, tags } = collection
 
-  const user = returnUserById(creator_id);
+  const user = returnUserById(creatorId)
   return (
     <>
-     
+
         <section className={styles.section}>
-          {user ? (
+          {user
+            ? (
             <UserHeader
-              username={user.userName || "Anonymous"}
+              username={user.userName || 'Anonymous'}
               userimage={`https://api.multiavatar.com/${user.userName}.svg`}
               likes={likes || null}
             />
-          ) : (
+              )
+            : (
             <UserHeaderLoading />
-          )}
+              )}
 
           <div>
             <h3 className={styles.title}>{title}</h3>
 
             <p>
               <span>
-                {`Created `}
-                <TimeAgo datetime={date_creation} locale="es.ts" />
+
+                <AiOutlineCalendar />
+                {'Created '}
+                <TimeAgo datetime={dateCreation} locale="es.ts" />
               </span>
             </p>
 
@@ -45,7 +50,7 @@ export default function EachQuest({ collection }) {
                     key={index}
                     style={{
                       color: colors.white,
-                      backgroundColor: colors.primary,
+                      backgroundColor: colors.primary
                     }}
                   >
                     {tag}
@@ -53,10 +58,10 @@ export default function EachQuest({ collection }) {
                 ))}
             </div>
           </div>
-          <div onClick={() => router.push("/Quest/[id]", `/Quest/${ID}`)}>
+          <div onClick={() => router.push('/Quest/[id]', `/Quest/${ID}`)}>
             <StartButton />
           </div>
         </section>
     </>
-  );
+  )
 }

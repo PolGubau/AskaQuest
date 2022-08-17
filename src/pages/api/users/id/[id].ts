@@ -1,62 +1,62 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { conn } from "src/utils/database";
+/* eslint-disable @typescript-eslint/space-before-function-paren */
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { conn } from 'src/utils/database'
 
-import { User } from "src/interfaces/User";
+import { User } from 'src/interfaces/User'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<User | object>
 ) {
-  const { method, query, body } = req;
-  const paramID = query.id;
-  let id: Number;
-  id = Number(paramID);
+  const { method, query, body } = req
+  const paramID = query.id
+  const id = Number(paramID)
 
   //
   switch (method) {
-    case "GET":
+    case 'GET':
       try {
-        const query = `SELECT * FROM public."Users" WHERE "ID" = $1`;
-        const values = [id];
-        const result = await conn.query(query, values);
+        const query = 'SELECT * FROM public."Users" WHERE "ID" = $1'
+        const values = [id]
+        const result = await conn.query(query, values)
 
         if (result.rows.length === 0) {
-          return res.status(404).json({ error: "not found" });
+          return res.status(404).json({ error: 'not found' })
         }
-        return res.json(result.rows[0]);
+        return res.json(result.rows[0])
       } catch (error) {
-        return res.status(400).json({ error });
+        return res.status(400).json({ error })
       }
 
     //
-    case "PUT":
+    case 'PUT':
       try {
-        const { userName, password } = body;
-        const query = `UPDATE public."Users" SET userName = $1, password = $2, WHERE ID = $3 RETURNING *`;
-        const values = [userName, password, id];
-        const result = await conn.query(query, values);
+        const { userName, password } = body
+        const query = 'UPDATE public."Users" SET userName = $1, password = $2, WHERE ID = $3 RETURNING *'
+        const values = [userName, password, id]
+        const result = await conn.query(query, values)
         if (result.rows.length === 0) {
-          return res.status(404).json({ error: "not found" });
+          return res.status(404).json({ error: 'not found' })
         }
-        return res.json(result.rows[0]);
+        return res.json(result.rows[0])
       } catch (error) {
-        return res.status(400).json({ error: error });
+        return res.status(400).json({ error })
       }
 
     //
-    case "DELETE":
+    case 'DELETE':
       try {
-        const query = `DELETE FROM public."Users" WHERE ID = $1 RETURNING *`;
-        const values = [id];
+        const query = 'DELETE FROM public."Users" WHERE ID = $1 RETURNING *'
+        const values = [id]
 
-        const response = await conn.query(query, values);
-        return res.json(response);
+        const response = await conn.query(query, values)
+        return res.json(response)
       } catch (error) {
-        return res.status(400).json({ error: error });
+        return res.status(400).json({ error })
       }
 
     //
     default:
-      return res.status(404).json({ error: "not found" });
+      return res.status(404).json({ error: 'not found' })
   }
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./AddNewButton.module.css";
-import { BsPlusLg } from "react-icons/bs";
+import React from 'react'
+import styles from './AddNewButton.module.css'
+import { BsPlusLg } from 'react-icons/bs'
 
 export default function AddNewButton() {
   return (
@@ -10,5 +10,5 @@ export default function AddNewButton() {
         <p className={styles.addText}>Add a new one !</p>
       </div>
     </>
-  );
+  )
 }

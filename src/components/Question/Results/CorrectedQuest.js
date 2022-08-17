@@ -3,7 +3,7 @@ export default function CorrectedQuest({
   color,
   question,
   isCorrect,
-  solution,
+  solution
 }) {
   return (
     <>
@@ -42,5 +42,5 @@ export default function CorrectedQuest({
         }
       `}</style>
     </>
-  );
+  )
 }

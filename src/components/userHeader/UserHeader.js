@@ -1,13 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import styles from "./userHeader.module.css";
-import { AiFillHeart } from "react-icons/ai";
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import styles from './userHeader.module.css'
+import { AiFillHeart } from 'react-icons/ai'
 
 export default function UserHeader({
-  username = "Anonymous",
-  userimage = `https://api.multiavatar.com/Anonymous.svg`,
-  likes = undefined,
+  username = 'Anonymous',
+  userimage = 'https://api.multiavatar.com/Anonymous.svg',
+  likes = undefined
 }) {
   return (
     <>
@@ -32,5 +32,5 @@ export default function UserHeader({
         )}
       </header>
     </>
-  );
+  )
 }

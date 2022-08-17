@@ -1,4 +1,4 @@
-import css from "styled-jsx/css";
+import css from 'styled-jsx/css'
 
 export default css`
   div {
@@ -46,4 +46,4 @@ export default css`
       width: 1000px;
     }
   }
-`;
+`

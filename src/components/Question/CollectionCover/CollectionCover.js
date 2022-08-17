@@ -1,22 +1,20 @@
-import Link from "next/link";
-import styles from "./CollectionCover.module.css";
-import { FaArrowRight } from "react-icons/fa";
+import styles from './CollectionCover.module.css'
+import { FaArrowRight } from 'react-icons/fa'
 
-import Image from "next/image";
 export default function CollectionCover({
   id,
   userId,
-  userName = "unknow",
-  userImage = "https://api.multiavatar.com/unknow.svg",
+  userName = 'unknow',
+  userImage = 'https://api.multiavatar.com/unknow.svg',
   title,
   tags,
   likes,
   questions,
-  setStarted,
+  setStarted
 }) {
   const start = () => {
-    setStarted(true);
-  };
+    setStarted(true)
+  }
   return (
     <>
       <article key={id}>
@@ -42,5 +40,5 @@ export default function CollectionCover({
         </section>
       </article>
     </>
-  );
+  )
 }

@@ -1,73 +1,75 @@
-import email from "next-auth/providers/email";
-import router from "next/router";
-import React, { useState } from "react";
-import { AiOutlineUser } from "react-icons/ai";
-import { HiOutlineMail } from "react-icons/hi";
-import { RiLockPasswordLine } from "react-icons/ri";
-import StartButton from "src/components/Buttons/StartButton/StartButton";
-import { TopToastMessage } from "src/components/Messages/Toasts";
-import { PATH } from "src/utils/consts";
-import { messageSignUp } from "src/utils/text";
-import Swal from "sweetalert2";
-import styles from "./SignUpForm.module.css";
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import router from 'next/router'
+import React, { useState } from 'react'
+import { AiOutlineUser } from 'react-icons/ai'
+import { HiOutlineMail } from 'react-icons/hi'
+import { RiLockPasswordLine } from 'react-icons/ri'
+import StartButton from 'src/components/Buttons/StartButton/StartButton'
+import { TopToastMessage } from 'src/components/Messages/Toasts'
+import { PATH } from 'src/utils/consts'
+import { messageSignUp } from 'src/utils/text'
+import Swal from 'sweetalert2'
+import styles from './SignUpForm.module.css'
 
 //
 
-export default function SignUpForm() {
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function SignUpForm () {
+  const [userName, setUserName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('')
 
-  const [failedAllFields, setFailedAllFields] = useState(false);
+  const [failedAllFields, setFailedAllFields] = useState(false)
 
-  const [message, setMessage] = useState(messageSignUp.base);
+  const [message, setMessage] = useState(messageSignUp.base)
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // reset error and message
-    setFailedAllFields(false);
-    setError("");
-    setMessage("");
+    setFailedAllFields(false)
+    setError('')
+    setMessage('')
 
     // fields check
     if (!userName || !email || !password) {
-      setFailedAllFields(true);
-      return Swal.fire("Ouups!", messageSignUp.allFieldsAreRequired, "error");
+      setFailedAllFields(true)
+      return await Swal.fire('Ouups!', messageSignUp.allFieldsAreRequired, 'error')
     }
     // user structure
     const user = {
       userName,
       email,
-      password,
-    };
+      password
+    }
     // save the post
-    const response = await fetch("/api/users", {
-      method: "POST",
-      body: JSON.stringify(user),
-    });
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      body: JSON.stringify(user)
+    })
 
     // get the data
-    const data = await response.json();
+    const data = await response.json()
 
     if (data.success) {
-      setUserName("");
-      setEmail("");
-      setPassword("");
+      setUserName('')
+      setEmail('')
+      setPassword('')
       TopToastMessage.fire({
-        icon: "success",
-        title: "Account Created! Now sign in with it",
-      });
-      router.push(PATH.SIGN_IN);
+        icon: 'success',
+        title: 'Account Created! Now sign in with it'
+      }).catch((err) => console.log(err))
+      router.push(PATH.SIGN_IN).catch((err) => console.log(err))
     } else {
       // set the error
-      return setError(data.message);
+      return setError(data.message)
     }
-  };
+  }
   return (
     <form className={styles.formulario} onSubmit={handleSubmit}>
       {message && <p className={styles.message}>{message}</p>}
+      {error && <p className={styles.error}>{error}</p>}
 
       <div className={styles.inputBig}>
         <div className={styles.inputIcon}>
@@ -120,8 +122,8 @@ export default function SignUpForm() {
           }
         />
       </div>
-      
+
         <StartButton type="submit" text="Sign Up" fontSize="1.2rem"/>
     </form>
-  );
+  )
 }
