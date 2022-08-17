@@ -1,4 +1,3 @@
-import Head from "next/head";
 import BodyComponent from "src/components/BodyComponent/BodyComponent";
 import AppLayout from "src/components/Layout/AppLayout";
 import Nav from "src/components/Nav";
@@ -7,11 +6,8 @@ export default function HomePage({collections}:any) {
   
   return (
     <>
-        <Head>
-          <title>Home / AskaQuest </title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>          
-        <Nav actualRoot="home" />
+       
+        <Nav/>
         <AppLayout>
         <main className="main">
           <BodyComponent collections={collections}/>

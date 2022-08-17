@@ -9,6 +9,7 @@ import Nav from "src/components/Nav";
 import LoginForm from "src/components/Layout/Forms/loginForm/LoginForm";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Head from "next/head";
 
 const Login = () => {
   const router = useRouter();
@@ -17,6 +18,9 @@ const Login = () => {
 
   return (
     <>
+        <Head>
+          <title>Login / AskaQuest</title>
+        </Head>
       <Nav seeProfile={false} />
       <AppLayout>
         <div className={styles.container}>

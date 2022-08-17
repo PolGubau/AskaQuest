@@ -18,7 +18,7 @@ export default function ProfileNav() {
   const {
     con: { data, status },
   } = useSessionStorage();
-  
+
   const { userName, avatar } = data;
   switch (status) {
     case 1:
@@ -59,6 +59,8 @@ export default function ProfileNav() {
           </div>
         </>
       );
+    default:
+      return "";
   }
   return (
     <div
