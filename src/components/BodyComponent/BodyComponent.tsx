@@ -7,6 +7,9 @@ import SignInPannel from "src/components/Pannel/SignInPannel";
 import Intro from "src/components/Layout/Intro";
 import WellcomeBack from "src/components/Pannel/WellcomeBack";
 
+
+
+
 export default function BodyComponent({ collections }: any) {
   
   

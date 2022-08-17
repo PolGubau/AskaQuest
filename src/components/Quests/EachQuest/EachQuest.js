@@ -6,6 +6,7 @@ import returnUserById from "src/services/returnUserById";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import { useRouter } from "next/router";
 import UserHeaderLoading from "src/components/UserHeader/UserHeaderLoading";
+
 export default function EachQuest({ collection }) {
   const router = useRouter();
 
@@ -14,47 +15,48 @@ export default function EachQuest({ collection }) {
   const user = returnUserById(creator_id);
   return (
     <>
-      <section className={styles.section}>
-        {user ? (
-          <UserHeader
-            username={user.userName || "Anonymous"}
-            userimage={`https://api.multiavatar.com/${user.userName}.svg`}
-            likes={likes || null}
-          />
-        ) : (
-          <UserHeaderLoading />
-        )}
+     
+        <section className={styles.section}>
+          {user ? (
+            <UserHeader
+              username={user.userName || "Anonymous"}
+              userimage={`https://api.multiavatar.com/${user.userName}.svg`}
+              likes={likes || null}
+            />
+          ) : (
+            <UserHeaderLoading />
+          )}
 
-        <div>
-          <h3 className={styles.title}>{title}</h3>
+          <div>
+            <h3 className={styles.title}>{title}</h3>
 
-          <p>
-            <span>
-              {`Created `}
-              <TimeAgo datetime={date_creation} locale="es.ts" />
-            </span>
-          </p>
+            <p>
+              <span>
+                {`Created `}
+                <TimeAgo datetime={date_creation} locale="es.ts" />
+              </span>
+            </p>
 
-          <div className={styles.tags}>
-            {tags &&
-              tags.map((tag, index) => (
-                <span
-                  className={styles.tag}
-                  key={index}
-                  style={{
-                    color: colors.white,
-                    backgroundColor: colors.primary,
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
+            <div className={styles.tags}>
+              {tags &&
+                tags.map((tag, index) => (
+                  <span
+                    className={styles.tag}
+                    key={index}
+                    style={{
+                      color: colors.white,
+                      backgroundColor: colors.primary,
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+            </div>
           </div>
-        </div>
-        <div onClick={() => router.push("/Quest/[id]", `/Quest/${ID}`)}>
-          <StartButton />
-        </div>
-      </section>
+          <div onClick={() => router.push("/Quest/[id]", `/Quest/${ID}`)}>
+            <StartButton />
+          </div>
+        </section>
     </>
   );
 }

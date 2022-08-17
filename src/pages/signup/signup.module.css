@@ -10,51 +10,7 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-.formulario {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-}
-.input {
-  width: 100%;
-  padding: 10px;
-  height: 49px;
-  border-radius: 0 10px 10px 0;
-  border: 1px solid var(--background);
-}
-.inputBig {
-  height: 49px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: nowrap;
-  align-content: center;
-}
-.inputIcon {
-  height: 49px;
-  width: 49px;
-  border-radius: 10px 0 0 10px;
-  display: flex;
-  background-color: var(--background);
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-}
-.CreateAccountButton {
-  background-color: var(--background);
-  outline: none;
-  border: 1px solid var(--secondary);
-  border-radius: 10px;
-  padding: 6px 12px;
-}
-.CreateAccountButton:hover {
-  background-color: var(--secondary);
-  color: var(--white);
-  cursor: pointer;
-}
+
 .buttonSection {
   display: flex;
   justify-content: center;

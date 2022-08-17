@@ -7,10 +7,10 @@ import { PATH } from "src/utils/consts";
 import { BiHomeAlt } from "react-icons/bi";
 
 export default function Nav({
-  actualName = "",
   actualRoot = "Home",
-  path = [],
-  actualLink = "/",
+  actualName = "",
+  actualLink = "",
+  seeProfile = true,
 }) {
   const router = useRouter();
   return (
@@ -27,26 +27,20 @@ export default function Nav({
               {actualRoot}
             </p>
 
-            {path &&
-              path.map((item, index) => (
-                <div key={index}>
-                  <span>/</span>
-                  <Link href={`${"/" + item}`}>
-                    <a className={styles.navPath}>{item}</a>
-                  </Link>
-                </div>
-              ))}
-            <Link href={`${actualLink}`} style={{ backgroundSmooth }}>
-              <a className={styles.navPath}>
-                {actualName && <span>/ </span>}
-                {actualName}
-              </a>
-            </Link>
+            {actualName && (
+              <Link href={`${actualLink}`} style={{ backgroundSmooth }}>
+                <a className={styles.navPath}>
+                  {actualName && <span>/ </span>}
+                  {actualName}
+                </a>
+              </Link>
+            )}
           </div>
-          <div>
-            <ProfileNav />
-            
-          </div>
+          {seeProfile && (
+            <div>
+              <ProfileNav />
+            </div>
+          )}
         </nav>
       </section>
     </>

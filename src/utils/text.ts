@@ -3,3 +3,11 @@ export const messagesLogin = {
     userNoExist: `This user doesn't exist 🥀`,
     passwordIncorrect: "Your username or password are incorrect.",
   };
+  
+  
+  
+  export const messageSignUp = {
+    base: "Create your account to acces all features!",
+    allFieldsAreRequired: "All fields are required",
+    passwordIncorrect: "Your username or password are incorrect.",
+  }

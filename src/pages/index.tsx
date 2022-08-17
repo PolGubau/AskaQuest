@@ -21,8 +21,9 @@ export default function HomePage({trendyCollections}:any) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticprops() {
   const res = await fetch(`${PATH.API}/collections`);
   const trendyCollections = await res.json();
   return { props: { trendyCollections } };
 }
+
