@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 import styles from './StartButton.module.css'
 import SquareLoader from 'src/components/loaders/SquaresLoader/SquareLoader'
-import { Card } from '@nextui-org/react'
 
 //
 export default function StartButton({
   text = 'Start',
   icon = 'arrow',
   type = 'button',
+  outline = false,
   fontSize = '1.5rem'
 }) {
   const [loading, setLoading] = useState(false)
@@ -19,31 +19,32 @@ export default function StartButton({
   }
   //
   return (
-    <Card isPressable isHoverable>
       <button
         type={type}
         style={{ outline: 'none', border: 'none', padding: 0 }}
-      >
-        <div className={styles.startButton} onClick={handleClick}>
+
+        onClick={handleClick}
+        className={`
+        ${styles.button} 
+        ${outline ? styles.outline : styles.noOutline}`}>
+
           {!loading
             ? (
-            <>
-              <p
-                className={styles.startButtonText}
-                style={{ fontSize }}
-              >
-                {text}
-              </p>
-              <p className={styles.startButtonIcon}>
-                {icon === 'arrow' && <FaArrowRight />}
-              </p>
-            </>
+              <>
+                <p
+                  className={styles.startButtonText}
+                  style={{ fontSize }}
+                >
+                  {text}
+                </p>
+                <p className={styles.startButtonIcon}>
+                  {icon === 'arrow' && <FaArrowRight />}
+                </p>
+              </>
               )
             : (
-            <SquareLoader squaresColor="#fff" />
+              <SquareLoader squaresColor="#fff" />
               )}
-        </div>
       </button>
-    </Card>
   )
 }

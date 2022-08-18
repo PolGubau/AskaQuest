@@ -1,6 +1,6 @@
 import React from 'react'
 import AppLayout from 'src/components/Layout/AppLayout'
-import CreateQuestForm from 'src/components/Layout/Forms/CreateQuestForm/LoginForm'
+import CreateQuestForm from 'src/components/Layout/Forms/CreateQuestForm/CreateQuestForm'
 import Nav from 'src/components/Nav'
 
 export default function createQuest () {

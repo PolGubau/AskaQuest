@@ -25,15 +25,15 @@ export default async function handler(
       // eslint-disable-next-line no-case-declarations
       const content = JSON.parse(body)
       try {
-        const { userName, email, password } = content
+        const { userName, email, password, image } = content
         const salt = bcrypt.genSaltSync(10)
         const hashPassword = bcrypt.hashSync(password, salt)
 
         const query = `INSERT INTO public."Users"(
-          "userName", password, email,date_creation)
-          VALUES ($1, $2, $3,$4)
+          "userName", password, email,date_creation,image)
+          VALUES ($1, $2, $3,$4,$5)
             RETURNING *;`
-        const values = [userName, hashPassword, email, new Date()]
+        const values = [userName, hashPassword, email, new Date(), image]
 
         const responsePOST = await conn.query(query, values)
 

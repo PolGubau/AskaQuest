@@ -2,34 +2,32 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import styles from './userHeader.module.css'
-import { AiFillHeart } from 'react-icons/ai'
+import useSessionStorage from 'src/hooks/useSessionStorage'
 
 export default function UserHeader({
+  you = false,
+  size = 40,
   username = 'Anonymous',
-  userimage = 'https://api.multiavatar.com/Anonymous.svg',
-  likes = undefined
+  userimage = 'https://api.multiavatar.com/Anonymous.svg'
 }) {
+  const { con: { data } } = useSessionStorage()
+  const name = you ? data.userName : username
+  const image = you ? data.image || `https://api.multiavatar.com/${name}.svg` : userimage
   return (
     <>
       <header className={styles.container}>
-        <Link href={`/profile/${username}`}>
-          <a className={styles.creator}>
+        <Link href={`/profile/${name}`}>
+          <a className={styles.creator} style={{ height: size }}>
             <Image
               className={styles.creatorImage}
-              src={userimage}
+              src={image}
               alt="Creator avatar"
-              width={30}
-              height={30}
+              width={size - 10}
+              height={size - 10}
             />
-            <span className={styles.creatorUserName}>{username}</span>
+            <span className={styles.creatorUserName}>By {name}</span>
           </a>
         </Link>
-        {likes && (
-          <div className={styles.likes}>
-            <p className={styles.likesText}>{likes}</p>
-            <AiFillHeart className={styles.likesIcon} color="red" />
-          </div>
-        )}
       </header>
     </>
   )

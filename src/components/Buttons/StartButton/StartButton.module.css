@@ -1,16 +1,42 @@
-.startButton {
-  cursor: pointer;
+.button {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: var(--background);
   font-size: 1.5em;
   font-weight: bold;
   padding: 10px 15px;
   height: 49px;
-  border-radius: 10px;
+  border-radius: 20px;
   width: 100%;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  transition: all 0.1s ease-in-out;
 }
+
+.button:hover {
+  background-color: var(--secondary);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.noOutline {
+  background-color: var(--background);
+  border: 1px solid var(--secondary);
+  color: var(--black);
+}
+
+.outline {
+  border: 3px solid var(--clean-background);
+  background-color: var(--white);
+  color: var(--black);
+
+}
+
 .startButtonText {
   display: flex;
   margin-right: 10px;
@@ -19,8 +45,4 @@
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-}
-.startButton:hover {
-  background-color: var(--secondary);
-  color: var(--white);
 }

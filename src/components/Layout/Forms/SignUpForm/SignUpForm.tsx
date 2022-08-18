@@ -41,7 +41,8 @@ export default function SignUpForm () {
     const user = {
       userName,
       email,
-      password
+      password,
+      image: `https://api.multiavatar.com/${userName}.svg`
     }
     // save the post
     const response = await fetch('/api/users', {
