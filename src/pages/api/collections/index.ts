@@ -16,10 +16,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     case 'POST':
       try {
-        const { creatorID, likes } = body
-        const query = `INSERT INTO public."Collections"( creator_id, likes)
-          VALUES (?, ?, ?, ?);`
-        const values = [creatorID, likes]
+        const content = JSON.parse(body)
+
+        const { creator_id: creatorID, likes, title, tags } = content
+        const query = `INSERT INTO public."Collections"( creator_id, date_creation,likes,title,tags)
+          VALUES (?, ?, ?, ?,?);`
+        const values = [creatorID, new Date(), likes, title, tags]
         const responsePOST = await conn.query(query, values)
 
         return res.status(200).json(responsePOST)

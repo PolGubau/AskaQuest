@@ -10,11 +10,10 @@ import UserHeader from 'src/components/UserHeader/UserHeader'
 import EachQuestionForm from './EachQuestionForm/EachQuestionForm'
 import { Question } from 'src/interfaces/question'
 import QuestionReaded from './QuestionReaded/QuestionReaded'
-import { Collection } from 'src/interfaces/Collection'
 import useSessionStorage from 'src/hooks/useSessionStorage'
+import { PATH } from 'src/utils/consts'
 
 export default function CreateQuestForm () {
-  const [collection, setCollection] = useState<Collection[]>([])
   const [questions, setQuestions] = useState<Question[]>([])
 
   const { con: { data } }: any = useSessionStorage()
@@ -33,17 +32,42 @@ export default function CreateQuestForm () {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    // 1. guardar la coleccion en la base de datos
-    // 2. coger el ID de la collection
-    // 3. guardar las preguntas en la base de datos
 
-    // const response = await fetch('/api/createQuest', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(data)
-    // })
+    // 1. guardar la coleccion en la base de datos
+    const collectionData = {
+      creator_id: creatorID,
+      likes: 0,
+      title,
+      tags
+    }
+    const collectionResponse = await fetch(`${PATH.API}/collections`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(collectionData)
+    })
+    const collection = await collectionResponse.json()
+    console.log(collection)
+
+    // 2. coger el ID de la collection
+    const collectionID = collection.id
+    // 3. guardar las preguntas en la base de datos una por una
+    questions.forEach(async (question) => {
+      const questionData = {
+        ...question,
+        collection_id: collectionID
+      }
+      const questionResponse = await fetch(`${PATH.API}/questions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(questionData)
+      })
+      const questionSaved = await questionResponse.json()
+      console.log(questionSaved)
+    })
   }
   return (
     <>
