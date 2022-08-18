@@ -42,7 +42,7 @@ export default function EachQuest({ collection }) {
               </span>
             </p>
 
-            <div className={styles.tags}>
+            {/* <div className={styles.tags}>
               {tags &&
                 tags.map((tag, index) => (
                   <span
@@ -56,7 +56,7 @@ export default function EachQuest({ collection }) {
                     {tag}
                   </span>
                 ))}
-            </div>
+            </div> */}
           </div>
           <div onClick={() => router.push('/Quest/[id]', `/Quest/${ID}`)}>
             <StartButton />

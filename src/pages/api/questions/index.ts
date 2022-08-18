@@ -17,13 +17,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'POST':
       try {
         const content = JSON.parse(body)
-        console.log(content)
         const { collection_id: collectionID, title, solution, answers, creator_id: creatorID } = content
 
         const query = `INSERT INTO public."Questions"( collection_id, title,solution,date_creation,answers,creatorID)
           VALUES ($1, $2, $3,$4,$5,$6) RETURNING *;`
 
         const values = [collectionID, title, solution, new Date(), answers, creatorID]
+        console.log(content)
 
         const responsePOST = await conn.query(query, values)
         const question = responsePOST.rows
