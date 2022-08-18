@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { conn } from 'src/utils/database'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -22,7 +23,6 @@ export default async function handler(
       }
 
     case 'POST':
-      // eslint-disable-next-line no-case-declarations
       const content = JSON.parse(body)
       try {
         const { userName, email, password, image } = content

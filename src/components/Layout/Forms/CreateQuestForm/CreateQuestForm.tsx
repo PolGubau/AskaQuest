@@ -11,7 +11,6 @@ import EachQuestionForm from './EachQuestionForm/EachQuestionForm'
 import { Question } from 'src/interfaces/question'
 import QuestionReaded from './QuestionReaded/QuestionReaded'
 import useSessionStorage from 'src/hooks/useSessionStorage'
-import { PATH } from 'src/utils/consts'
 
 export default function CreateQuestForm () {
   const [questions, setQuestions] = useState<Question[]>([])
@@ -27,7 +26,6 @@ export default function CreateQuestForm () {
     question.date_creation = new Date()
     setQuestions([...questions, question])
   }
-  console.log(questions)
   const message = (messageCreateCollection.base)
 
   const handleSubmit = async (e: any) => {
@@ -40,33 +38,34 @@ export default function CreateQuestForm () {
       title,
       tags
     }
-    const collectionResponse = await fetch(`${PATH.API}/collections`, {
+    // save the post
+    const response = await fetch('/api/collections', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify(collectionData)
     })
-    const collection = await collectionResponse.json()
-    console.log(collection)
 
+    // get the data
+    const data = await response.json()
     // 2. coger el ID de la collection
-    const collectionID = collection.id
+    const collectionID = data.collection[0].ID
     // 3. guardar las preguntas en la base de datos una por una
     questions.forEach(async (question) => {
       const questionData = {
         ...question,
         collection_id: collectionID
       }
-      const questionResponse = await fetch(`${PATH.API}/questions`, {
+      console.log('QUESTION: ', questionData)
+
+      // save the post
+      const response = await fetch('/api/questions', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify(questionData)
       })
-      const questionSaved = await questionResponse.json()
-      console.log(questionSaved)
+
+      // get the data
+      const data = await response.json()
+
+      console.log(data)
     })
   }
   return (
