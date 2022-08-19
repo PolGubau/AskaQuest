@@ -18,9 +18,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         const content = JSON.parse(body)
         const { creator_id: creatorID, title, tags } = content
+        const jsonTags = JSON.stringify(tags)
         const query = `INSERT INTO public."Collections"( creator_id, date_creation,likes,title,tags)
           VALUES ($1, $2, $3,$4,$5) RETURNING *;`
-        const values = [creatorID, new Date(), 0, title, tags]
+        const values = [creatorID, new Date(), 0, title, jsonTags]
         const responsePOST = await conn.query(query, values)
         const collection = responsePOST.rows
 

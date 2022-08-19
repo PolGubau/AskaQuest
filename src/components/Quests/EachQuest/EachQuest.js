@@ -1,4 +1,3 @@
-import { colors } from 'src/styles/theme'
 import styles from './EachQuest.module.css'
 import TimeAgo from 'timeago-react'
 import UserHeader from 'src/components/UserHeader/UserHeader'
@@ -12,6 +11,7 @@ export default function EachQuest({ collection }) {
   const router = useRouter()
 
   const { ID, title, creator_id: creatorId, date_creation: dateCreation, likes, tags } = collection
+  console.log(tags, typeof tags)
 
   const user = returnUserById(creatorId)
   return (
