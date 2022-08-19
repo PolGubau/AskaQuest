@@ -90,3 +90,15 @@
   align-content: center;
   margin-top: 20px;
 }
+
+.questionsDone {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

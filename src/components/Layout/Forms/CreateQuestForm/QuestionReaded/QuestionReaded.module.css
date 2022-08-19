@@ -31,3 +31,11 @@
 .solutionText {
     margin-left: 10px;
 }
+
+.correct {
+    background-color: var(--right);
+}
+
+.noCorrect {
+    background-color: var(--wrong);
+}

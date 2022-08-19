@@ -1,6 +1,6 @@
 import styles from './CollectionCover.module.css'
 import { FaArrowRight } from 'react-icons/fa'
-
+import UserHeader from 'src/components/UserHeader/UserHeader'
 export default function CollectionCover({
   id,
   userId,
@@ -19,7 +19,7 @@ export default function CollectionCover({
     <>
       <article key={id}>
         <section className={styles.container}>
-          <userHeader name={userName} image={userImage} />
+          <UserHeader name={userName} image={userImage} />
 
           <div className={styles.content}>
             <h3 className={styles.title}>{title}</h3>

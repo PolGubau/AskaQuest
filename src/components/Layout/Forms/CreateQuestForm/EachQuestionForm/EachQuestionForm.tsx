@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import SaveButton from 'src/components/Buttons/SaveButton/SaveButton'
+import Swal from 'sweetalert2'
 import styles from './EachQuestionForm.module.css'
 
 export default function EachQuestionForm ({ saveQuestion }: any) {
@@ -39,7 +40,16 @@ export default function EachQuestionForm ({ saveQuestion }: any) {
   }
 
   const handleSave = () => {
-    saveQuestion(question)
+    // save the question if a radio button is pressed
+    if (question.solution !== '') {
+      saveQuestion(question)
+    } else {
+      void Swal.fire(
+        'Question is not finnished!',
+        'You need to check which answer is the solution',
+        'warning'
+      )
+    }
   }
   return (
 

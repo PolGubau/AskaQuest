@@ -2,9 +2,7 @@ import { colors } from 'src/styles/theme'
 import { useState } from 'react'
 import Button from 'src/components/Buttons/Button'
 import styles from './Question.module.css'
-import Link from 'next/link'
-import Image from 'next/image'
-
+import UserHeader from 'src/components/UserHeader/UserHeader'
 //
 export default function Question({
   id = 0,
@@ -45,20 +43,7 @@ export default function Question({
     <>
       <article key={id} className={styles.container}>
         <header className={styles.names}>
-          <Link href={`/profile/${userName}`}>
-            <a className={styles.creator}>
-              <Image
-                src={userImage}
-                alt="Creator avatar"
-                width={30}
-                height={30}
-              />
-              <small className={styles.creatorUserNameBy}>
-                By
-                <span className={styles.creatorUserName}>{userName}</span>
-              </small>
-            </a>
-          </Link>
+         <UserHeader userName={userName} userImage={userImage}/>
         </header>
         <div className={styles.content}>
           <p className={styles.title}>

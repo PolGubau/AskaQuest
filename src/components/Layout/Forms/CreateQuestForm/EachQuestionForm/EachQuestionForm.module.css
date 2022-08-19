@@ -1,5 +1,6 @@
 .question {
     padding: 20px;
+    margin-top: 10px;
     background: var(--white);
     border-radius: 20px;
     box-shadow: 10px 10px 30px #bebebe,

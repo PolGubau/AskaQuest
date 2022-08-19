@@ -9,11 +9,11 @@ import AddNewButton from 'src/components/Buttons/AddNew/AddNewButton'
 import { useRouter } from 'next/router'
 import TimeAgo from 'timeago-react'
 import useSessionStorage from 'src/hooks/useSessionStorage'
+import Link from 'next/link'
 
-export default function userPage ({ id, user, collectionsByUser }) {
+export default function userPage({ id, user, collectionsByUser }) {
   const router = useRouter()
-  const { userName, avatar, followers, date_creation: dateCreation } =
-    user
+  const { userName, avatar, followers, date_creation: dateCreation } = user
   const {
     con: { data }
   } = useSessionStorage()
@@ -86,7 +86,13 @@ export default function userPage ({ id, user, collectionsByUser }) {
               : (
               <QuestGallery allCollections={collectionsByUser} />
                 )}
-            {id === userNameLogedIn && <AddNewButton />}
+            {id === userNameLogedIn && (
+              <Link href={PATH.CREATE_QUEST}>
+                <a>
+                  <AddNewButton />
+                </a>
+              </Link>
+            )}
           </section>
         </main>
       </AppLayout>
@@ -94,7 +100,7 @@ export default function userPage ({ id, user, collectionsByUser }) {
   )
 }
 
-export async function getServerSideProps (context) {
+export async function getServerSideProps(context) {
   const { id } = context.query
 
   const userRes = await fetch(`${PATH.API}/users/userName/${id}`)

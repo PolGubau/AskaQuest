@@ -5,6 +5,7 @@ import Nav from 'src/components/Nav'
 import Question from 'src/components/Question'
 import Results from 'src/components/Question/Results/Results'
 import AppLayout from 'src/components/Layout/AppLayout'
+import ErrorNoQuestions from 'src/components/Question/ErrorNoQuestions'
 //
 export default function CollectionPage ({
   error = false,
@@ -32,7 +33,6 @@ export default function CollectionPage ({
     setCurrentQuestion(ARRAY_QUESTIONS[questionIndex])
   }, [questionIndex])
 
-  console.log(ARRAY_QUESTIONS)
   return (
     <>
       <Nav />
@@ -47,11 +47,13 @@ export default function CollectionPage ({
             }
             title={collection.title}
             likes={collection.likes}
-            tags={collection.tags}
+            tags={JSON.parse(collection.tags)}
             questions={collection.questions}
             setStarted={setStarted}
           />
         )}
+        {questions.error && <ErrorNoQuestions />}
+
         {started && questionIndex < MAX_QUESTION && (
           <div>
             <Question

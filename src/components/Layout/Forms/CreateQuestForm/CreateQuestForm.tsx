@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState } from 'react'
-import { AiOutlineUser } from 'react-icons/ai'
+import { FaTextHeight } from 'react-icons/fa'
 import styles from './CreateQuestForm.module.css'
 import { messageCreateCollection } from 'src/utils/text'
 import StartButton from 'src/components/Buttons/StartButton/StartButton'
@@ -76,7 +76,7 @@ export default function CreateQuestForm () {
         <div className={styles.headerInputs}>
           <div className={styles.inputBig}>
             <div className={styles.inputIcon}>
-              <AiOutlineUser size={18} />
+              <FaTextHeight size={18} />
             </div>
             <input
               type="text"
@@ -120,9 +120,12 @@ export default function CreateQuestForm () {
         {/* */}
 
         <article className={styles.questionsContainer}>
+          <p>Staged Questions</p>
+          <section className={styles.questionsDone}>
           {questions.map((question, index) => (
             <QuestionReaded key={index} question={question} />
           ))}
+          </section>
 
           <EachQuestionForm saveQuestion={saveQuestions} />
 
