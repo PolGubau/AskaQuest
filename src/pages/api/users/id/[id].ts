@@ -33,11 +33,11 @@ export default async function handler(
     // take the user from the body and update it   
       try {
         const { userName, email, password, followers, following, collections_done, role, image, ID } = body
-        console.log(body)
+        console.log('BODY received by backend: ', body)
         const query = 'UPDATE public."Users" SET "userName" = $1, "email" = $2, "password" = $3, "followers" = $4, "following" = $5, "collections_done" = $6, "role" = $7, "image" = $8 WHERE "ID" = $9'
-        const values = [userName, email, password, followers, following, collections_done, role, image, ID]
+        const values = [userName, email, password,JSON.stringify(followers) ,JSON.stringify(following), collections_done, role, image, ID]
         await conn.query(query, values).then((result: { rows: (object | User)[] }) => {
-          return res.status(200).json(result.rows[0])
+          return res.status(200).json(result)
         })
       } catch (error) {
         return res.status(400).json({ error })

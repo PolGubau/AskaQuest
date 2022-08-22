@@ -24,17 +24,19 @@ export default function userPage({
   user: User;
   collectionsByUser: Collection[];
 }) {
+  const userLoged = takeUserLoged();
+
   const router = useRouter();
-  const [followingProfile, setFollowingProfile] = useState(false);
+  const [followingProfile, setFollowingProfile] = useState(
+    user.following?.includes(userLoged.ID)
+  );
   const { ID, userName, image, followers, date_creation: dateCreation } = user;
 
-  //
-  console.log('Followers received from frontend': followers);
-
+  console.log("Profiled", user);
+  console.log("Loged", userLoged);
   // const followers = followersStringlified
   //   ? JSON.parse(followersStringlified)
   //   : [];
-  const userLoged = takeUserLoged();
 
   const handleFollowCall = async () => {
     if (userLoged) {
