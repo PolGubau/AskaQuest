@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,8 +20,9 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/c/*": ["components/*"],
-
+      "@/c/*": [
+        "components/*"
+      ],
       "@h": [
         "src/hooks"
       ],
@@ -32,8 +37,23 @@
       ],
     }
   },
-  
-  
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Quests/CollectionsItem.js", "src/interfaces/pages/login/index.tsx", "src/components/Nav/ProfileNav.js", "src/components/Nav/SkeletonProfile.js", "src/hooks/useSessionStorage.tsx", "src/pages/profile/[id].js", "src/hooks/useTimeAgo.js", "src/components/UserHeader/UserHeader.js", "src/components/UserHeader/userHeader.js", "src/components/Layout/AppLayout/index.js", "src/components/Question/ErrorNoQuestions/index.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/components/Quests/CollectionsItem.js",
+    "src/interfaces/pages/login/index.tsx",
+    "src/components/Nav/ProfileNav.js",
+    "src/components/Nav/SkeletonProfile.js",
+    "src/hooks/useLocalStorage.tsx",
+    "src/pages/profile/[id].tsx",
+    "src/hooks/useTimeAgo.js",
+    "src/components/UserHeader/UserHeader.js",
+    "src/components/UserHeader/userHeader.js",
+    "src/components/Layout/AppLayout/index.js",
+    "src/components/Question/ErrorNoQuestions/index.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

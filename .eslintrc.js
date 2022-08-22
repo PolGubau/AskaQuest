@@ -14,11 +14,15 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
+  parser: "@typescript-eslint/parser",
+
   plugins: [
     'react'
   ],
   rules: {
     'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    'dot-notation': 'off',
+    '@typescript-eslint/dot-notation': 'warn'
   }
 }

@@ -1,4 +1,3 @@
-import { signOut } from 'next-auth/react'
 import React, { useState } from 'react'
 import styles from './NavSettings.module.css'
 import { IoIosSettings } from 'react-icons/io'
@@ -6,13 +5,13 @@ import { IoIosSettings } from 'react-icons/io'
 import { useRouter } from 'next/router'
 import { PATH } from 'src/utils/consts'
 import { colors } from 'src/styles/theme'
+import { handleLogout } from 'src/services/handleLogin/handleLogout'
 
 function SettingsPannel({ show = false, changeShow }) {
   const router = useRouter()
 
   const handleSignOut = () => {
-    signOut()
-    sessionStorage.clear()
+    handleLogout()
     router.replace(PATH.SIGN_IN)
   }
   return (

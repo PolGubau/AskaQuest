@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import router from 'next/router'
-import React from 'react'
-import { PATH } from 'src/utils/consts'
-import styles from './SignInPannel.module.css'
+import React from "react";
+import { PATH } from "src/utils/consts";
+import styles from "./SignInPannel.module.css";
+import ButtonWithIcon from "src/components/Buttons/ButtonWithIcon/ButtonWithIcon";
+import Link from "next/link";
 
-export default function SignInPannel () {
+export default function SignInPannel() {
   return (
     <>
       <section className={styles.container}>
@@ -15,19 +16,18 @@ export default function SignInPannel () {
           experience.
         </p>
         <div className={styles.buttonGroup}>
-        <button
-          className={styles.button}
-          onClick={async () => await router.push(PATH.SIGN_IN)}
-        >
-          Sign in
-        </button>
-        <button
-          className={styles.button}
-          onClick={async () => await router.push(PATH.CREATE_ACCOUNT)}
-        >
-          Create an account
-        </button></div>
+          <Link href={PATH.SIGN_IN}>
+            <a>
+              <ButtonWithIcon text={"Sign in"} icon={"user"} />
+            </a>
+          </Link>
+          <Link href={PATH.CREATE_ACCOUNT}>
+            <a>
+              <ButtonWithIcon text={"Create an account"} icon={"create"} />
+            </a>
+          </Link>
+        </div>
       </section>
     </>
-  )
+  );
 }

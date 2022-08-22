@@ -1,7 +1,14 @@
 
 export interface User {
-  id?: string
+  ID: string
+  date_creation?: string
   userName: string
   password: string
-  date_creation?: string
+  followers?: Array<number | string>
+  following?: Array<number | string>
+  email: string
+  collections_done?: string
+  role: number
+  image?: string
 }
+

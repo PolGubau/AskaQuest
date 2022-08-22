@@ -6,10 +6,9 @@ import StartButton from 'src/components/Buttons/StartButton/StartButton'
 import { useRouter } from 'next/router'
 import UserHeaderLoading from 'src/components/UserHeader/UserHeaderLoading'
 import { AiOutlineCalendar } from 'react-icons/ai'
-import { colors } from 'src/styles/theme'
 
 //
-export default function EachQuest({ collection }) {
+export default function EachQuest ({ collection }) {
   const router = useRouter()
 
   const {
@@ -20,7 +19,7 @@ export default function EachQuest({ collection }) {
     likes,
     tags
   } = collection
-  const tagsArray = JSON.parse(tags)
+  // const tagsArray = JSON.parse(tags)
   const user = returnUserById(creatorId)
   return (
     <>
@@ -48,7 +47,7 @@ export default function EachQuest({ collection }) {
             </span>
           </p>
           <div className={styles.tags}>
-            {tags &&
+            {/* {tags &&
               tagsArray.map((tag, index) => (
                 <span
                   className={styles.tag}
@@ -60,7 +59,7 @@ export default function EachQuest({ collection }) {
                 >
                   {tag}
                 </span>
-              ))}
+              ))} */}
           </div>
         </div>
         <div onClick={() => router.push('/Quest/[id]', `/Quest/${ID}`)}>

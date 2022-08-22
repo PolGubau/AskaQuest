@@ -1,73 +1,73 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import React, { useState } from 'react'
-import { FaTextHeight } from 'react-icons/fa'
-import styles from './CreateQuestForm.module.css'
-import { messageCreateCollection } from 'src/utils/text'
-import StartButton from 'src/components/Buttons/StartButton/StartButton'
-import UserHeader from 'src/components/UserHeader/UserHeader'
-import EachQuestionForm from './EachQuestionForm/EachQuestionForm'
-import { Question } from 'src/interfaces/question'
-import QuestionReaded from './QuestionReaded/QuestionReaded'
-import useSessionStorage from 'src/hooks/useSessionStorage'
+import React, { useState } from "react";
+import { FaTextHeight } from "react-icons/fa";
+import styles from "./CreateQuestForm.module.css";
+import { messageCreateCollection } from "src/utils/text";
+import StartButton from "src/components/Buttons/StartButton/StartButton";
+import UserHeader from "src/components/UserHeader/UserHeader";
+import EachQuestionForm from "./EachQuestionForm/EachQuestionForm";
+import { Question } from "src/interfaces/question";
+import QuestionReaded from "./QuestionReaded/QuestionReaded";
+import useLocalStorage from "src/hooks/useLocalStorage";
 
-export default function CreateQuestForm () {
-  const [questions, setQuestions] = useState<Question[]>([])
+export default function CreateQuestForm() {
+  const [questions, setQuestions] = useState<Question[]>([]);
 
-  const { con: { data } }: any = useSessionStorage()
-  const creatorID = data.ID
+  const {
+    con: { data },
+  }: any = useLocalStorage("user");
+  const creatorID = data.ID;
 
-  const [title, setTitle] = useState('')
-  const [tags, setTags] = useState(['', '', ''])
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState(["", "", ""]);
 
   const saveQuestions = (question: Question) => {
-    question.creator_id = creatorID
-    question.date_creation = new Date()
-    setQuestions([...questions, question])
-  }
-  const message = (messageCreateCollection.base)
+    question.creator_id = creatorID;
+    question.date_creation = new Date();
+    setQuestions([...questions, question]);
+  };
+  const message = messageCreateCollection.base;
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // 1. guardar la coleccion en la base de datos
     const collectionData = {
       creator_id: creatorID,
       likes: 0,
       title,
-      tags
-    }
+      tags,
+    };
     // save the post
-    const response = await fetch('/api/collections', {
-      method: 'POST',
-      body: JSON.stringify(collectionData)
-    })
+    const response = await fetch("/api/collections", {
+      method: "POST",
+      body: JSON.stringify(collectionData),
+    });
 
     // get the data
-    const data = await response.json()
+    const data = await response.json();
     // 2. coger el ID de la collection
-    const collectionID = data.collection[0].ID
+    const collectionID = data.collection[0].ID;
     // 3. guardar las preguntas en la base de datos una por una
     questions.forEach(async (question) => {
       const questionData = {
         ...question,
-        collection_id: collectionID
-      }
-      console.log('QUESTION: ', questionData)
+        collection_id: collectionID,
+      };
 
       // save the post
-      const response = await fetch('/api/questions', {
-        method: 'POST',
-        body: JSON.stringify(questionData)
-      })
+      const response = await fetch("/api/questions", {
+        method: "POST",
+        body: JSON.stringify(questionData),
+      });
 
       // get the data
-      const data = await response.json()
-
-      console.log(data)
-    })
-  }
+      const data = await response.json();
+      console.log("Result: ", data);
+    });
+  };
   return (
     <>
       {message && <p className={styles.message}>{message}</p>}
@@ -122,18 +122,22 @@ export default function CreateQuestForm () {
         <article className={styles.questionsContainer}>
           <p>Staged Questions</p>
           <section className={styles.questionsDone}>
-          {questions.map((question, index) => (
-            <QuestionReaded key={index} question={question} />
-          ))}
+            {questions.map((question, index) => (
+              <QuestionReaded key={index} question={question} />
+            ))}
           </section>
 
           <EachQuestionForm saveQuestion={saveQuestions} />
-
         </article>
 
         <div className={styles.buttonContainer} onClick={handleSubmit}>
-          <StartButton type="submit" text="Submit Collection" fontSize="1.2rem" />
+          <StartButton
+            type="submit"
+            text="Submit Collection"
+            fontSize="1.2rem"
+          />
         </div>
       </form>
-    </>)
+    </>
+  );
 }

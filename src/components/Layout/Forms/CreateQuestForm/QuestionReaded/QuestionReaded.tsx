@@ -1,6 +1,5 @@
 import styles from "./QuestionReaded.module.css";
 export default function QuestionReaded({ question }: any) {
-  console.log(question);
   const { title, solution, answers } = question;
   return (
     <>
@@ -20,7 +19,7 @@ export default function QuestionReaded({ question }: any) {
                         : styles.noCorrect
                     }`}
                   >
-                    {answe r}
+                    {answer}
                   </p>
                 </div>
               );

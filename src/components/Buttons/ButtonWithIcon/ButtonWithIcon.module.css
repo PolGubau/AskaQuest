@@ -1,0 +1,53 @@
+.inputBig {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    align-content: center;
+    transition: 0.2s ease all;
+}
+
+.inputBig:active {
+    transform: scale(0.95);
+}
+
+.inputIcon {
+    height: 40px;
+    width: 50px;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    background-color: var(--background);
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.button {
+    width: 100%;
+    height: 40px;
+    border-radius: 0 10px 10px 0;
+    border: 1px solid var(--background);
+    background-color: var(--clean-background);
+    color: var(--black);
+    font-size: 14px;
+    padding-right: 3px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    cursor: pointer;
+}
+
+.inputBig:hover .inputIcon {
+    background-color: var(--secondary);
+    color: var(--white);
+}
+
+.inputBig:hover .button {
+    background-color: var(--dark-background);
+    color: var(--white);
+}

@@ -28,7 +28,7 @@ export default function singleQuestionPage ({ questions }) {
 }
 
 export async function getServerSideProps () {
-  const res = await fetch(`${PATH.API}/questions`)
+  const res = await fetch(PATH.API.QUESTIONS)
   const questions = await res.json()
   return { props: { questions } }
 }

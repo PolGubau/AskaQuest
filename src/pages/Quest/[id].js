@@ -88,24 +88,34 @@ export default function CollectionPage ({
   )
 }
 export async function getServerSideProps (context) {
-  const { id } = context.query
-  // we have an id from a collection
-  const collectionRes = await fetch(`${PATH.API}/collections/${id}`)
-  if (!collectionRes) {
-    return { props: { error: true } }
-  }
-  const collection = await collectionRes.json()
+  try {
+    const { id } = context.query
+    // we have an id from a collection
+    const collectionRes = await fetch(`${PATH.API.COLLECTION_BY_ID}/${id}`)
+    if (!collectionRes) {
+      return { props: { error: true } }
+    }
+    const collection = await collectionRes.json()
 
-  const questionsRes = await fetch(
-    `${PATH.API}/questions/MatchingByCollection/${id}`
-  )
-  if (!questionsRes) {
-    return { props: { error: true } }
-  }
-  const questions = await questionsRes.json()
-  const userID = collection.creator_id
-  const userRes = await fetch(`${PATH.API}/users/id/${userID}`)
-  const user = await userRes.json()
+    const questionsRes = await fetch(
+      `${PATH.API.QUESTIONS_MATCHING_COLLECTION}/${id}`
+    )  
+    if (!questionsRes) {
+      return { props: { error: true } }
+    }
+    const questions = await questionsRes.json()
+    
+    
+    
 
-  return { props: { user, collection, questions } }
+    
+    
+    const userID = collection.creator_id
+    const userRes = await fetch(`${PATH.API.USER_BY_ID}/${userID}`)
+    const user = await userRes.json()  
+    return { props: { user, collection, questions } }
+
+} catch (error) {
+    return {error}
+  }
 }

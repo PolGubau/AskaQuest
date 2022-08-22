@@ -6,7 +6,7 @@ import { PATH } from 'src/utils/consts'
 import styles from './ProfileNav.module.css'
 import { backgroundSmooth } from 'src/styles/theme'
 
-import useSessionStorage from 'src/hooks/useSessionStorage'
+import useLocalStorage from 'src/hooks/useLocalStorage'
 import NavSettings from 'src/components/Nav/NavSettings'
 import logo from 'src/assets/logo.svg'
 import { useState } from 'react'
@@ -17,7 +17,7 @@ export default function ProfileNav () {
   const [loading, setLoading] = useState(false)
   const {
     con: { data, status }
-  } = useSessionStorage()
+  } = useLocalStorage('user')
 
   const { userName, avatar } = data
   switch (status) {

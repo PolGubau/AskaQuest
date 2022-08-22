@@ -2,15 +2,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import styles from './userHeader.module.css'
-import useSessionStorage from 'src/hooks/useSessionStorage'
+import useLocalStorage from 'src/hooks/useLocalStorage'
 
-export default function UserHeader({
+export default function UserHeader ({
   you = false,
   size = 40,
   username = 'Anonymous',
   userimage = 'https://api.multiavatar.com/Anonymous.svg'
 }) {
-  const { con: { data } } = useSessionStorage()
+  const { con: { data } } = useLocalStorage('user')
   const name = you ? data.userName : username
   const image = you ? data.image || `https://api.multiavatar.com/${name}.svg` : userimage
   return (

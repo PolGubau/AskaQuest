@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { now } from 'next-auth/client/_utils'
+import { Connection } from 'pg'
 import { conn } from 'src/utils/database'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -11,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const response = await conn.query(query)
         return res.json(response.rows)
       } catch (error) {
-        return res.status(400).json({ error })
+        return res.status(400).json({ error: error })
       }
 
     case 'POST':
@@ -24,7 +26,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const values = [creatorID, new Date(), 0, title, jsonTags]
         const responsePOST = await conn.query(query, values)
         const collection = responsePOST.rows
-
+        
+        if (collection.error){
+  
+  return res.status(400).json({
+   error:"No internet signal :("
+  })
+}
         return res.status(200).json({ collection })
       } catch (error) {
         return res.status(400).json({ error, message: 'error', body })

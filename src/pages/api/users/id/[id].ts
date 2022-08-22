@@ -30,18 +30,22 @@ export default async function handler(
 
     //
     case 'PUT':
+    // take the user from the body and update it   
       try {
-        const { userName, password } = body
-        const query = 'UPDATE public."Users" SET userName = $1, password = $2, WHERE ID = $3 RETURNING *'
-        const values = [userName, password, id]
-        const result = await conn.query(query, values)
-        if (result.rows.length === 0) {
-          return res.status(404).json({ error: 'not found' })
-        }
-        return res.json(result.rows[0])
+        const { userName, email, password, followers, following, collections_done, role, image, ID } = body
+        console.log(body)
+        const query = 'UPDATE public."Users" SET "userName" = $1, "email" = $2, "password" = $3, "followers" = $4, "following" = $5, "collections_done" = $6, "role" = $7, "image" = $8 WHERE "ID" = $9'
+        const values = [userName, email, password, followers, following, collections_done, role, image, ID]
+        await conn.query(query, values).then((result: { rows: (object | User)[] }) => {
+          return res.status(200).json(result.rows[0])
+        })
       } catch (error) {
         return res.status(400).json({ error })
       }
+     
+      
+      
+     
 
     //
     case 'DELETE':

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { PATH } from 'src/utils/consts'
 import { BiHomeAlt } from 'react-icons/bi'
 
-export default function Nav({
+export default function Nav ({
   actualRoot = 'Home',
   actualName = '',
   actualLink = '',
