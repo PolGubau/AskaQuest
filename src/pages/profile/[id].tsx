@@ -1,5 +1,5 @@
 // user
-import { PATH } from "src/utils/consts";
+import PATH from "src/utils/consts";
 import AppLayout from "src/components/Layout/AppLayout";
 import QuestGallery from "src/components/Quests/QuestGallery";
 import Nav from "src/components/Nav";
@@ -16,6 +16,9 @@ import AddNewButton from "src/components/Buttons/AddNew/AddNewButton";
 import { handleFollow } from "src/services/handleFollow";
 import { useState } from "react";
 import ButtonWithIcon from "src/components/Buttons/ButtonWithIcon/ButtonWithIcon";
+import UserHeader from "src/components/UserHeader/UserHeader";
+
+//
 export default function userPage({
   user,
   collectionsByUser,
@@ -30,17 +33,19 @@ export default function userPage({
   const [followingProfile, setFollowingProfile] = useState(
     user.following?.includes(userLoged.ID)
   );
-  const { ID, userName, image, followers, date_creation: dateCreation } = user;
+  const {
+    ID,
+    userName,
+    image,
+    followers: followersNotParsed,
+    date_creation: dateCreation,
+  } = user;
 
-  console.log("Profiled", user);
-  console.log("Loged", userLoged);
-  // const followers = followersStringlified
-  //   ? JSON.parse(followersStringlified)
-  //   : [];
+  const followers = followersNotParsed ? JSON.parse(followersNotParsed) : [];
 
   const handleFollowCall = async () => {
     if (userLoged) {
-      setFollowingProfile(await handleFollow(userLoged, user));
+      setFollowingProfile(await handleFollow(user, userLoged));
     }
   };
 
@@ -70,23 +75,12 @@ export default function userPage({
                       <p>{`Some of ${userName}'s followers:`}</p>
 
                       <div className={styles.followersContainer}>
-                        {followers.map((follower: any) => (
-                          <div
-                            className={styles.followerContainer}
-                            key={follower}
-                            onClick={() =>
-                              router.push(`${PATH.USER}/${follower}`)
-                            }
-                          >
-                            <Image
-                              src={`https://api.multiavatar.com/${follower}.svg`}
-                              alt={follower}
-                              width={25}
-                              height={25}
-                              className={styles.followerAvatar}
-                            />
-                            <p className={styles.followerName}>{follower}</p>
-                          </div>
+                        {followers.map((followerID: any, index: string) => (
+                          <UserHeader
+                            id={followerID}
+                            key={index}
+                            onlyId={true}
+                          />
                         ))}
                       </div>
                     </>

@@ -19,22 +19,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'POST':
       try {
         const content = JSON.parse(body)
+        
         const { creator_id: creatorID, title, tags } = content
+        
         const jsonTags = JSON.stringify(tags)
+        
         const query = `INSERT INTO public."Collections"( creator_id, date_creation,likes,title,tags)
           VALUES ($1, $2, $3,$4,$5) RETURNING *;`
+          
         const values = [creatorID, new Date(), 0, title, jsonTags]
+        
         const responsePOST = await conn.query(query, values)
         const collection = responsePOST.rows
-        
-        if (collection.error){
-  
-  return res.status(400).json({
-   error:"No internet signal :("
-  })
-}
+
         return res.status(200).json({ collection })
-      } catch (error) {
+      }   catch (error) {
         return res.status(400).json({ error, message: 'error', body })
       }
 

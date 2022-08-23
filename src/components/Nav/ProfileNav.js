@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { PATH } from 'src/utils/consts'
+import PATH from 'src/utils/consts'
 import styles from './ProfileNav.module.css'
 import { backgroundSmooth } from 'src/styles/theme'
 

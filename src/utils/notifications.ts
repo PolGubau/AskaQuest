@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import Swal, { SweetAlertIcon } from "sweetalert2";
 
 export const NotificaciónTop = Swal.mixin({
           toast: true,
@@ -11,3 +11,14 @@ export const NotificaciónTop = Swal.mixin({
             toast.addEventListener("mouseleave", Swal.resumeTimer);
           },
         });
+        
+        
+export const alertCenter = Swal.mixin({
+          position: "center",
+          showConfirmButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar",
+          reverseButtons: true,
+        });
+export const bigAlert=(title:string,message:string,icon:SweetAlertIcon)=>  void Swal.fire(title,message, icon);

@@ -1,5 +1,5 @@
 
-export interface User {
+export interface UserInterface {
   ID: string
   date_creation?: string
   userName: string

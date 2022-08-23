@@ -1,37 +1,34 @@
-
-import Logo from 'src/components/Logo/Logo'
-import AppLayout from 'src/components/Layout/AppLayout'
-import SquareLoader from 'src/components/loaders/SquaresLoader/SquareLoader'
-import styles from 'src/pages/login/login.module.css'
-import { PATH } from 'src/utils/consts'
-import Nav from 'src/components/Nav'
-import LoginForm from 'src/components/Layout/Forms/loginForm/LoginForm'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import Head from 'next/head'
+import Logo from "src/components/Logo/Logo";
+import AppLayout from "src/components/Layout/AppLayout";
+import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
+import styles from "src/pages/login/login.module.css";
+import PATH from "src/utils/consts";
+import Nav from "src/components/Nav";
+import LoginForm from "src/components/Layout/Forms/loginForm/LoginForm";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import Head from "next/head";
 
 const Login = () => {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
-        <Head>
-          <title>Login / AskaQuest</title>
-        </Head>
+      <Head>
+        <title>Login / AskaQuest</title>
+      </Head>
       <Nav seeProfile={false} />
       <AppLayout>
         <div className={styles.container}>
           <section>
             <Logo />
             <section className={styles.singupSection}>
-              {isLoading
-                ? (
+              {isLoading ? (
                 <SquareLoader />
-                  )
-                : (
-                <LoginForm isLoading={isLoading} setLoading={setIsLoading}/>
-                  )}
+              ) : (
+                <LoginForm isLoading={isLoading} setLoading={setIsLoading} />
+              )}
             </section>
 
             <section className={styles.buttonSection}>
@@ -40,7 +37,9 @@ const Login = () => {
                 <button
                   className={styles.CreateAccountButton}
                   onClick={(e) => {
-                    router.push(PATH.CREATE_ACCOUNT).catch((err) => console.log(err))
+                    router
+                      .push(PATH.CREATE_ACCOUNT)
+                      .catch((err) => console.log(err));
                   }}
                 >
                   Create Account
@@ -51,7 +50,7 @@ const Login = () => {
         </div>
       </AppLayout>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

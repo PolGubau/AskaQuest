@@ -1,4 +1,4 @@
-import { PATH } from "src/utils/consts";
+import PATH from "src/utils/consts";
 import useSWR from "swr";
 
 const getData = async (url: string) => {

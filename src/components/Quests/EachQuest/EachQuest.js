@@ -27,9 +27,9 @@ export default function EachQuest ({ collection }) {
         {user
           ? (
           <UserHeader
-            username={user.userName || 'Anonymous'}
-            userimage={`https://api.multiavatar.com/${user.userName}.svg`}
-            likes={likes || null}
+            name={user.userName}
+            image={`https://api.multiavatar.com/${user.userName}.svg`}
+            likes={likes}
           />
             )
           : (

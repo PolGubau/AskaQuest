@@ -1,5 +1,5 @@
 import Collections from "src/components/Quests/QuestGallery";
-import { PATH } from "src/utils/consts";
+import PATH from "src/utils/consts";
 import AppLayout from "src/components/Layout/AppLayout";
 import Nav from "src/components/Nav";
 

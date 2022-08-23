@@ -2,7 +2,7 @@ import BodyComponent from "src/components/BodyComponent/BodyComponent";
 import AppLayout from "src/components/Layout/AppLayout";
 import Nav from "src/components/Nav";
 import { Collection } from "src/interfaces/Collection";
-import { PATH } from "src/utils/consts";
+import PATH from "src/utils/consts";
 
 export default function HomePage({
   collections,

@@ -6,7 +6,7 @@ import styles from "./LoginForm.module.css";
 import { messagesLogin } from "src/utils/text";
 
 import { useRouter } from "next/router";
-import { PATH } from "src/utils/consts";
+import PATH from "src/utils/consts";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import InputWithIcon from "src/components/Buttons/InputButtons/InputWithIcon/InputWithIcon";
 import { NotificaciónTop } from "src/utils/notifications";

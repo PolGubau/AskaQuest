@@ -1,5 +1,5 @@
 import Question from 'src/components/Question'
-import { PATH } from 'src/utils/consts'
+import PATH from 'src/utils/consts'
 import { useRouter } from 'next/router'
 import AppLayout from 'src/components/Layout/AppLayout'
 export default function singleQuestionPage ({ questions }) {

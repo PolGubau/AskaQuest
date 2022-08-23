@@ -14,6 +14,8 @@ export default function Question({
   nextQuestion,
   questionIndex,
   results,
+  creator,
+  createdAt,
   setResults
 }) {
   const [selectedIndex, setSelectedIndex] = useState(undefined)

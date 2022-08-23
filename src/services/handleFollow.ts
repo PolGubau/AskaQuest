@@ -1,75 +1,71 @@
 import { User } from "src/interfaces/User";
-import { PATH } from "src/utils/consts";
+import PATH from "src/utils/consts";
 
-export const handleFollow = async (Pol:User,Maria:User) => {
-    //EJ: Pol quiere seguir a María, le da a seguir
+export const handleFollow = async (Profiled:User,Loged:User) => {
+    //EJ: Loged quiere seguir a Profiled, le da a seguir
     let isNowFollowing = false;
 
-    let {userName, email, password,followers,following,collections_done,role,image,ID } = Pol
-    let {userName:userName2, email:email2, password:password2,followers:followers2,following:following2,collections_done:collections_done2,role:role2,image:image2,ID:ID2 } = Maria
+    let {userName, email, password,followers,following,collections_done,role,image,ID } = Profiled
+    let {userName:userName2, email:email2, password:password2,followers:followers2,following:following2,collections_done:collections_done2,role:role2,image:image2,ID:ID2 } = Loged
     
-
-    
-    // convertimos a array los followers y following, y los usamos para saber si ya siguen o no
     following = JSON.parse(following)
-    following2 = JSON.parse(followers2)
+    followers2 = JSON.parse(followers2)
     
-    // si ya siguen, dejamos de seguir
-    console.log(`Array de gente que sigue el del profile ${userName}: ${following}`)
-    console.log(`Id de quien quiere seguir:${ID2}(${userName2})`)
+    console.log(Loged)
     
-    if(following.includes(ID2)){        
-        console.log(userName + ' ha dejado de seguir a ' + userName2)
-
-        const index = following.indexOf(ID2)
-        try{
-        following.splice(index,1)
-        following=JSON.stringify(following)
-        following2.splice(following2.indexOf(ID),1)
-        following2=JSON.stringify(following2)
-        }catch{
-            console.log(following)
-        }
+    console.log(`${userName} sigue a ${following} y le siguen${followers}`);
+    console.log(`${userName2} sigue a ${following2} y le siguen${followers2}`);
+   
+    
+    if(following===null){
+        following = []
+    }   
+    if(followers2===null){
+        followers2 = []
+    }   
+    
+   
+    
+    if(following && following.includes(ID2)){
+        console.log(`Ya siguen, dejamos de seguir`)
+      // quitamos el id de la persona que sigue al del profile
+    //     following = following.filter((id:number) => id.toString() !== ID2.toString()) // devuelve los index que no sea el mismo id
+    //     followers2 = followers2.filter((id:number) => id.toString() !== ID.toString()) // devuelve los index que no sea el mismo id
         isNowFollowing = false
     }else{
         // si no siguen, seguimos
-        console.log(userName + ' ha empezado a seguir a ' + userName2)
-        following=[...following,ID2]
-        following=JSON.stringify(following)
-        following2=[...following2,ID]
-        following2=JSON.stringify(following2)
+        console.log(`No siguen, seguimos`)
+    //     following.push(ID2)
+    //     console.log(`Se ha añadido a la lista de seguidos del profile ${userName}: ${following}`)
+    //     followers2.push(ID)
         
-        
+
         isNowFollowing = true
     }
-    
-     
-    //enviamos los datos a la base de datos
-    
-    const response = await fetch(`${PATH.API.USER_BY_ID}/${ID}`, {
+    // actualizamos el array de following del que sigue
+    await fetch(PATH.API.USER_BY_ID+'/'+ID, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({userName, email, password,followers,following,collections_done,role,image,ID }),
+        body: JSON.stringify({userName, email, password,followers,following,collections_done,role,image,ID })
     })
-    const data1 = await response.json()
-    console.log('DATA 1: ',data1.rows)
-    
-    const response2 = await fetch(`${PATH.API.USER_BY_ID}/${ID2}`, {
+
+    // actualizamos el array de followers del que es seguido
+    await fetch(PATH.API.USER_BY_ID+'/'+ID2, {
         method: 'PUT',
-       headers: {
-            'Content-Type': 'application/json',
+        headers: {
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({userName:userName2, email:email2, password:password2,followers:followers2,following:following2,collections_done:collections_done2,role:role2,image:image2,ID:ID2 }),
-        
+        body: JSON.stringify({userName:userName2, email:email2, password:password2,followers:followers2,following:following2,collections_done:collections_done2,role:role2,image:image2,ID:ID2 })
     })
-       const data2 = await response2.json()
-    console.log('DATA 2: ',data2.rows)
+    
+    
+   
     
     
     
-    return isNowFollowing
+    // return isNowFollowing
     
     
     

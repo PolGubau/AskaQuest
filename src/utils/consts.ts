@@ -1,6 +1,6 @@
 const DOMINIO = 'http://localhost:3000'
 
-export const PATH = {
+const PATH = {
   HOME: `${DOMINIO}`,
   SIGN_IN: `${DOMINIO}/login`,
   CREATE_ACCOUNT: `${DOMINIO}/signup`,
@@ -12,28 +12,24 @@ export const PATH = {
 
   // API ENDPOINTS
   
-API:{
-  
-  USERS: `${DOMINIO}/api/users`,
-  USER_BY_ID: `${DOMINIO}/api/users/id`,
-  USER_BY_USERNAME: `${DOMINIO}/api/users/userName`,
-  // 
-  ALL_COLLECTIONS: `${DOMINIO}/api/collections`,
-  COLLECTION_BY_ID: `${DOMINIO}/api/collections`,
-  COLLECTION_BY_USERNAME: `${DOMINIO}/api/collections/userName`,
-  // 
-  QUESTIONS: `${DOMINIO}/api/questions`,
-  QUESTIONS_MATCHING_COLLECTION: `${DOMINIO}/api/questions/MatchingCollection`,
+  API:{
+    USERS: `${DOMINIO}/api/users`,
+    USER_BY_ID: `${DOMINIO}/api/users/id`,
+    USER_BY_USERNAME: `${DOMINIO}/api/users/userName`,
+    // 
+    ALL_COLLECTIONS: `${DOMINIO}/api/collections`,
+    COLLECTION_BY_ID: `${DOMINIO}/api/collections`,
+    COLLECTION_BY_USERNAME: `${DOMINIO}/api/collections/userName`,
+    // 
+    QUESTIONS: `${DOMINIO}/api/questions`,
+    QUESTIONS_MATCHING_COLLECTION: `${DOMINIO}/api/questions/MatchingCollection`,
 },
   //
   GITHUB_LOGIN: `${DOMINIO}/api/auth/signin/github`,
   SIGN_OUT: `${DOMINIO}/api/auth/signout`
 }
 
-export const MAX_CHARACTERS = 100
 
-export const LOADING_STATE = {
-  NOT_GOT_IT: 0,
-  LOADING: 1,
-  GOT_IT: 2
-}
+
+
+export default PATH
