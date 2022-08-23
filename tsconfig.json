@@ -48,11 +48,11 @@
     "src/hooks/useLocalStorage.tsx",
     "src/pages/profile/[id].tsx",
     "src/hooks/useTimeAgo.js",
-    "src/components/UserHeader/UserHeader.js",
-    "src/components/UserHeader/userHeader.js",
+    "src/components/UserHeader/UserHeader.tsx",
+    "src/components/UserHeader/UserHeader.tsx",
     "src/components/Layout/AppLayout/index.js",
     "src/components/Question/ErrorNoQuestions/index.js"
-  ],
+, "src/components/Question/index.js"  ],
   "exclude": [
     "node_modules"
   ]
