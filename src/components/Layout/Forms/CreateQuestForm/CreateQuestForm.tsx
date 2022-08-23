@@ -8,11 +8,14 @@ import { messageCreateCollection } from "src/utils/text";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import UserHeader from "src/components/UserHeader/UserHeader";
 import EachQuestionForm from "./EachQuestionForm/EachQuestionForm";
-import { Question } from "src/interfaces/question";
+import { QuestionInterface } from "src/interfaces/question";
 import QuestionReaded from "./QuestionReaded/QuestionReaded";
 import useLocalStorage from "src/hooks/useLocalStorage";
+import PATH from "src/utils/consts";
+import { useRouter } from "next/router";
 
 export default function CreateQuestForm() {
+  const router = useRouter();
   const [questions, setQuestions] = useState<Question[]>([]);
 
   const {
@@ -41,7 +44,7 @@ export default function CreateQuestForm() {
       tags,
     };
     // save the post
-    const response = await fetch("/api/collections", {
+    const response = await fetch(PATH.API.ALL_COLLECTIONS, {
       method: "POST",
       body: JSON.stringify(collectionData),
     });
@@ -56,9 +59,10 @@ export default function CreateQuestForm() {
         ...question,
         collection_id: collectionID,
       };
+      console.log("SENDED BY FRONT: ", questionData);
 
       // save the post
-      const response = await fetch("/api/questions", {
+      const response = await fetch(PATH.API.QUESTIONS, {
         method: "POST",
         body: JSON.stringify(questionData),
       });
@@ -67,6 +71,9 @@ export default function CreateQuestForm() {
       const data = await response.json();
       console.log("Result: ", data);
     });
+
+    // 4. redirigir a la pagina de la collection
+    router.push(PATH.HOME);
   };
   return (
     <>
