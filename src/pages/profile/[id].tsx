@@ -1,13 +1,13 @@
 // user
-import PATH from "src/utils/consts";
+import PATH from "src/utils/path";
 import AppLayout from "src/components/Layout/AppLayout";
-import QuestGallery from "src/components/Quests/QuestGallery";
+import QuestGallery from "src/components/QuestGallery/QuestGallery";
 import Nav from "src/components/Nav";
 import Image from "next/image";
 import styles from "./profile.module.css";
 import { useRouter } from "next/router";
-import { User } from "src/interfaces/User";
-import { Collection } from "src/interfaces/Collection";
+import UserInterface from "src/interfaces/User";
+import { CollectionInterface } from "src/interfaces/Collection";
 import { GetServerSidePropsContext } from "next";
 import { takeUserLoged } from "src/services/takeUserLoged";
 import TimeAgo from "timeago-react";
@@ -24,8 +24,8 @@ export default function userPage({
   collectionsByUser,
 }: {
   userName: string;
-  user: User;
-  collectionsByUser: Collection[];
+  user: UserInterface;
+  collectionsByUser: CollectionInterface[];
 }) {
   const userLoged = takeUserLoged();
 
@@ -76,11 +76,19 @@ export default function userPage({
 
                       <div className={styles.followersContainer}>
                         {followers.map((followerID: any, index: string) => (
-                          <UserHeader
-                            id={followerID}
-                            key={index}
-                            onlyId={true}
-                          />
+                          let followerObj= returnObjectByID(PATH.API.USER_BY_ID, followerID)
+                          
+                            const { data, status } = followerObj;
+
+                          {status === "success" ? (
+            <UserHeader                            
+              key={index}
+              name={data.userName}
+              image={`https://api.multiavatar.com/${data.userName}.svg`}
+            />
+          ) : (
+            <UserHeaderLoading />
+          )}
                         ))}
                       </div>
                     </>

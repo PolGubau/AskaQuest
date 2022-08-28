@@ -3,7 +3,7 @@ import ProfileNav from './ProfileNav'
 import styles from './ProfileNav.module.css'
 import { backgroundSmooth } from 'src/styles/theme'
 import { useRouter } from 'next/router'
-import PATH from 'src/utils/consts'
+import PATH from 'src/utils/path'
 import { BiHomeAlt } from 'react-icons/bi'
 
 export default function Nav ({

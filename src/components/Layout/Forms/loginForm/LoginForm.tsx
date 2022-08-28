@@ -6,10 +6,10 @@ import styles from "./LoginForm.module.css";
 import { messagesLogin } from "src/utils/text";
 
 import { useRouter } from "next/router";
-import PATH from "src/utils/consts";
+import PATH from "src/utils/path";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import InputWithIcon from "src/components/Buttons/InputButtons/InputWithIcon/InputWithIcon";
-import { NotificaciónTop } from "src/utils/notifications";
+import { notificacionTop } from "src/utils/notifications";
 import Swal from "sweetalert2";
 const bcrypt = require("bcryptjs");
 
@@ -46,10 +46,8 @@ export default function LoginForm({ setLoading }: any) {
       } else {
         // password match
 
-        void NotificaciónTop.fire({
-          icon: "success",
-          title: "Signed in successfully",
-        });
+        notificacionTop("success", "Signed in successfully!");
+
         const jsonUser = JSON.stringify(user);
 
         localStorage.setItem("user", jsonUser);

@@ -1,4 +1,4 @@
-import useLocalStorage from "src/hooks/useLocalStorage";
+import useLocalStorage from "src/hooks/getUserFromLocalStorage";
 
 export const takeUserLoged = () => {
   const { con }: any = useLocalStorage("user");

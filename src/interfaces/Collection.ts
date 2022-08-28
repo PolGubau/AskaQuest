@@ -6,5 +6,4 @@ export interface CollectionInterface {
   creator_id: number
   date_creation?: string
   likes?: number
-
 }

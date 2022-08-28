@@ -2,11 +2,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { conn } from 'src/utils/database'
 
-import { User } from 'src/interfaces/User'
+import UserInterface  from 'src/interfaces/User'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<User | object>
+  res: NextApiResponse<UserInterface | object>
 ) {
   const { method, query, body } = req
   const paramID = query.id
@@ -31,9 +31,10 @@ export default async function handler(
     //
     case 'PUT':
       try {
-        const { likes } = body
-        const query = 'UPDATE public."Collections" SET likes = $1, WHERE ID = $2 RETURNING *'
-        const values = [likes, id]
+        const { title,tags,likes,ID } = body
+        const query = 'UPDATE public."Collections" SET "title" = $1, "tags"=$2,"likes"=$3 WHERE ID = $4 RETURNING *'
+        const values = [ title,JSON.stringify(tags),likes,ID]
+        
         const result = await conn.query(query, values)
         if (result.rows.length === 0) {
           return res.status(404).json({ error: 'not found' })

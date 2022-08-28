@@ -2,11 +2,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { conn } from 'src/utils/database'
 
-import { User } from 'src/interfaces/User'
+import UserInterface  from 'src/interfaces/User'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<User | object>
+  res: NextApiResponse<UserInterface | object>
 ) {
   const { method, query, body } = req
   const paramID = query.id
@@ -32,21 +32,20 @@ export default async function handler(
     case 'PUT':
     // take the user from the body and update it   
       try {
-        const { userName, email, password, followers, following, collections_done, role, image, ID } = body
+        const { userName, email, password, followers, following, collections_done, role, image, liked, ID } = body
         console.log('BODY received by backend: ', body)
-        const query = 'UPDATE public."Users" SET "userName" = $1, "email" = $2, "password" = $3, "followers" = $4, "following" = $5, "collections_done" = $6, "role" = $7, "image" = $8 WHERE "ID" = $9'
-        const values = [userName, email, password,JSON.stringify([3,3,5]) ,JSON.stringify([23,5,1]), collections_done, role, image, ID]
-        await conn.query(query, values).then((result: { rows: (object | User)[] }) => {
+        
+        const query = 'UPDATE public."Users" SET "userName" = $1, "email" = $2, "password" = $3, "followers" = $4, "following" = $5, "collections_done" = $6, "role" = $7, "image" = $8, "liked" =$9 WHERE "ID" = $10'
+        
+        
+        const values = [userName, email, password,JSON.stringify(followers) ,JSON.stringify(following), collections_done, role, image, JSON.stringify(liked),ID]
+        await conn.query(query, values).then((result: { rows: (object | UserInterface)[] }) => {
           return res.status(200).json(result)
         })
       } catch (error) {
         return res.status(400).json({ error })
       }
      
-      
-      
-     
-
     //
     case 'DELETE':
       try {

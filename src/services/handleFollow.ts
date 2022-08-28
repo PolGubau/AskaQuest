@@ -1,7 +1,7 @@
-import { User } from "src/interfaces/User";
-import PATH from "src/utils/consts";
+import UserInterface from "src/interfaces/User";
+import PATH from "src/utils/path";
 
-export const handleFollow = async (Profiled:User,Loged:User) => {
+export const handleFollow = async (Profiled:UserInterface,Loged:UserInterface) => {
     //EJ: Loged quiere seguir a Profiled, le da a seguir
     let isNowFollowing = false;
 

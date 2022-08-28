@@ -1,11 +1,11 @@
-import QuestGallery from "src/components/Quests/QuestGallery";
+import QuestGallery from "src/components/QuestGallery/QuestGallery";
 import Logo from "src/components/Logo/Logo";
-import useLocalStorage from "src/hooks/useLocalStorage";
+import useLocalStorage from "src/hooks/getUserFromLocalStorage";
 
 // pannel
-import SignInPannel from "src/components/Pannel/SignInPannel";
+import SignInPannel from "src/components/Layout/Pannel/SignInPannel";
 import Intro from "src/components/Layout/Intro";
-import WellcomeBack from "src/components/Pannel/WellcomeBack";
+import WellcomeBack from "src/components/Layout/Pannel/WellcomeBack";
 
 export default function BodyComponent({ collections }: any) {
   const { con } = useLocalStorage("user");

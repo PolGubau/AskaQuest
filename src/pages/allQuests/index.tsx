@@ -1,5 +1,5 @@
-import Collections from "src/components/Quests/QuestGallery";
-import PATH from "src/utils/consts";
+import Collections from "src/components/QuestGallery/QuestGallery";
+import PATH from "src/utils/path";
 import AppLayout from "src/components/Layout/AppLayout";
 import Nav from "src/components/Nav";
 
@@ -11,7 +11,7 @@ export default function HomePage({ allCollections }: any) {
         <main>
           <section>
             <p>All Collections: </p>
-            <Collections allCollections={allCollections} />
+            <Collections collections={allCollections} />
           </section>
         </main>
       </AppLayout>

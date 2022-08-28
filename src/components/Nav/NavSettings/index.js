@@ -3,7 +3,7 @@ import styles from './NavSettings.module.css'
 import { IoIosSettings } from 'react-icons/io'
 
 import { useRouter } from 'next/router'
-import PATH from 'src/utils/consts'
+import PATH from 'src/utils/path'
 import { colors } from 'src/styles/theme'
 import { handleLogout } from 'src/services/handleLogin/handleLogout'
 

@@ -2,7 +2,7 @@ import Logo from "src/components/Logo/Logo";
 import AppLayout from "src/components/Layout/AppLayout";
 import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
 import styles from "src/pages/login/login.module.css";
-import PATH from "src/utils/consts";
+import PATH from "src/utils/path";
 import Nav from "src/components/Nav";
 import LoginForm from "src/components/Layout/Forms/loginForm/LoginForm";
 import { useRouter } from "next/router";

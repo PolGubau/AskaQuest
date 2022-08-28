@@ -1,0 +1,9 @@
+.likes {
+    display: flex;
+    align-content: center;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

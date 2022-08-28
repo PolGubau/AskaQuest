@@ -8,15 +8,15 @@ import { messageCreateCollection } from "src/utils/text";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import UserHeader from "src/components/UserHeader/UserHeader";
 import EachQuestionForm from "./EachQuestionForm/EachQuestionForm";
-import { QuestionInterface } from "src/interfaces/question";
+import { QuestionInterface } from "src/interfaces/Question";
 import QuestionReaded from "./QuestionReaded/QuestionReaded";
-import useLocalStorage from "src/hooks/useLocalStorage";
-import PATH from "src/utils/consts";
+import useLocalStorage from "src/hooks/getUserFromLocalStorage";
+import PATH from "src/utils/path";
 import { useRouter } from "next/router";
 
 export default function CreateQuestForm() {
   const router = useRouter();
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QuestionInterface[]>([]);
 
   const {
     con: { data },
@@ -26,7 +26,7 @@ export default function CreateQuestForm() {
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState(["", "", ""]);
 
-  const saveQuestions = (question: Question) => {
+  const saveQuestions = (question: QuestionInterface) => {
     question.creator_id = creatorID;
     question.date_creation = new Date();
     setQuestions([...questions, question]);

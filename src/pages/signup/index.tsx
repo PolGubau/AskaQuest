@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import AppLayout from "src/components/Layout/AppLayout";
 import styles from "src/pages/signup/signup.module.css";
-import PATH from "src/utils/consts";
+import PATH from "src/utils/path";
 import Logo from "src/components/Logo/Logo";
 import SignUpForm from "src/components/Layout/Forms/SignUpForm/SignUpForm";
 import Nav from "src/components/Nav";

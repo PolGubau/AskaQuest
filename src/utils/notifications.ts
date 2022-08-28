@@ -1,6 +1,6 @@
 import Swal, { SweetAlertIcon } from "sweetalert2";
 
-export const NotificaciónTop = Swal.mixin({
+export const topAlert = Swal.mixin({
           toast: true,
           position: "top-end",
           showConfirmButton: false,
@@ -11,7 +11,7 @@ export const NotificaciónTop = Swal.mixin({
             toast.addEventListener("mouseleave", Swal.resumeTimer);
           },
         });
-        
+export const notificacionTop =(icon: SweetAlertIcon,title: string)=>topAlert.fire({icon,title})
         
 export const alertCenter = Swal.mixin({
           position: "center",

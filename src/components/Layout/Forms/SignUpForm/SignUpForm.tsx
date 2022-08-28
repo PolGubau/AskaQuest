@@ -7,7 +7,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import { TopToastMessage } from "src/components/Messages/TopToastMessage";
-import PATH from "src/utils/consts";
+import PATH from "src/utils/path";
 import { messageSignUp } from "src/utils/text";
 import Swal from "sweetalert2";
 import styles from "./SignUpForm.module.css";

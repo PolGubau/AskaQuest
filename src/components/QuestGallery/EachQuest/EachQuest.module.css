@@ -11,11 +11,23 @@
   flex-wrap: wrap;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
 .title {
   margin: 0 0 10px 0;
   font-size: 1.3em;
   font-weight: bold;
 }
+
 .tags {
   display: flex;
   flex-direction: row;
@@ -26,8 +38,11 @@
   flex-wrap: wrap;
   margin: 10px 0;
 }
+
 .tag {
   margin: 7px 7px 0px 0;
   padding: 7px 10px;
   border-radius: 8px;
+  background-color: var(--white);
+  border: 1px solid var(--secondary);
 }

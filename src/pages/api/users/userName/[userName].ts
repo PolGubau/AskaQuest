@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { conn } from 'src/utils/database'
 
-import { User } from 'src/interfaces/User'
+import UserInterface  from 'src/interfaces/User'
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<User | object>
+  res: NextApiResponse<UserInterface | object>
 ) {
   const { method, query,body } = req
   const userNameReq = query.userName

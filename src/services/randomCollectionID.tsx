@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import PATH from "src/utils/consts";
+import PATH from "src/utils/path";
 import useSWR from "swr";
 import { offlineCollections } from "src/utils/offlineCollections";
 const getData = async (url: string) => {

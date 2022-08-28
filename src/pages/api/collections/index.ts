@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { now } from 'next-auth/client/_utils'
 import { Connection } from 'pg'
 import { conn } from 'src/utils/database'
 

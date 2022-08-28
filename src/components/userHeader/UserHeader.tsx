@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import styles from "./userHeader.module.css";
-import useLocalStorage from "src/hooks/useLocalStorage";
-import returnUserById from "src/services/returnUserById";
+import useLocalStorage from "src/hooks/getUserFromLocalStorage";
+import returnObjectById from "src/services/returnObjectById";
+import PATH from "src/utils/path";
 
 export default function UserHeader({
   id = "",
@@ -21,9 +22,10 @@ export default function UserHeader({
   }
 
   if (id) {
-    let user = returnUserById(id);
-    name = user.userName;
-    image = user.image || `https://api.multiavatar.com/${name}.svg`;
+    const user = returnObjectById(PATH.API.USER_BY_ID, id);
+    const { data, status } = user;
+    name = data.userName;
+    image = data.image || `https://api.multiavatar.com/${name}.svg`;
   }
   return (
     <>

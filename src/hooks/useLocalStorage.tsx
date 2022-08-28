@@ -1,18 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-export default function useLocalStorage(toSearch: string) {
-  const [con, setCon] = useState({ status: 0, data: {} });
-
+//  a service that we call to update the local storage, we will introduce its name and the new value
+export const updateLocalStorage = (name: string, value: any) => {
   useEffect(() => {
-    const takingData = localStorage.getItem(toSearch);
-    if (takingData) {
-      const dataRes = JSON.parse(takingData);
-
-      setCon({ status: 1, data: dataRes });
-    } else {
-      setCon({ status: -1, data: { error: `${toSearch} not given` } });
-    }
+    return localStorage.setItem(name, JSON.stringify(value));
   }, []);
-
-  return { con };
-}
+};
+//  a service that we call to get the local storage, we will introduce its name and the new value
+export const getLocalStorage = (name: string) => {
+  useEffect(() => {
+    const res = localStorage.getItem(name);
+    return res ? JSON.parse(res) : null;
+  }, []);
+};
+//  a service that we call to remove the local storage, we will introduce its name and the new value
+export const removeLocalStorage = (name: string) => {
+  useEffect(() => {
+    localStorage.removeItem(name);
+  }, []);
+};
+//  a service that we call to clear the local storage, we will introduce its name and the new value
+export const clearLocalStorage = () => {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+};

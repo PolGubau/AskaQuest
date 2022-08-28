@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React from "react";
-import PATH from "src/utils/consts";
+import PATH from "src/utils/path";
 import styles from "./SignInPannel.module.css";
 import ButtonWithIcon from "src/components/Buttons/ButtonWithIcon/ButtonWithIcon";
 import Link from "next/link";
