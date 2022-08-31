@@ -22,3 +22,7 @@ export const alertCenter = Swal.mixin({
           reverseButtons: true,
         });
 export const bigAlert=(title:string,message:string,icon:SweetAlertIcon)=>  void Swal.fire(title,message, icon);
+
+
+
+
