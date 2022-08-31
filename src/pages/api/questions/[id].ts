@@ -25,6 +25,7 @@ export default async function handler(
       } catch (error) {
         return res.status(400).json({ error })
       }
+      break;
 
     //
     case 'PUT':
@@ -40,6 +41,7 @@ export default async function handler(
       } catch (error) {
         return res.status(400).json({ error })
       }
+      break;
 
     //
     case 'DELETE':
@@ -52,9 +54,12 @@ export default async function handler(
       } catch (error) {
         return res.status(400).json({ error })
       }
+      break;
 
     //
     default:
       return res.status(404).json({ error: 'not found' })
+            break;
+
   }
 }
