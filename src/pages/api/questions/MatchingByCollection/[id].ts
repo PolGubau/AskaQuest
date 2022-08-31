@@ -17,18 +17,19 @@ export default async function handler(
       try {
         const query = 'SELECT * FROM public."Questions" WHERE "collection_id" = $1'
         const values = [id]
-        const result = await conn.query(query, values)
 
-        if (result.rows.length === 0) {
-          return res.status(404).json({ error: 'not found' })
-        }
-        return res.json(result.rows)
+        const result = await conn.query(query, values)
+        return res.status(200).json(result)
+      
       } catch (error) {
         return res.status(400).json({ error })
       }
+      break;
 
     //
     default:
       return res.status(404).json({ error: 'method not found' })
+            break;
+
   }
 }
