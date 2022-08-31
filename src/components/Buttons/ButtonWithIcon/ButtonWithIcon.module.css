@@ -43,6 +43,7 @@
     cursor: pointer;
 }
 
+
 .inputBig:hover .inputIcon {
     background-color: var(--secondary);
     color: var(--white);
