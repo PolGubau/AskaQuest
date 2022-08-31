@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaTextHeight } from "react-icons/fa";
 import styles from "./CreateQuestForm.module.css";
 import { messageCreateCollection } from "src/utils/text";
@@ -10,24 +10,30 @@ import UserHeader from "src/components/UserHeader/UserHeader";
 import EachQuestionForm from "./EachQuestionForm/EachQuestionForm";
 import { QuestionInterface } from "src/interfaces/Question";
 import QuestionReaded from "./QuestionReaded/QuestionReaded";
-import useLocalStorage from "src/hooks/getUserFromLocalStorage";
+import getUserFromLocalStorage from "src/hooks/getUserFromLocalStorage";
 import PATH from "src/utils/path";
 import { useRouter } from "next/router";
+import UserInterface from "src/interfaces/User";
 
 export default function CreateQuestForm() {
   const router = useRouter();
   const [questions, setQuestions] = useState<QuestionInterface[]>([]);
 
   const {
-    con: { data },
-  }: any = useLocalStorage("user");
-  const creatorID = data.ID;
+    con: { status, user },
+  } = getUserFromLocalStorage("user");
+
+  // user will be undefined until status is 1
+  if (status !== 1) {
+    return <div>Loading...</div>;
+  }
+  const { ID: creatorID } = user as UserInterface;
 
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState(["", "", ""]);
 
   const saveQuestions = (question: QuestionInterface) => {
-    question.creator_id = creatorID;
+    if (user) question.creator_id = Number(creatorID);
     question.date_creation = new Date();
     setQuestions([...questions, question]);
   };
