@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import router from "next/router";
 import React from "react";
 import PATH from "src/utils/path";
 import styles from "./SignInPannel.module.css";
-import { BiDice5 } from "react-icons/bi";
 import randomCollection from "src/services/randomCollectionID";
-import InputWithIcon from "src/components/Buttons/InputButtons/InputWithIcon/InputWithIcon";
 import ButtonWithIcon from "src/components/Buttons/ButtonWithIcon/ButtonWithIcon";
 import Link from "next/link";
 
