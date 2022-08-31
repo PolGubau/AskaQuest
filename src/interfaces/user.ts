@@ -9,8 +9,8 @@ export default interface UserInterface {
   image?: string
   followers?: Array<number | string> | any
   following?: Array<number | string> | any
-  collections_done?: Array<number | string> | any
-  liked: Array<number | string> | any
+  collections_done?: any
+  liked: Array<number | string> 
   error?:any
 }
 
