@@ -21,7 +21,7 @@ export default function CreateQuestForm() {
 
   const {
     con: { status, user },
-  } = getUserFromLocalStorage("user");
+  } = getUserFromLocalStorage();
 
   // user will be undefined until status is 1
   if (status !== 1) {
@@ -99,7 +99,16 @@ export default function CreateQuestForm() {
               className={styles.input}
             />
           </div>
-          <UserHeader size={49} you={true} />
+          <UserHeader
+            size={49}
+            you={true}
+            searchById={{
+              state: false,
+              id: "",
+            }}
+            name={""}
+            image={""}
+          />
         </div>
         <section className={styles.tagsContainer}>
           <p>How would you describe your Quest in 3 words?</p>
