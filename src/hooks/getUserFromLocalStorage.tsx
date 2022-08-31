@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import UserInterface from "src/interfaces/User";
 
-export default function getUserFromLocalStorage(toSearch: string) {
+export default function getUserFromLocalStorage() {
   interface getUserFromLocalStorageInterface {
     status: number;
     user: UserInterface | undefined;
@@ -11,29 +11,31 @@ export default function getUserFromLocalStorage(toSearch: string) {
     user: undefined,
   });
 
+  // we need to take the user from localstorage and return it with an status code
   useEffect(() => {
-    const takingUser = localStorage.getItem(toSearch);
+    const user = localStorage.getItem("user");
+    if (user) {
+      const userRaw = JSON.parse(user);
+      const liked = JSON.parse(userRaw.liked);
+      const followers = JSON.parse(userRaw.followers);
+      const following = JSON.parse(userRaw.following);
 
-    if (!takingUser) {
-      setCon({ status: -1, user: undefined });
-      return;
+      const newUser: UserInterface = {
+        ...userRaw,
+        followers,
+        following,
+        liked,
+      };
+      setCon({
+        status: 1,
+        user: newUser,
+      });
+    } else {
+      setCon({
+        status: -1,
+        user: undefined,
+      });
     }
-
-    const userRaw = JSON.parse(takingUser);
-
-    const liked = JSON.parse(userRaw.liked);
-    const followers = JSON.parse(userRaw.followers);
-    const following = JSON.parse(userRaw.following);
-
-    const user: UserInterface = {
-      ...userRaw,
-      followers,
-      following,
-      liked,
-    };
-
-    setCon({ status: 1, user });
   }, []);
-
   return { con };
 }
