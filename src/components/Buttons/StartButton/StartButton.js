@@ -9,9 +9,10 @@ export default function StartButton({
   icon = 'arrow',
   type = 'button',
   outline = false,
-  fontSize = '1.5rem'
+  fontSize = '1.5rem',
+  loadingProp=false
 }) {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(loadingProp)
 
   //
   const handleClick = () => {
