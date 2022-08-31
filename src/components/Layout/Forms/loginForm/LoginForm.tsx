@@ -36,7 +36,9 @@ export default function LoginForm({ setLoading }: any) {
     } else {
       // user found
       const user = await response.json();
+
       const passwordsMatch = await bcrypt.compare(password, user.password);
+      // const passwordsMatch = true;
       if (!passwordsMatch) {
         // password not match
         void Swal.fire("Ouups!", messagesLogin.passwordIncorrect, "error");
