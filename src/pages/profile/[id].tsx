@@ -9,16 +9,25 @@ import { useRouter } from "next/router";
 import UserInterface from "src/interfaces/User";
 import { CollectionInterface } from "src/interfaces/Collection";
 import { GetServerSidePropsContext } from "next";
-import { takeUserLoged } from "src/services/takeUserLoged";
 import TimeAgo from "timeago-react";
 import Link from "next/link";
 import AddNewButton from "src/components/Buttons/AddNew/AddNewButton";
 import { handleFollow } from "src/services/handleFollow";
-import { useState } from "react";
+import {
+  JSXElementConstructor,
+  Key,
+  ReactElement,
+  ReactFragment,
+  useEffect,
+  useState,
+} from "react";
 import ButtonWithIcon from "src/components/Buttons/ButtonWithIcon/ButtonWithIcon";
 import UserHeader from "src/components/UserHeader/UserHeader";
+import getUserFromLocalStorage from "src/hooks/getUserFromLocalStorage";
+import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
+import UserHeaderLoading from "src/components/UserHeader/UserHeaderLoading";
+import returnObjectById from "src/services/returnObjectById";
 
-//
 export default function userPage({
   user,
   collectionsByUser,
@@ -27,25 +36,34 @@ export default function userPage({
   user: UserInterface;
   collectionsByUser: CollectionInterface[];
 }) {
-  const userLoged = takeUserLoged();
+  let { ID, userName, image, followers, date_creation: dateCreation } = user;
+  followers = JSON.parse(followers);
 
-  const router = useRouter();
-  const [followingProfile, setFollowingProfile] = useState(
-    user.following?.includes(userLoged.ID)
+  const [userLoading, setUserLoading] = useState(false);
+  const [isFollowed, setIsFollowed] = useState(false);
+  const [userLoged, setUserLoged] = useState<UserInterface | undefined>(
+    undefined
   );
-  const {
-    ID,
-    userName,
-    image,
-    followers: followersNotParsed,
-    date_creation: dateCreation,
-  } = user;
+  const { con } = getUserFromLocalStorage("user");
 
-  const followers = followersNotParsed ? JSON.parse(followersNotParsed) : [];
+  useEffect(() => {
+    setUserLoading(true);
+    if (con.status === 1) {
+      setUserLoged(con.user);
+      const isFollowed = userLoged?.following.find(
+        (following: { ID: number }) => following.ID === Number(user.ID)
+      );
+      if (isFollowed) {
+        setIsFollowed(true);
+      }
+      setUserLoading(false);
+    }
+  }, [con]);
+  console.log("IsFollowed: ", isFollowed);
 
   const handleFollowCall = async () => {
     if (userLoged) {
-      setFollowingProfile(await handleFollow(user, userLoged));
+      handleFollow(user, userLoged, isFollowed, setIsFollowed);
     }
   };
 
@@ -61,40 +79,39 @@ export default function userPage({
           <header className={styles.header}>
             <div className={styles.headerLeft}>
               <h1 className={styles.heading1}>{userName}</h1>
+              {userLoading && <SquareLoader />}
               {userLoged && ID !== userLoged.ID && (
                 <div className={styles.followersContainer}>
                   <div onClick={handleFollowCall}>
-                    {followingProfile ? (
+                    {isFollowed ? (
                       <ButtonWithIcon icon={"user"} text={"Following"} />
                     ) : (
                       <ButtonWithIcon icon={"user"} text={"Follow"} />
                     )}
                   </div>
-                  {/* {followers.length > 0 ? (
+                  {followers.length > 0 ? (
                     <>
                       <p>{`Some of ${userName}'s followers:`}</p>
 
                       <div className={styles.followersContainer}>
-                        {followers.map((followerID: any, index: string) => (
-                          let followerObj= returnObjectByID(PATH.API.USER_BY_ID, followerID)
-                          
-                            const { data, status } = followerObj;
-
-                          {status === "success" ? (
-            <UserHeader                            
-              key={index}
-              name={data.userName}
-              image={`https://api.multiavatar.com/${data.userName}.svg`}
-            />
-          ) : (
-            <UserHeaderLoading />
-          )}
-                        ))}
+                        {followers
+                          .map((followerID: string) => {
+                            return (
+                              <UserHeader
+                                id={followerID || ""}
+                                you={false}
+                                size={40}
+                                name={""}
+                                image={""}
+                              />
+                            );
+                          })
+                          .slice(0, 3)}
                       </div>
                     </>
                   ) : (
                     `Be the first one to follow ${userName}!`
-                  )} */}
+                  )}
                 </div>
               )}
               {dateCreation && (
@@ -121,7 +138,7 @@ export default function userPage({
             ) : (
               <QuestGallery collections={collectionsByUser} />
             )}
-            {ID === userLoged.ID && (
+            {ID === userLoged?.ID && (
               <Link href={PATH.CREATE_QUEST}>
                 <a>
                   <AddNewButton />
