@@ -13,6 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } catch (error) {
         return res.status(400).json({ error })
       }
+      break;
 
     case 'POST':
        try {
@@ -28,8 +29,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } catch (error) {
         return res.status(400).json({ error })
       }
+      break;
 
     default:
       return res.status(404).json({ error: 'method not found' })
+            break;
+
   }
 }
