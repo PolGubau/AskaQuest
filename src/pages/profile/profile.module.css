@@ -38,32 +38,6 @@
   justify-content: flex-start;
 }
 
-.followerContainer {
+.followButton {
   display: flex;
-  margin: 0 7px 7px 0;
-  flex-direction: row;
-  height: 49px;
-  width: fit-content;
-  padding: 2px 8px;
-  border: 1px solid var(--background);
-  border-radius: 10px;
-  background-color: var(--clean-background);
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-.followerContainer:hover {
-  cursor: pointer;
-  background-color: var(--background);
-  color: var(--white);
-}
-
-.followerAvatar {
-  margin: 0 0 0 10px;
-}
-
-.followerName {
-  margin-left: 8px;
 }
