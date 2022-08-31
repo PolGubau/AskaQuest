@@ -16,7 +16,7 @@ export default function LikesQuest({
   const [loadingUser, setLoadingUser] = useState(false);
 
   // we want a useEffect that refresh the user Loged every time the component is rendered
-  const { con } = getUserFromLocalStorage("user");
+  const { con } = getUserFromLocalStorage();
   const userLoged: UserInterface | undefined = con.user;
 
   // useEffect that checks if the user liked before the quest or not
