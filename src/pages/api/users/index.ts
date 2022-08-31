@@ -21,6 +21,7 @@ export default async function handler(
       } catch (error) {
         return res.status(400).json({ error })
       }
+      break;
 
     case 'POST':
       const content = JSON.parse(body)
@@ -44,8 +45,11 @@ export default async function handler(
         console.log(error)
         return res.status(400).json({ error })
       }
+      break;
 
     default:
       return res.status(404).json({ error: 'not found' })
+            break;
+
   }
 }
