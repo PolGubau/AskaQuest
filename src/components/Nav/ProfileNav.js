@@ -11,14 +11,13 @@ import NavSettings from 'src/components/Nav/NavSettings'
 import logo from 'src/assets/logo.svg'
 import { useState } from 'react'
 import SquareLoader from '../loaders/SquaresLoader/SquareLoader'
+import getUserFromLocalStorage from 'src/hooks/getUserFromLocalStorage'
 //
 export default function ProfileNav () {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  const {
-    con: { user, status }
-  } = useLocalStorage('user')
-
+  const {con} = getUserFromLocalStorage()
+const { user, status } = con
   switch (status) {
     case 1:
       const { userName, avatar,ID } = user
