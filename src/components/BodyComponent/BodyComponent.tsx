@@ -9,13 +9,13 @@ import WellcomeBack from "src/components/Layout/Pannel/WellcomeBack";
 
 export default function BodyComponent({ collections }: any) {
   const { con } = useLocalStorage("user");
-  const { status, data } = con;
+  const { status, user } = con;
   return (
     <section>
       <Intro>
         <Logo />
         {status !== 1 && <SignInPannel />}
-        {status === 1 && <WellcomeBack user={data} />}
+        {status === 1 && <WellcomeBack user={user} />}
       </Intro>
 
       <p>New Collections: </p>
