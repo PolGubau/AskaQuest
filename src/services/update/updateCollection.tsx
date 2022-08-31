@@ -5,22 +5,18 @@ export const updateCollection = (
   endpoint: string,
   newCollection: CollectionInterface
 ) => {
-  fetch(`${endpoint}/${newCollection.ID}`, {
+  const { title, tags, likes, ID } = newCollection;
+
+  fetch(endpoint + "/" + ID, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: newCollection.title,
-      tags: newCollection.tags,
-      likes: newCollection.likes,
-      ID: newCollection.ID,
-    }),
+
+    body: JSON.stringify({ title, tags, likes, ID }),
   })
     .then((res) => res.json())
     .then((data) => {
       const { rowCount } = data;
       if (rowCount > 0) {
+        console.log("Collection updated!");
         bigAlert("Nice!", "Like added to quest!", "success");
       }
     })
