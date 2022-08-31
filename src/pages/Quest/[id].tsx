@@ -25,14 +25,14 @@ export default function CollectionPage({
   questions: QuestionInterface[];
 }) {
   const router = useRouter();
-
-  if (error === true) {
+  if (questions.length === 0) {
     bigAlert("ouups", `This collection has 0 questions...`, "error");
     void router.push(PATH.HOME);
     return <h1>Oupss</h1>;
   }
   const MAX_QUESTION = Number(questions.length);
   const ARRAY_QUESTIONS = questions;
+  console.log(ARRAY_QUESTIONS);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(
     ARRAY_QUESTIONS[questionIndex]
@@ -94,7 +94,8 @@ export default function CollectionPage({
         {questionIndex >= MAX_QUESTION && (
           <Results
             results={results}
-            userName={user.userName}
+            collection={collection}
+            userNameCreator={user.userName}
             title={collection.title}
           />
         )}
@@ -107,21 +108,20 @@ export async function getServerSideProps(context: { query: { id: string } }) {
     const { id } = context.query;
     // we have an id from a collection
     const collectionRes = await fetch(`${PATH.API.COLLECTION_BY_ID}/${id}`);
-    if (!collectionRes) {
-      return { props: { error: true } };
-    }
     const collection = await collectionRes.json();
 
     const questionsRes = await fetch(
       `${PATH.API.QUESTIONS_MATCHING_COLLECTION}/${id}`
     );
-    const questions = await questionsRes.json();
+    const questJSON = await questionsRes.json();
+    const questions = questJSON.rows;
 
     const userID = collection.creator_id;
     const userRes = await fetch(`${PATH.API.USER_BY_ID}/${userID}`);
     const user = await userRes.json();
     return { props: { user, collection, questions } };
   } catch (error) {
+    console.log("Error: ", error);
     return { props: { error: true } };
   }
 }
