@@ -12,6 +12,7 @@ export default async function handler(
   const paramID = query.id
   const id = Number(paramID)
 
+
   //
   switch (method) {
     case 'GET':
@@ -27,11 +28,11 @@ export default async function handler(
       } catch (error) {
         return res.status(400).json({ error })
       }
+        break;
 
     //
     case 'PUT':
     // take the user from the body and update it   
-      try {
         const { userName, email, password, followers, following, collections_done, role, image, liked, ID } = body
         console.log('BODY received by backend: ', body)
         
@@ -40,16 +41,17 @@ export default async function handler(
         
         const values = [userName, email, password,JSON.stringify(followers) ,JSON.stringify(following), collections_done, role, image, JSON.stringify(liked),ID]
         await conn.query(query, values).then((result: { rows: (object | UserInterface)[] }) => {
-          return res.status(200).json(result)
-        })
-      } catch (error) {
-        return res.status(400).json({ error })
-      }
-     
+          return res.json(result)
+          })
+          
+        break;
+
+        
+        
     //
     case 'DELETE':
       try {
-        const query = 'DELETE FROM public."Users" WHERE ID = $1 RETURNING *'
+        const query = 'DELETE FROM public."Users" WHERE "ID" = $1 RETURNING *'
         const values = [id]
 
         const response = await conn.query(query, values)
@@ -57,9 +59,14 @@ export default async function handler(
       } catch (error) {
         return res.status(400).json({ error })
       }
+        break;
+
+
 
     //
     default:
       return res.status(404).json({ error: 'not found' })
+            break;
+
   }
 }
