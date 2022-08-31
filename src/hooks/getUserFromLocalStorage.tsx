@@ -1,18 +1,38 @@
 import { useEffect, useState } from "react";
 import UserInterface from "src/interfaces/User";
 
-export default function useLocalStorage(toSearch: string) {
-  const [con, setCon] = useState({ status: 0, data: {} });
+export default function getUserFromLocalStorage(toSearch: string) {
+  interface getUserFromLocalStorageInterface {
+    status: number;
+    user: UserInterface | undefined;
+  }
+  const [con, setCon] = useState<getUserFromLocalStorageInterface>({
+    status: 0,
+    user: undefined,
+  });
 
   useEffect(() => {
-    const takingData = localStorage.getItem(toSearch);
-    if (takingData) {
-      let dataRes: UserInterface = JSON.parse(takingData);
+    const takingUser = localStorage.getItem(toSearch);
 
-      setCon({ status: 1, data: dataRes });
-    } else {
-      setCon({ status: -1, data: { error: `${toSearch} not given` } });
+    if (!takingUser) {
+      setCon({ status: -1, user: undefined });
+      return;
     }
+
+    const userRaw = JSON.parse(takingUser);
+
+    const liked = JSON.parse(userRaw.liked);
+    const followers = JSON.parse(userRaw.followers);
+    const following = JSON.parse(userRaw.following);
+
+    const user: UserInterface = {
+      ...userRaw,
+      followers,
+      following,
+      liked,
+    };
+
+    setCon({ status: 1, user });
   }, []);
 
   return { con };
