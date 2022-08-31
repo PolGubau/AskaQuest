@@ -1,58 +1,48 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./userHeader.module.css";
-import useLocalStorage from "src/hooks/getUserFromLocalStorage";
+import getUserFromLocalStorage from "src/hooks/getUserFromLocalStorage";
 import PATH from "src/utils/path";
 import UserInterface from "src/interfaces/User";
+import useFetch from "react-fetch-hook";
+import SquareLoader from "../loaders/SquaresLoader/SquareLoader";
 
-export default async function UserHeader({
-  id = "",
+export default function UserHeader({
+  searchById = { state: false, id: "" },
   you = false,
   size = 40,
   name = "Anonymous",
   image = "https://api.multiavatar.com/Anonymous.svg",
 }: {
-  id: string;
+  searchById: { state: boolean; id: string };
   you: boolean;
   size: number;
   name: string;
   image: string;
 }) {
+  let loading = false;
   if (you) {
     const {
       con: { data },
-    }: any = useLocalStorage("user");
+    }: any = getUserFromLocalStorage();
     name = data?.userName;
     image = data?.image;
   }
 
-  if (id) {
-    const [userWithID, setUserWithID] = useState<UserInterface | undefined>(
-      undefined
-    );
-    const getUserByItsID = async () => {
-      const response = await fetch(`${PATH.API.USER_BY_ID}/${id}`).then(
-        (response) => response.json()
-      );
+  if (searchById.state) {
+    const { isLoading, data }: { isLoading: boolean; data?: UserInterface } =
+      useFetch(`${PATH.API.USER_BY_ID}/${searchById.id}`);
 
-      // update the state
-      setUserWithID(response);
-    };
-    useEffect(() => {
-      try {
-        getUserByItsID();
-      } catch (error) {
-        console.log(error);
-      }
-    }, []);
-
-    if (userWithID) {
-      name = userWithID.userName;
-      image = userWithID.image || `https://api.multiavatar.com/${name}.svg`;
+    if (isLoading) {
+      loading = true;
+    }
+    if (data) {
+      name = data.userName;
+      image = data.image || `https://api.multiavatar.com/${name}.svg`;
     } else {
-      name = "Loading";
-      image = `https://api.multiavatar.com/loading.svg`;
+      name = "Deletted User";
+      image = `https://api.multiavatar.com/Deletted.svg`;
     }
   }
   return (
@@ -60,20 +50,24 @@ export default async function UserHeader({
       <header className={styles.container}>
         <Link href={`/profile/${name}`}>
           <a className={styles.creator} style={{ height: size }}>
-            <Image
-              className={styles.creatorImage}
-              src={
-                image ||
-                `https://api.multiavatar.com/${name}.svg` ||
-                `https://api.multiavatar.com/Annonymous.svg`
-              }
-              alt="Creator avatar"
-              width={size - 10}
-              height={size - 10}
-            />
-            <span className={styles.creatorUserName}>
-              {name || "Loading..."}
-            </span>
+            {loading ? (
+              <SquareLoader />
+            ) : (
+              <>
+                <Image
+                  className={styles.creatorImage}
+                  src={
+                    image ||
+                    `https://api.multiavatar.com/${name}.svg` ||
+                    `https://api.multiavatar.com/Annonymous.svg`
+                  }
+                  alt="Creator avatar"
+                  width={size - 10}
+                  height={size - 10}
+                />
+                <span className={styles.creatorUserName}>{name}</span>
+              </>
+            )}
           </a>
         </Link>
       </header>
