@@ -32,6 +32,16 @@
   background-color: var(--background);
 }
 
+.optionDanger {
+  text-align: left;
+  cursor: pointer;
+  margin: 5px 5px;
+  padding: 5px 14px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--wrong);
+}
+
 .option:hover {
   background-color: var(--secondary);
   color: var(--white);
