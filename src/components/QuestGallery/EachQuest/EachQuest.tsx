@@ -43,6 +43,9 @@ export default function EachQuest({
             <UserHeader
               name={data.userName}
               image={`https://api.multiavatar.com/${data.userName}.svg`}
+              searchById={{ state: false, id: "" }}
+              you={false}
+              size={40}
             />
           ) : (
             <UserHeaderLoading />
