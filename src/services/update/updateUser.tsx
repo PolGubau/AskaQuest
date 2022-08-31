@@ -37,7 +37,7 @@ export const updateUser = (endpoint: string, userUpdated: UserInterface) => {
     .then((data) => {
       const { rowCount } = data;
       if (rowCount > 0) {
-        notificacionTop("success", "You liked this quest!");
+        notificacionTop("success", "Updated with success!");
       }
     })
     .catch((err) => console.log(err));
