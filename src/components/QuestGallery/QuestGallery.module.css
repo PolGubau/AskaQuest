@@ -1,10 +1,7 @@
 .offlineCollections {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 2fr));
-
+  grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
   gap: 10px;
-
-
 }
 
 .noInternetContainer p {
@@ -13,8 +10,7 @@
 
 .section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 2fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
   margin-top: 10px;
-
   grid-gap: 15px;
 }
