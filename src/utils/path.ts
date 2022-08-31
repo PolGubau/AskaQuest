@@ -5,7 +5,7 @@ const PATH = {
   SIGN_IN: `${DOMINIO}/login`,
   CREATE_ACCOUNT: `${DOMINIO}/signup`,
   USER: `${DOMINIO}/profile`,
-  PROFILE: `${DOMINIO}/profile/`,
+  PROFILE: `${DOMINIO}/profile`,
   ALL_QUESTS: `${DOMINIO}/allQuests`,
   CREATE_QUEST: `${DOMINIO}/createQuest`,
   RANDOM_QUEST: `${DOMINIO}/Quest`,
@@ -22,7 +22,7 @@ const PATH = {
     COLLECTION_BY_USERNAME: `${DOMINIO}/api/collections/userName`,
     // 
     QUESTIONS: `${DOMINIO}/api/questions`,
-    QUESTIONS_MATCHING_COLLECTION: `${DOMINIO}/api/questions/MatchingCollection`,
+    QUESTIONS_MATCHING_COLLECTION: `${DOMINIO}/api/questions/MatchingByCollection`,
 },
   //
   GITHUB_LOGIN: `${DOMINIO}/api/auth/signin/github`,
