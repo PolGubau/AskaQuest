@@ -7,7 +7,7 @@ import UserHeader from 'src/components/UserHeader/UserHeader'
 export default function Question({
   id = 0,
   title = 'Your connection did not work, do you know why?',
-  answers,
+  answers:answersStringified,
   solution = 'yes',
   userName = 'unknow',
   userImage = 'https://api.multiavatar.com/unknow.svg',
@@ -18,6 +18,7 @@ export default function Question({
   createdAt,
   setResults
 }) {
+  const answers = JSON.parse(answersStringified)
   const [selectedIndex, setSelectedIndex] = useState(undefined)
   const select = (index) => {
     selectedIndex === index
@@ -27,7 +28,7 @@ export default function Question({
   const handleSubmit = () => {
     const yourAnswer = answers[selectedIndex]
     const isCorrect = yourAnswer === solution
-
+setSelectedIndex(undefined)
     // concat in results array the index of question, its solution and if you did it right
     setResults([
       ...results,
