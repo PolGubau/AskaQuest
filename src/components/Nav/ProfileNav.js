@@ -16,12 +16,12 @@ export default function ProfileNav () {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const {
-    con: { data, status }
+    con: { user, status }
   } = useLocalStorage('user')
 
-  const { userName, avatar } = data
   switch (status) {
     case 1:
+      const { userName, avatar,ID } = user
       return (
         <>
           <div className={styles.RightNav}>
@@ -54,7 +54,7 @@ export default function ProfileNav () {
               </Link>
             )}
             <section className="settings">
-              <NavSettings />
+              <NavSettings userID={ID}userName={userName}/>
             </section>
           </div>
         </>
