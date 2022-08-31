@@ -7,6 +7,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import StartButton from "src/components/Buttons/StartButton/StartButton";
 import { TopToastMessage } from "src/components/Messages/TopToastMessage";
+import { notificacionTop } from "src/utils/notifications";
 import PATH from "src/utils/path";
 import { messageSignUp } from "src/utils/text";
 import Swal from "sweetalert2";
@@ -24,6 +25,7 @@ export default function SignUpForm() {
   const [failedAllFields, setFailedAllFields] = useState(false);
 
   const [message, setMessage] = useState(messageSignUp.base);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -38,6 +40,17 @@ export default function SignUpForm() {
       return await Swal.fire(
         "Ouups!",
         messageSignUp.allFieldsAreRequired,
+        "error"
+      );
+    }
+    // we need to check if this userName is already taken
+    const res = await fetch(`${PATH.API.USER_BY_USERNAME}/${userName}`);
+    const userIfIsTaken = await res.json();
+    console.log(userIfIsTaken);
+    if (!userIfIsTaken.error) {
+      return await Swal.fire(
+        "Ouups!",
+        "This userName is already taken",
         "error"
       );
     }
