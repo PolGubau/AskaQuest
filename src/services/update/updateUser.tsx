@@ -2,22 +2,35 @@ import UserInterface from "src/interfaces/User";
 import { notificacionTop } from "src/utils/notifications";
 
 export const updateUser = (endpoint: string, userUpdated: UserInterface) => {
+  const {
+    ID,
+    userName,
+    email,
+    liked,
+    password,
+    followers,
+    following,
+    role,
+    image,
+    collections_done,
+  } = userUpdated;
+
   fetch(`${endpoint}/${userUpdated.ID}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userName: userUpdated.userName,
-      email: userUpdated.email,
-      password: userUpdated.password,
-      followers: userUpdated.followers,
-      following: userUpdated.following,
-      collections_done: userUpdated.collections_done,
-      role: userUpdated.role,
-      image: userUpdated.image,
-      liked: userUpdated.liked,
-      ID: userUpdated.ID,
+      userName,
+      email,
+      password,
+      followers,
+      following,
+      collections_done,
+      role,
+      image,
+      liked,
+      ID,
     }),
   })
     .then((res) => res.json())
