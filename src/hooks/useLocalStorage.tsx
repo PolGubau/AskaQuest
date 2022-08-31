@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 //  a service that we call to update the local storage, we will introduce its name and the new value
 export const updateLocalStorage = (name: string, value: any) => {
@@ -8,10 +8,12 @@ export const updateLocalStorage = (name: string, value: any) => {
 };
 //  a service that we call to get the local storage, we will introduce its name and the new value
 export const getLocalStorage = (name: string) => {
+  const [user, setUser] = useState();
   useEffect(() => {
     const res = localStorage.getItem(name);
-    return res ? JSON.parse(res) : null;
+    setUser(res ? JSON.parse(res) : {});
   }, []);
+  return user;
 };
 //  a service that we call to remove the local storage, we will introduce its name and the new value
 export const removeLocalStorage = (name: string) => {
