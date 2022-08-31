@@ -47,7 +47,7 @@ export default function EachQuest({
           ) : (
             <UserHeaderLoading />
           )}
-          <LikesQuest collection={collection} userLoged={userLoged} />
+          <LikesQuest collection={collection} />
         </div>
         <div>
           <h3 className={styles.title}>{title}</h3>
