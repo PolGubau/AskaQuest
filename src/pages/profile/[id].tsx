@@ -17,6 +17,8 @@ import ButtonWithIcon from "src/components/Buttons/ButtonWithIcon/ButtonWithIcon
 import getUserFromLocalStorage from "src/hooks/getUserFromLocalStorage";
 import ProfileSignInPannel from "src/components/Layout/ProfilePageFragments/SignInPannel/ProfileSignInPannel";
 import ProfileFollowers from "src/components/Layout/ProfilePageFragments/ProfileFollowers/ProfileFollowers";
+import Swal, { SweetAlertResult } from "sweetalert2";
+import ProfileEditProfile from "src/components/Layout/ProfilePageFragments/ProfileEditProfile/ProfileEditProfile";
 
 export default function userPage({
   user,
@@ -79,7 +81,14 @@ export default function userPage({
           <header className={styles.header}>
             <div className={styles.headerLeft}>
               <h1 className={styles.heading1}>{userName}</h1>
-
+              {/* Date part */}
+              {dateCreation && (
+                <p className={styles.timeago}>
+                  {"Here since "}
+                  <TimeAgo datetime={dateCreation} locale="es.ts" />
+                  {"."}
+                </p>
+              )}
               {/* Pannel for signin */}
 
               {!userLoged && <ProfileSignInPannel userName={userName} />}
@@ -87,55 +96,38 @@ export default function userPage({
               {/* userLoged is not You */}
               {userLoged && userLoged?.ID !== ID && (
                 <div className={styles.followersContainer}>
-                  <div onClick={handleFollowCall} className={styles.followButton}>
+                  <div
+                    onClick={handleFollowCall}
+                    className={styles.followButton}
+                  >
                     {isFollowed ? (
                       <ButtonWithIcon icon={"user"} text={"Following"} />
                     ) : (
                       <ButtonWithIcon icon={"user"} text={"Follow"} />
                     )}
                   </div>
-                  <ProfileFollowers
-                    userName={userName}
-                    followers={followers}
-                    you={false}
-                  />
                 </div>
               )}
-              {/* userLoged is  You */}
-              {userLoged && userLoged?.ID === ID && (
-                <ProfileFollowers
-                  userName={userName}
-                  followers={followers}
-                  you={false}
-                />
-              )}
-
-              {/* Date part */}
-              {dateCreation && (
-                <p>
-                  {"Here since "}
-                  <TimeAgo datetime={dateCreation} locale="es.ts" />
-                  {"."}
-                </p>
+              {/* If are you, edit button */}
+              {userLoged?.ID === ID && (
+                <ProfileEditProfile userLoged={userLoged} />
               )}
             </div>
             <div>
-              {userLoged?.ID === ID && (
-                <div className={styles.followersContainer}>
-                  <Link href={PATH.CREATE_QUEST}>
-                    <a>
-                      <ButtonWithIcon icon="create" text="Edit Profile" />
-                    </a>
-                  </Link>
-                </div>
-              )}
-              <Image
-                className={styles.avatar}
-                alt={`${userName}&apos;s avatar`}
-                src={image || `https://api.multiavatar.com/${userName}.svg`}
-                width={200}
-                height={200}
-              />
+              <div className={styles.rightHeader}>
+                <ProfileFollowers
+                  userName={userName}
+                  followers={followers}
+                  you={userLoged?.ID === ID}
+                />
+                <Image
+                  className={styles.avatar}
+                  alt={`${userName}&apos;s avatar`}
+                  src={image || `https://api.multiavatar.com/${userName}.svg`}
+                  width={200}
+                  height={200}
+                />
+              </div>
             </div>
           </header>
           <section>
