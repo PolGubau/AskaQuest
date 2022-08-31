@@ -1,7 +1,7 @@
 import css from 'styled-jsx/css'
 
 export default css`
-  div {
+div {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -14,7 +14,6 @@ export default css`
     -moz-box-direction: normal;
     -ms-flex-direction: row;
     flex-direction: row;
-    height: 100vh;
     width: 100%;
     justify-content: center;
     align-content: center;
@@ -42,8 +41,9 @@ export default css`
     main {
       height: fit-content;
       min-height: 60vh;
-      max-height: 90vh;
+      max-height: 80vh;
       width: 1000px;
     }
   }
+ 
 `
