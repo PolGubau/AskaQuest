@@ -5,7 +5,6 @@ import QuestGallery from "src/components/QuestGallery/QuestGallery";
 import Nav from "src/components/Nav";
 import Image from "next/image";
 import styles from "./profile.module.css";
-import { useRouter } from "next/router";
 import UserInterface from "src/interfaces/User";
 import { CollectionInterface } from "src/interfaces/Collection";
 import { GetServerSidePropsContext } from "next";
@@ -13,20 +12,11 @@ import TimeAgo from "timeago-react";
 import Link from "next/link";
 import AddNewButton from "src/components/Buttons/AddNew/AddNewButton";
 import { handleFollow } from "src/services/handleFollow";
-import {
-  JSXElementConstructor,
-  Key,
-  ReactElement,
-  ReactFragment,
-  useEffect,
-  useState,
-} from "react";
+import { useState } from "react";
 import ButtonWithIcon from "src/components/Buttons/ButtonWithIcon/ButtonWithIcon";
-import UserHeader from "src/components/UserHeader/UserHeader";
 import getUserFromLocalStorage from "src/hooks/getUserFromLocalStorage";
-import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
-import UserHeaderLoading from "src/components/UserHeader/UserHeaderLoading";
-import returnObjectById from "src/services/returnObjectById";
+import ProfileSignInPannel from "src/components/Layout/ProfilePageFragments/SignInPannel/ProfileSignInPannel";
+import ProfileFollowers from "src/components/Layout/ProfilePageFragments/ProfileFollowers/ProfileFollowers";
 
 export default function userPage({
   user,
@@ -39,27 +29,37 @@ export default function userPage({
   let { ID, userName, image, followers, date_creation: dateCreation } = user;
   followers = JSON.parse(followers);
 
-  const [userLoading, setUserLoading] = useState(false);
-  const [isFollowed, setIsFollowed] = useState(false);
-  const [userLoged, setUserLoged] = useState<UserInterface | undefined>(
-    undefined
-  );
-  const { con } = getUserFromLocalStorage("user");
+  if (typeof followers === "number") {
+    followers = [followers];
+  }
 
-  useEffect(() => {
-    setUserLoading(true);
-    if (con.status === 1) {
-      setUserLoged(con.user);
-      const isFollowed = userLoged?.following.find(
+  const [isFollowed, setIsFollowed] = useState(false);
+
+  const { con } = getUserFromLocalStorage();
+
+  console.log(con);
+
+  let userLoged: UserInterface | undefined = undefined;
+  if (con.status === 1) {
+    userLoged = con.user;
+  }
+
+  // check if you are this user
+  if (userLoged) {
+    // if there is only 1 follower its transformed to a number, lets pass it to an array
+    let followingArray: Array<any> = JSON.parse(userLoged.following);
+    if (typeof followingArray === "number") {
+      followingArray = [followingArray];
+    }
+    if (userLoged.ID !== ID) {
+      const isFollowed = followingArray.find(
         (following: { ID: number }) => following.ID === Number(user.ID)
       );
       if (isFollowed) {
         setIsFollowed(true);
       }
-      setUserLoading(false);
     }
-  }, [con]);
-  console.log("IsFollowed: ", isFollowed);
+  }
 
   const handleFollowCall = async () => {
     if (userLoged) {
@@ -79,41 +79,38 @@ export default function userPage({
           <header className={styles.header}>
             <div className={styles.headerLeft}>
               <h1 className={styles.heading1}>{userName}</h1>
-              {userLoading && <SquareLoader />}
-              {userLoged && ID !== userLoged.ID && (
+
+              {/* Pannel for signin */}
+
+              {!userLoged && <ProfileSignInPannel userName={userName} />}
+
+              {/* userLoged is not You */}
+              {userLoged && userLoged?.ID !== ID && (
                 <div className={styles.followersContainer}>
-                  <div onClick={handleFollowCall}>
+                  <div onClick={handleFollowCall} className={styles.followButton}>
                     {isFollowed ? (
                       <ButtonWithIcon icon={"user"} text={"Following"} />
                     ) : (
                       <ButtonWithIcon icon={"user"} text={"Follow"} />
                     )}
                   </div>
-                  {followers.length > 0 ? (
-                    <>
-                      <p>{`Some of ${userName}'s followers:`}</p>
-
-                      <div className={styles.followersContainer}>
-                        {followers
-                          .map((followerID: string) => {
-                            return (
-                              <UserHeader
-                                id={followerID || ""}
-                                you={false}
-                                size={40}
-                                name={""}
-                                image={""}
-                              />
-                            );
-                          })
-                          .slice(0, 3)}
-                      </div>
-                    </>
-                  ) : (
-                    `Be the first one to follow ${userName}!`
-                  )}
+                  <ProfileFollowers
+                    userName={userName}
+                    followers={followers}
+                    you={false}
+                  />
                 </div>
               )}
+              {/* userLoged is  You */}
+              {userLoged && userLoged?.ID === ID && (
+                <ProfileFollowers
+                  userName={userName}
+                  followers={followers}
+                  you={false}
+                />
+              )}
+
+              {/* Date part */}
               {dateCreation && (
                 <p>
                   {"Here since "}
@@ -123,6 +120,15 @@ export default function userPage({
               )}
             </div>
             <div>
+              {userLoged?.ID === ID && (
+                <div className={styles.followersContainer}>
+                  <Link href={PATH.CREATE_QUEST}>
+                    <a>
+                      <ButtonWithIcon icon="create" text="Edit Profile" />
+                    </a>
+                  </Link>
+                </div>
+              )}
               <Image
                 className={styles.avatar}
                 alt={`${userName}&apos;s avatar`}
@@ -138,7 +144,7 @@ export default function userPage({
             ) : (
               <QuestGallery collections={collectionsByUser} />
             )}
-            {ID === userLoged?.ID && (
+            {userLoged?.ID === ID && (
               <Link href={PATH.CREATE_QUEST}>
                 <a>
                   <AddNewButton />
