@@ -1,73 +1,60 @@
 import UserInterface from "src/interfaces/User";
 import PATH from "src/utils/path";
+import { updateUser } from "./update/updateUser";
 
-export const handleFollow = async (Profiled:UserInterface,Loged:UserInterface) => {
-    //EJ: Loged quiere seguir a Profiled, le da a seguir
-    let isNowFollowing = false;
-
-    let {userName, email, password,followers,following,collections_done,role,image,ID } = Profiled
-    let {userName:userName2, email:email2, password:password2,followers:followers2,following:following2,collections_done:collections_done2,role:role2,image:image2,ID:ID2 } = Loged
-    
-    following = JSON.parse(following)
-    followers2 = JSON.parse(followers2)
-    
-    console.log(Loged)
-    
-    console.log(`${userName} sigue a ${following} y le siguen${followers}`);
-    console.log(`${userName2} sigue a ${following2} y le siguen${followers2}`);
+export const handleFollow = async (Profiled:UserInterface,Loged:UserInterface,isFollowed:boolean,setIsFollowed:any) => {
+   
+    const newUserLoged = Loged   
+    const newUserProfiled = Profiled   
    
     
-    if(following===null){
-        following = []
-    }   
-    if(followers2===null){
-        followers2 = []
-    }   
-    
-   
-    
-    if(following && following.includes(ID2)){
-        console.log(`Ya siguen, dejamos de seguir`)
-      // quitamos el id de la persona que sigue al del profile
-    //     following = following.filter((id:number) => id.toString() !== ID2.toString()) // devuelve los index que no sea el mismo id
-    //     followers2 = followers2.filter((id:number) => id.toString() !== ID.toString()) // devuelve los index que no sea el mismo id
-        isNowFollowing = false
-    }else{
-        // si no siguen, seguimos
-        console.log(`No siguen, seguimos`)
-    //     following.push(ID2)
-    //     console.log(`Se ha añadido a la lista de seguidos del profile ${userName}: ${following}`)
-    //     followers2.push(ID)
-        
-
-        isNowFollowing = true
+    // if following and followers array are stringified, we need to parse them to arrays
+    if (typeof newUserLoged.following === 'string') {
+        newUserLoged.following = JSON.parse(newUserLoged.following)
     }
-    // actualizamos el array de following del que sigue
-    await fetch(PATH.API.USER_BY_ID+'/'+ID, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({userName, email, password,followers,following,collections_done,role,image,ID })
-    })
-
-    // actualizamos el array de followers del que es seguido
-    await fetch(PATH.API.USER_BY_ID+'/'+ID2, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({userName:userName2, email:email2, password:password2,followers:followers2,following:following2,collections_done:collections_done2,role:role2,image:image2,ID:ID2 })
-    })
+    if (typeof newUserLoged.followers === 'string') {
+        newUserLoged.followers = JSON.parse(newUserLoged.followers)
+    }
+    if (typeof newUserProfiled.followers === 'string') {
+        newUserProfiled.followers = JSON.parse(newUserProfiled.followers)
+    }
+    if (typeof newUserProfiled.following === 'string') {
+        newUserProfiled.following = JSON.parse(newUserProfiled.following)
+    }
     
     
+    
+    
+    
+    // if followers or following is empty, create an empty array
+    
+    if(newUserLoged.following === null){
+        newUserLoged.following = []
+    }
+    if(newUserProfiled.followers === null){
+        newUserProfiled.followers = []
+    }
+    
+    
+    // lets use isFollowed to know if we are following or unfollowing
+    if(isFollowed){
+        // we need to stop following
+        newUserLoged.following = newUserLoged.following.filter((user: string) => user !== Profiled.ID)
+        newUserProfiled.followers = newUserProfiled.followers.filter((user: string) => user !== Loged.ID)
+    }else{
+        // we need to follow
+        newUserLoged.following.push(Profiled.ID)
+        newUserProfiled.followers.push(Loged.ID)
+    }
+   
+    window.localStorage.setItem('user',JSON.stringify(newUserLoged))
    
     
     
+    updateUser(PATH.API.USER_BY_ID,newUserLoged)
+    updateUser(PATH.API.USER_BY_ID,newUserProfiled)
     
-    // return isNowFollowing
-    
-    
+   return setIsFollowed(!isFollowed) 
     
     
         
