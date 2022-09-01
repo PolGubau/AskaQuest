@@ -1,7 +1,7 @@
 import styles from './CollectionCover.module.css'
 import { FaArrowRight } from 'react-icons/fa'
 import UserHeader from 'src/components/UserHeader/UserHeader'
-export default function CollectionCover({
+export default function CollectionCover ({
   id,
   userId,
   userName = 'unknow',
