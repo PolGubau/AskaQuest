@@ -1,4 +1,4 @@
-export default function CorrectedQuest({
+export default function CorrectedQuest ({
   index,
   color,
   question,
