@@ -1,6 +1,6 @@
 import { colors } from '../../../styles/theme'
 
-export default function QuestionLoading() {
+export default function QuestionLoading () {
   return (
     <>
       <article className="container">
