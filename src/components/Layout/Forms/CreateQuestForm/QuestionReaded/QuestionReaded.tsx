@@ -1,6 +1,6 @@
-import styles from "./QuestionReaded.module.css";
-export default function QuestionReaded({ question }: any) {
-  const { title, solution, answers } = question;
+import styles from './QuestionReaded.module.css'
+export default function QuestionReaded ({ question }: any) {
+  const { title, solution, answers } = question
   return (
     <>
       <div className={styles.questionBox}>
@@ -22,7 +22,7 @@ export default function QuestionReaded({ question }: any) {
                     {answer}
                   </p>
                 </div>
-              );
+              )
             })}
           </div>
         </div>
@@ -32,5 +32,5 @@ export default function QuestionReaded({ question }: any) {
         </div>
       </div>
     </>
-  );
+  )
 }
