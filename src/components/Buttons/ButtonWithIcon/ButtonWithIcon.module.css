@@ -12,28 +12,44 @@
     transform: scale(0.95);
 }
 
+.inputIconRounded {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    display: flex;
+    background-color: var(--background);
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+}
+
+.inputIconRounded:hover {
+    filter: brightness(0.8);
+}
+
 .inputIcon {
     height: 40px;
-    width: 60px;
+    width: 40px;
     padding-left: 5px;
     border-radius: 20px 0 0 20px;
     display: flex;
     background-color: var(--background);
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     align-content: center;
-
 }
 
 .button {
-    width: 100%;
+    width: fit-content;
     height: 40px;
     border-radius: 0 20px 20px 0;
     border: 1px solid var(--background);
     background-color: var(--clean-background);
     color: var(--black);
     font-size: 14px;
-    padding-right: 5px;
+    padding: 5px 15px 5px 10px;
     font-weight: 400;
     display: flex;
     justify-content: center;
@@ -46,7 +62,7 @@
 
 .inputBig:hover .inputIcon {
     background-color: var(--secondary);
-    color: var(--white);
+    filter: brightness(0.8);
 }
 
 .inputBig:hover .button {
