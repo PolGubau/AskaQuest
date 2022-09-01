@@ -1,13 +1,13 @@
-import useSWR from "swr";
+import useSWR from 'swr'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = async (url: string) => await fetch(url).then(async (res) => await res.json())
 
-export default function returnObjectById(
+export default function returnObjectById (
   endPoint: string,
   ID: string | number
 ) {
-  const { data, error } = useSWR(`${endPoint}/${ID}`, fetcher);
+  const { data, error } = useSWR(`${endPoint}/${ID}`, fetcher)
 
-  if (!data) return { data, status: "loading" };
-  return { data, status: error ? "error" : "success" };
+  if (!data) return { data, status: 'loading' }
+  return { data, status: error ? 'error' : 'success' }
 }
