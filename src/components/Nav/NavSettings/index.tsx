@@ -1,34 +1,34 @@
-import React, { useState } from "react";
-import styles from "./NavSettings.module.css";
-import { IoIosSettings } from "react-icons/io";
-import { deleteUser } from "src/services/delete/deleteUser";
-import { useRouter } from "next/router";
-import PATH from "src/utils/path";
-import { colors } from "src/styles/theme";
-import { handleLogout } from "src/services/handleLogin/handleLogout";
+import React, { useState } from 'react'
+import styles from './NavSettings.module.css'
+import { IoIosSettings } from 'react-icons/io'
+import { deleteUser } from 'src/services/delete/deleteUser'
+import { useRouter } from 'next/router'
+import PATH from 'src/utils/path'
+import { colors } from 'src/styles/theme'
+import { handleLogout } from 'src/services/handleLogin/handleLogout'
 
-function SettingsPannel({
+function SettingsPannel ({
   show = false,
   changeShow,
   userID,
-  userName = "User",
+  userName = 'User'
 }: {
-  show: boolean;
-  changeShow: Function;
-  userID: number | string;
-  userName: string;
+  show: boolean
+  changeShow: Function
+  userID: number | string
+  userName: string
 }) {
-  const router = useRouter();
+  const router = useRouter()
 
   const handleSignOut = () => {
-    handleLogout();
-    router.replace(PATH.SIGN_IN);
-  };
+    handleLogout()
+    void router.replace(PATH.SIGN_IN)
+  }
   const handleDeleteUser = () => {
-    deleteUser(PATH.API.USER_BY_ID, userID);
-    localStorage.clear();
-    router.push(PATH.HOME);
-  };
+    deleteUser(PATH.API.USER_BY_ID, userID)
+    localStorage.clear()
+    void router.push(PATH.HOME)
+  }
   return (
     <>
       {show && (
@@ -37,13 +37,13 @@ function SettingsPannel({
             <p className={styles.title}>Settings</p>
             <button
               className={styles.option}
-              onClick={() => router.push(PATH.HOME)}
+              onClick={async () => await router.push(PATH.HOME)}
             >
               Go Home
             </button>
             <button
               className={styles.option}
-              onClick={() => router.push(PATH.PROFILE + `/${userName}`)}
+              onClick={async () => await router.push(PATH.PROFILE + `/${userName}`)}
             >
               Your Profile
             </button>
@@ -58,25 +58,25 @@ function SettingsPannel({
           <div
             className={styles.background}
             onClick={() => {
-              changeShow();
+              changeShow()
             }}
           ></div>
         </>
       )}
     </>
-  );
+  )
 }
 
-function NavSettings({
+function NavSettings ({
   userID,
-  userName,
+  userName
 }: {
-  userID: number | string;
-  userName: string;
+  userID: number | string
+  userName: string
 }) {
-  const [showSettings, setShowSettings] = useState(false);
+  const [showSettings, setShowSettings] = useState(false)
 
-  const changeShow = () => setShowSettings(!showSettings);
+  const changeShow = () => setShowSettings(!showSettings)
 
   return (
     <>
@@ -86,7 +86,7 @@ function NavSettings({
             ? { backgroundColor: colors.background }
             : { backgroundColor: colors.white }
         }
-        className={`${styles.settingsButton} ${showSettings ? "active" : ""}`}
+        className={`${styles.settingsButton} ${showSettings ? 'active' : ''}`}
         onClick={changeShow}
       >
         <IoIosSettings className={styles.settingIcon} />
@@ -98,7 +98,7 @@ function NavSettings({
         userID={userID}
       />
     </>
-  );
+  )
 }
 
-export default NavSettings;
+export default NavSettings
