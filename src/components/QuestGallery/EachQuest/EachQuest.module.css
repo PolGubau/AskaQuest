@@ -4,11 +4,23 @@
   padding: 15px;
   border: 1px solid var(--background);
   background-color: var(--clean-background);
-  border-radius: 10px;
+  border-radius: 20px;
   align-content: flex-start;
   justify-content: space-between;
   align-items: stretch;
   flex-wrap: wrap;
+  transition: 0.1s;
+}
+
+.section:hover {
+  filter: brightness(1.1);
+  border: 1px solid var(--dark-background);
+  transform: scale(0.97);
+}
+
+.section:active {
+  transform: scale(0.95);
+
 }
 
 .header {
