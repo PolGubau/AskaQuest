@@ -4,13 +4,13 @@ import styles from './StartButton.module.css'
 import SquareLoader from 'src/components/loaders/SquaresLoader/SquareLoader'
 
 //
-export default function StartButton({
+export default function StartButton ({
   text = 'Start',
   icon = 'arrow',
   type = 'button',
   outline = false,
   fontSize = '1.5rem',
-  loadingProp=false
+  loadingProp = false
 }) {
   const [loading, setLoading] = useState(loadingProp)
 
