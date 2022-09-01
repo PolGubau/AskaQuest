@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/space-before-function-paren */
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { conn } from 'src/utils/database'
 
-import UserInterface  from 'src/interfaces/User'
+import UserInterface from 'src/interfaces/User'
 
-export default async function handler(
+export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<UserInterface | object>
 ) {
@@ -27,25 +26,23 @@ export default async function handler(
       } catch (error) {
         return res.status(400).json({ error })
       }
-      break;
 
     //
-    case 'PUT':
-     // we are receiving a stringified collection and we need to upload it to the database
-     
-      const { title, tags, likes, ID} = body
+    case 'PUT':{
+      // we are receiving a stringified collection and we need to upload it to the database
+
+      const { title, tags, likes, ID } = body
       console.log('BODY received by backend: ', body)
       const query = 'UPDATE public."Collections" SET "title" = $1, "tags" = $2, "likes" = $3 WHERE "ID" = $4'
       const values = [title, JSON.stringify(tags), likes, ID]
-      await conn.query(query, values).then((result: { rows: (object | UserInterface)[] }) => {
+      await conn.query(query, values).then((result: { rows: Array<object | UserInterface> }) => {
         return res.json(result)
-        })
+      })
         .catch((error: Error) => {
           return res.json({ error })
         })
-        
-        break;
 
+      break }
 
     //
     case 'DELETE':
@@ -58,7 +55,6 @@ export default async function handler(
       } catch (error) {
         return res.status(400).json({ error })
       }
-      break;
 
     //
     default:
