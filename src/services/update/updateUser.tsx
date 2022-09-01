@@ -1,5 +1,5 @@
-import UserInterface from "src/interfaces/User";
-import { notificacionTop } from "src/utils/notifications";
+import UserInterface from 'src/interfaces/User'
+import { notificacionTop } from 'src/utils/notifications'
 
 export const updateUser = (endpoint: string, userUpdated: UserInterface) => {
   const {
@@ -12,13 +12,13 @@ export const updateUser = (endpoint: string, userUpdated: UserInterface) => {
     following,
     role,
     image,
-    collections_done,
-  } = userUpdated;
+    collections_done
+  }: UserInterface = userUpdated
 
   fetch(`${endpoint}/${userUpdated.ID}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       userName,
@@ -30,15 +30,15 @@ export const updateUser = (endpoint: string, userUpdated: UserInterface) => {
       role,
       image,
       liked,
-      ID,
-    }),
+      ID
+    })
   })
-    .then((res) => res.json())
+    .then(async (res) => await res.json())
     .then((data) => {
-      const { rowCount } = data;
+      const { rowCount } = data
       if (rowCount > 0) {
-        notificacionTop("success", "Updated with success!");
+        notificacionTop('success', 'Saved with success!')
       }
     })
-    .catch((err) => console.log(err));
-};
+    .catch((err) => console.log(err))
+}
