@@ -15,9 +15,11 @@
   align-items: center;
   justify-content: flex-start;
 }
+
 .creatorUserNameBy {
   margin-left: 10px;
 }
+
 .creatorUserName {
   font-weight: 700;
 }
@@ -34,6 +36,7 @@
 
   flex-wrap: wrap;
 }
+
 .title {
   font-weight: 700;
   font-size: var(--fontHeader);
@@ -50,6 +53,7 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
 .tag {
   margin: 10px 5px 10px 5px;
   background-color: var(--clean-background);
@@ -57,6 +61,7 @@
   padding: 10px 15px;
   border-radius: 8px;
 }
+
 .startButton {
   position: absolute;
   bottom: 15px;
@@ -70,11 +75,13 @@
   font-weight: bold;
   padding: 10px 15px;
   border-radius: 15px;
-  width: 97%;
+  width: calc(100% - 30px);
 }
+
 .startButtonText {
   margin-right: 10px;
 }
+
 .startButton:hover {
   background-color: var(--secondary);
   color: var(--white);
