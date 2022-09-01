@@ -19,40 +19,15 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-    "paths": {
-      "@/c/*": [
-        "components/*"
-      ],
-      "@h": [
-        "src/hooks"
-      ],
-      "@con": [
-        "src/context"
-      ],
-      "@i": [
-        "src/interfaces"
-      ],
-      "@u": [
-        "src/utils"
-      ],
-    }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/Quests/CollectionsItem.js",
-    "src/interfaces/pages/login/index.tsx",
-    "src/components/Nav/ProfileNav.js",
-    "src/components/Nav/SkeletonProfile.js",
-    "src/hooks/getUserFromLocalStorage.tsx",
-    "src/pages/profile/[id].tsx",
-    "src/hooks/useTimeAgo.js",
-    "src/components/UserHeader/UserHeader.tsx",
-    "src/components/UserHeader/UserHeader.tsx",
-    "src/components/Layout/AppLayout/index.js",
-    "src/components/Question/ErrorNoQuestions/index.js"
-, "src/components/Question/index.js"  ],
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.json"
+  ],
   "exclude": [
     "node_modules"
   ]
