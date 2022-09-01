@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import React from "react";
-import PATH from "src/utils/path";
-import styles from "./SignInPannel.module.css";
-import ButtonWithIcon from "src/components/Buttons/ButtonWithIcon/ButtonWithIcon";
-import Link from "next/link";
+import React from 'react'
+import PATH from 'src/utils/path'
+import styles from './SignInPannel.module.css'
+import ButtonWithIcon from 'src/components/Buttons/ButtonWithIcon/ButtonWithIcon'
+import Link from 'next/link'
 
-export default function SignInPannel() {
+export default function SignInPannel () {
   return (
     <>
       <section className={styles.container}>
@@ -18,16 +18,16 @@ export default function SignInPannel() {
         <div className={styles.buttonGroup}>
           <Link href={PATH.SIGN_IN}>
             <a>
-              <ButtonWithIcon text={"Sign in"} icon={"user"} />
+              <ButtonWithIcon text={'Sign in'} icon={'user'} />
             </a>
           </Link>
           <Link href={PATH.CREATE_ACCOUNT}>
             <a>
-              <ButtonWithIcon text={"Create an account"} icon={"create"} />
+              <ButtonWithIcon text={'Create an account'} icon={'create'} />
             </a>
           </Link>
         </div>
       </section>
     </>
-  );
+  )
 }
