@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './AddNewButton.module.css'
 import { BsPlusLg } from 'react-icons/bs'
 
-export default function AddNewButton() {
+export default function AddNewButton () {
   return (
     <>
       <div className={styles.container}>
