@@ -1,7 +1,7 @@
 import Skeleton from 'react-loading-skeleton'
 import { backgroundSmooth } from 'src/styles/theme'
 
-export default function SkeletonProfile() {
+export default function SkeletonProfile () {
   return (
     <>
       <Skeleton
