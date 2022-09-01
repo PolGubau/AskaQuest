@@ -1,63 +1,63 @@
-import React, { useState } from "react";
-import SaveButton from "src/components/Buttons/SaveButton/SaveButton";
-import Swal from "sweetalert2";
-import styles from "./EachQuestionForm.module.css";
+import React, { useState } from 'react'
+import SaveButton from 'src/components/Buttons/SaveButton/SaveButton'
+import Swal from 'sweetalert2'
+import styles from './EachQuestionForm.module.css'
 
-export default function EachQuestionForm({ saveQuestion }: any) {
-  const [answersDone, setAnswersDone] = useState(false);
+export default function EachQuestionForm ({ saveQuestion }: any) {
+  const [answersDone, setAnswersDone] = useState(false)
   const [question, setQuestion] = useState({
-    title: "",
-    solution: "",
-    answers: ["", "", ""],
-  });
+    title: '',
+    solution: '',
+    answers: ['', '', '']
+  })
   const changeTitle = (e: { target: { value: string } }) => {
     setQuestion({
       ...question,
-      title: e.target.value,
-    });
-  };
+      title: e.target.value
+    })
+  }
   const changeSolution = (e: { target: { value: string } }) => {
     setQuestion({
       ...question,
-      solution: e.target.value,
-    });
-  };
+      solution: e.target.value
+    })
+  }
   const changeAnswers = (e: any) => {
     // change value of the answer in array
-    const answers = question.answers;
-    answers[e.target.name] = e.target.value;
+    const answers = question.answers
+    answers[e.target.name] = e.target.value
     setQuestion({
       ...question,
-      answers,
-    });
+      answers
+    })
 
     // if all answers are filled, set answersDone to true
     if (
-      question.answers[0] !== "" &&
-      question.answers[1] !== "" &&
-      question.answers[2] !== ""
+      question.answers[0] !== '' &&
+      question.answers[1] !== '' &&
+      question.answers[2] !== ''
     ) {
-      setAnswersDone(true);
+      setAnswersDone(true)
     }
-  };
+  }
 
   const handleSave = () => {
     // save the question if a radio button is pressed
-    if (question.solution !== "") {
-      saveQuestion(question);
+    if (question.solution !== '') {
+      saveQuestion(question)
       setQuestion({
-        title: "",
-        solution: "",
-        answers: ["", "", ""],
-      });
+        title: '',
+        solution: '',
+        answers: ['', '', '']
+      })
     } else {
       void Swal.fire(
-        "Question is not finnished!",
-        "You need to check which answer is the solution",
-        "warning"
-      );
+        'Question is not finnished!',
+        'You need to check which answer is the solution',
+        'warning'
+      )
     }
-  };
+  }
   return (
     <>
       <div className={styles.question}>
@@ -117,7 +117,7 @@ export default function EachQuestionForm({ saveQuestion }: any) {
                 <label htmlFor="Answer1radio">
                   {question.answers[0].length > 1
                     ? question.answers[0]
-                    : "Answer 1"}
+                    : 'Answer 1'}
                 </label>
               </div>
               <div>
@@ -133,7 +133,7 @@ export default function EachQuestionForm({ saveQuestion }: any) {
                 <label htmlFor="Answer2radio">
                   {question.answers[1].length > 1
                     ? question.answers[1]
-                    : "Answer 2"}
+                    : 'Answer 2'}
                 </label>
               </div>
               <div>
@@ -148,7 +148,7 @@ export default function EachQuestionForm({ saveQuestion }: any) {
                 <label htmlFor="Answer3radio">
                   {question.answers[2].length > 1
                     ? question.answers[2]
-                    : "Answer 3"}
+                    : 'Answer 3'}
                 </label>
               </div>
             </div>
@@ -159,5 +159,5 @@ export default function EachQuestionForm({ saveQuestion }: any) {
         </div>
       </div>
     </>
-  );
+  )
 }
