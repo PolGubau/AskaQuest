@@ -1,13 +1,13 @@
 export const deleteUser = (endpoint: string, userID: string | number) => {
   fetch(`${endpoint}/${userID}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json",
-    },
+      'Content-Type': 'application/json'
+    }
   })
-    .then((res) => res.json())
+    .then(async (res) => await res.json())
     .then((data) => {
-      console.log("DELETED: ", data);
+      console.log('DELETED: ', data)
     })
-    .catch((err) => console.log(err));
-};
+    .catch((err) => console.log(err))
+}
