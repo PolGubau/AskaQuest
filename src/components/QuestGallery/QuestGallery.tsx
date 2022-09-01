@@ -1,14 +1,14 @@
-import EachQuest from "src/components/QuestGallery/EachQuest/EachQuest";
-import useLocalStorage from "src/hooks/getUserFromLocalStorage";
-import { CollectionInterface } from "src/interfaces/Collection";
-import UserInterface from "src/interfaces/User";
-import { offlineCollections } from "src/utils/offlineCollections";
-import styles from "./QuestGallery.module.css";
-export default function QuestGallery({ collections = [] }: any) {
+import EachQuest from 'src/components/QuestGallery/EachQuest/EachQuest'
+import useLocalStorage from 'src/hooks/getUserFromLocalStorage'
+import { CollectionInterface } from 'src/interfaces/Collection'
+import UserInterface from 'src/interfaces/User'
+import { offlineCollections } from 'src/utils/offlineCollections'
+import styles from './QuestGallery.module.css'
+export default function QuestGallery ({ collections = [] }: any) {
   const {
-    con: { data },
-  } = useLocalStorage("user");
-  const userLoged = data as UserInterface;
+    con: { user }
+  } = useLocalStorage()
+  const userLoged = user as UserInterface
   return (
     <>
       <section className={styles.section}>
@@ -39,5 +39,5 @@ export default function QuestGallery({ collections = [] }: any) {
         )}
       </section>
     </>
-  );
+  )
 }
