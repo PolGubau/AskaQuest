@@ -2,22 +2,12 @@ import css from 'styled-jsx/css'
 
 export default css`
 div {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-    -moz-box-orient: horizontal;
-    -moz-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
+   display: flex;
     width: 100%;
-    justify-content: center;
+    flex-direction: column;
     align-content: center;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
   }
 
   main {
