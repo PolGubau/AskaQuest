@@ -20,16 +20,12 @@ export default async function handler(
 
         const result = await conn.query(query, values)
         return res.status(200).json(result)
-      
       } catch (error) {
         return res.status(400).json({ error })
       }
-      break;
 
     //
     default:
       return res.status(404).json({ error: 'method not found' })
-            break;
-
   }
 }
