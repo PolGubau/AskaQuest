@@ -6,7 +6,6 @@ import PATH from 'src/utils/path'
 import styles from './ProfileNav.module.css'
 import { backgroundSmooth } from 'src/styles/theme'
 
-import useLocalStorage from 'src/hooks/getUserFromLocalStorage'
 import NavSettings from 'src/components/Nav/NavSettings'
 import logo from 'src/assets/logo.svg'
 import { useState } from 'react'
@@ -16,11 +15,11 @@ import getUserFromLocalStorage from 'src/hooks/getUserFromLocalStorage'
 export default function ProfileNav () {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  const {con} = getUserFromLocalStorage()
-const { user, status } = con
+  const { con } = getUserFromLocalStorage()
+  const { user, status } = con
   switch (status) {
-    case 1:
-      const { userName, avatar,ID } = user
+    case 1:{
+      const { userName, avatar, ID } = user
       return (
         <>
           <div className={styles.RightNav}>
@@ -57,7 +56,7 @@ const { user, status } = con
             </section>
           </div>
         </>
-      )
+      ) }
   }
   return (
     <div
