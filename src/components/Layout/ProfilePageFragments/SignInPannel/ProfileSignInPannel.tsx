@@ -1,13 +1,13 @@
-import Link from "next/link";
-import React from "react";
-import ButtonWithIcon from "src/components/Buttons/ButtonWithIcon/ButtonWithIcon";
-import PATH from "src/utils/path";
-import styles from "./ProfileSignInPannel.module.css";
+import Link from 'next/link'
+import React from 'react'
+import ButtonWithIcon from 'src/components/Buttons/ButtonWithIcon/ButtonWithIcon'
+import PATH from 'src/utils/path'
+import styles from './ProfileSignInPannel.module.css'
 
-export default function ProfileSignInPannel({
-  userName = "",
+export default function ProfileSignInPannel ({
+  userName = ''
 }: {
-  userName: string;
+  userName: string
 }) {
   return (
     <>
@@ -15,15 +15,15 @@ export default function ProfileSignInPannel({
       <div className={styles.signInbuttons}>
         <Link href={PATH.SIGN_IN}>
           <a>
-            <ButtonWithIcon icon="user" text={"Sign In"} />
+            <ButtonWithIcon icon="user" text={'Sign In'} />
           </a>
         </Link>
         <Link href={PATH.CREATE_ACCOUNT}>
           <a>
-            <ButtonWithIcon icon="create" text={"Create an Account"} />
+            <ButtonWithIcon icon="create" text={'Create an Account'} />
           </a>
         </Link>
       </div>
     </>
-  );
+  )
 }
