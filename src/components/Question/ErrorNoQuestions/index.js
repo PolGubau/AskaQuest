@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import PATH from 'src/utils/path'
 import Swal from 'sweetalert2'
 
-export default function ErrorNoQuestion() {
+export default function ErrorNoQuestion () {
   const router = useRouter()
   useEffect(() => {
     Swal.fire({
