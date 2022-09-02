@@ -48,6 +48,11 @@
   dependencies:
     "glob" "7.1.7"
 
+"@next/swc-win32-x64-msvc@12.2.2":
+  "integrity" "sha512-2D2iinWUL6xx8D9LYVZ5qi7FP6uLAoWymt8m8aaG2Ld/Ka8/k723fJfiklfuAcwOxfufPJI+nRbT5VcgHGzHAQ=="
+  "resolved" "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-12.2.2.tgz"
+  "version" "12.2.2"
+
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
   "resolved" "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -1287,6 +1292,11 @@
   "integrity" "sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw=="
   "resolved" "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   "version" "1.4.0"
+
+"next-swc-win32-x64-msvc@^0.0.1-security":
+  "integrity" "sha512-FXBi2h6Y1X9cnffgRGkn2KtDbqTLBXlt2CSFrvLYJbLjTq67ghaeMkrV5zawXPTrVLQdFdhkOYe2MlYfVJyVpQ=="
+  "resolved" "https://registry.npmjs.org/next-swc-win32-x64-msvc/-/next-swc-win32-x64-msvc-0.0.1-security.tgz"
+  "version" "0.0.1-security"
 
 "next@12.2.2":
   "integrity" "sha512-zAYFY45aBry/PlKONqtlloRFqU/We3zWYdn2NoGvDZkoYUYQSJC8WMcalS5C19MxbCZLUVCX7D7a6gTGgl2yLg=="
