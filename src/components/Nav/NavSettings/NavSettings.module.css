@@ -1,0 +1,84 @@
+.RightNav {
+  display: flex;
+}
+
+.container {
+  right: 65px;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: var(--clean-background);
+  padding: 10px;
+  min-width: 150px;
+  border-radius: 10px;
+  z-index: 2;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.title {
+  margin: 10px;
+}
+
+.option {
+  text-align: left;
+  cursor: pointer;
+  margin: 5px 5px;
+  padding: 5px 14px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--background);
+}
+
+.optionDanger {
+  text-align: left;
+  cursor: pointer;
+  margin: 5px 5px;
+  padding: 5px 14px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--wrong);
+}
+
+.option:hover {
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+.settingIcon {
+  width: 25px;
+  height: 25px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: row;
+}
+
+.settingsButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.settingsButton:hover {
+  background-color: var(--clean-background);
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--black);
+  opacity: 0.3;
+}
