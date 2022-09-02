@@ -1,0 +1,88 @@
+.names {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fontSmall);
+}
+
+.creator {
+  display: flex;
+  background-color: var(--clean-background);
+  border-radius: 25px;
+  z-index: 1;
+  padding: 5px 15px 5px 5px;
+  margin: 5px 0;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.creatorUserNameBy {
+  margin-left: 10px;
+}
+
+.creatorUserName {
+  font-weight: 700;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+
+  border-radius: 10px;
+  align-content: flex-start;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  flex-wrap: wrap;
+}
+
+.title {
+  font-weight: 700;
+  font-size: var(--fontHeader);
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.tag {
+  margin: 10px 5px 10px 5px;
+  background-color: var(--clean-background);
+  border: 1px solid var(--background);
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.startButton {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  transition: 0.1s ease;
+  background-color: var(--background);
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 15px;
+  width: calc(100% - 30px);
+}
+
+.startButtonText {
+  margin-right: 10px;
+}
+
+.startButton:hover {
+  background-color: var(--secondary);
+  color: var(--white);
+}
