@@ -2,6 +2,7 @@ import BodyComponent from 'src/components/BodyComponent/BodyComponent'
 import AppLayout from 'src/components/Layout/AppLayout'
 import Nav from 'src/components/Nav'
 import { CollectionInterface } from 'src/interfaces/Collection'
+
 import PATH from 'src/utils/path'
 
 export default function HomePage ({
