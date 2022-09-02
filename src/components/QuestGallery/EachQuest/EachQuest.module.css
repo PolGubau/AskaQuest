@@ -10,6 +10,7 @@
   align-items: stretch;
   flex-wrap: wrap;
   transition: 0.1s;
+  cursor: pointer;
 }
 
 .section:hover {
