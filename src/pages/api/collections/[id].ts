@@ -8,8 +8,8 @@ export default async function handler (
   res: NextApiResponse<UserInterface | object>
 ) {
   const { method, query, body } = req
-  const paramID = query.id
-  const id = Number(paramID)
+  const paramID = query.id as string
+  const id = Number(paramID) || 0
 
   //
   switch (method) {
@@ -29,8 +29,9 @@ export default async function handler (
 
     //
     case 'PUT':{
-      // we are receiving a stringified collection and we need to upload it to the database
-
+      if (!body) {
+        return res.status(400).json({ error: 'Missing body' })
+      }
       const { title, tags, likes, ID } = body
       console.log('BODY received by backend: ', body)
       const query = 'UPDATE public."Collections" SET "title" = $1, "tags" = $2, "likes" = $3 WHERE "ID" = $4'
