@@ -8,14 +8,20 @@ module.exports = {
 
   extends: [
     'plugin:@next/next/recommended',
-    'plugin:react/recommended',
+    'plugin:react/recommended',"eslint:recommended",
     'standard-with-typescript'
   ],
   
   parser: `@typescript-eslint/parser`,
   parserOptions: {
+      "ecmaFeatures": {
+      "jsx": true
+    },
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
+    ecmaVersion: 12,
+    sourceType: 'module'
+    
   },
   
   plugins: [
