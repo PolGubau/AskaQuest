@@ -1,5 +1,5 @@
 import Logo from 'src/components/Logo/Logo'
-import AppLayout from 'src/components/Layout/AppLayout'
+import AppLayout from 'src/components/Layout/AppLayout/AppLayout/AppLayout'
 import SquareLoader from 'src/components/loaders/SquaresLoader/SquareLoader'
 import styles from 'src/styles/stylesPages/login.module.css'
 import PATH from 'src/utils/path'

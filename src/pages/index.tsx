@@ -1,6 +1,6 @@
 import BodyComponent from 'src/components/BodyComponent/BodyComponent'
-import AppLayout from 'src/components/Layout/AppLayout'
-import Nav from 'src/components/Nav'
+import AppLayout from 'src/components/Layout/AppLayout/index'
+import Nav from 'src/components/Nav/index'
 import { CollectionInterface } from 'src/interfaces/Collection'
 
 import PATH from 'src/utils/path'
