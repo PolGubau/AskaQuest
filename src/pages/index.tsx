@@ -15,6 +15,7 @@ export default function HomePage ({
       <Nav navigatable={false}/>
       <AppLayout>
         <main className="main">
+          BETA
           <BodyComponent collections={collections} />
         </main>
       </AppLayout>
