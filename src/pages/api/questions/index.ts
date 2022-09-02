@@ -15,6 +15,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
     case 'POST':
+      if (!body) {
+        return res.status(400).json({ error: 'Missing body' })
+      }
       try {
         const { collection_id: collectionID, title, solution, answers, creator_id: creatorID } = JSON.parse(body)
         const answerJson = JSON.stringify(answers)
