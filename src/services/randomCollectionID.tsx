@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import PATH from 'src/utils/path'
 import useSWR from 'swr'
-import { offlineCollections } from 'src/utils/offlineCollections'
+import { offlineCollections } from 'src/utils/offlineData'
 const getData = async (url: string) => {
   const response = await fetch(url)
   return await response.json()
