@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fontSmall);
+}
+
+.creator {
+  min-width: 80px;
+  height: 40px;
+  display: flex;
+  background-color: var(--white);
+  border: 1px solid var(--background);
+  border-radius: 25px;
+  z-index: 1;
+  padding: 5px 15px 5px 5px;
+  margin: 5px 0;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.creator:hover {
+  background-color: var(--background);
+  color: var(--white);
+}
+
+.userName {
+  min-width: 30px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.creatorUserName {
+  display: flex;
+  min-width: 20px;
+  height: 15px;
+  font-weight: 700;
+  margin-left: 10px;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.creatorImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.likesNumber {
+  width: 20px;
+  margin-right: 5px;
+  border-radius: 5px;
+  height: 20px;
+}
