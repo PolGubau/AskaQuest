@@ -1,4 +1,4 @@
-import UserInterface from 'src/interfaces/User'
+import UserInterface from 'src/interfaces/user'
 import { notificacionTop } from 'src/utils/notifications'
 
 export const updateUser = (endpoint: string, userUpdated: UserInterface) => {
