@@ -29,7 +29,10 @@ export default async function handler(
 
     //
     case 'PUT':{
-    // take the user from the body and update it
+      if (!body) {
+        return res.status(400).json({ error: 'Missing body' })
+      }
+      // take the user from the body and update it
       const { userName, email, password, followers, following, collections_done: collectionDone, role, image, liked } = body
       console.log('BODY received by backend: ', body)
 
