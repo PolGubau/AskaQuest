@@ -23,6 +23,9 @@ export default async function handler(
       }
 
     case 'POST':
+      if (!body) {
+        return res.status(400).json({ error: 'Missing body' })
+      }
       const content = JSON.parse(body)
       try {
         const { userName, email, password, image } = content
