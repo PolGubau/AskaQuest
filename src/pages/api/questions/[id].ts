@@ -7,8 +7,8 @@ export default async function handler(
   res: NextApiResponse<object>
 ) {
   const { method, query, body } = req
-  const paramID = query.id
-  const id = Number(paramID)
+  const paramID = query.id as string
+  const id = Number(paramID) || 0
 
   //
   switch (method) {
@@ -29,6 +29,9 @@ export default async function handler(
     //
     case 'PUT':
       try {
+        if (!body) {
+          return res.status(400).json({ error: 'Missing body' })
+        }
         const { likes } = body
         const query = 'UPDATE public."Questions" SET likes = $1, WHERE ID = $2 RETURNING *'
         const values = [likes, id]
