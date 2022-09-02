@@ -11,7 +11,7 @@ export default function HomePage ({
 }): JSX.Element {
   return (
     <>
-      <Nav />
+      <Nav navigatable={false}/>
       <AppLayout>
         <main className="main">
           <BodyComponent collections={collections} />
