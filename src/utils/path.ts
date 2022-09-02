@@ -1,9 +1,6 @@
 
-// if its dev mode, use localhost, if not, use the deployed url
 const DOMINIO = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://askaquest.netlify.app'
 
-// const DOMINIO = 'http://localhost:3000'
-console.log(process.env.NODE_ENV, process.env.URL_DEV)
 const PATH = {
   HOME: `${DOMINIO}`,
   SIGN_IN: `${DOMINIO}/login`,
