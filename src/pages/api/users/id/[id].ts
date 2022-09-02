@@ -9,8 +9,8 @@ export default async function handler(
   res: NextApiResponse<UserInterface | object>
 ) {
   const { method, query, body } = req
-  const paramID = query.id
-  const id = Number(paramID)
+  const paramID = query.id as string
+  const id = Number(paramID) || 0
 
   //
   switch (method) {
@@ -30,9 +30,11 @@ export default async function handler(
 
     //
     case 'PUT':{
-    // take the user from the body and update it
+      if (!body) {
+        return res.status(400).json({ error: 'Missing body' })
+      }
+      // take the user from the body and update it
       const { userName, email, password, followers, following, collections_done: collectionsDone, role, image, liked, ID } = body
-      console.log('BODY received by backend: ', body)
 
       const query = 'UPDATE public."Users" SET "userName" = $1, "email" = $2, "password" = $3, "followers" = $4, "following" = $5, "collections_done" = $6, "role" = $7, "image" = $8, "liked" =$9 WHERE "ID" = $10'
 
