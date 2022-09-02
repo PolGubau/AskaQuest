@@ -10,6 +10,7 @@ export default function Nav ({
   actualRoot = 'Home',
   actualName = '',
   actualLink = '',
+  navigatable = true,
   seeProfile = true
 }) {
   const router = useRouter()
@@ -19,7 +20,7 @@ export default function Nav ({
         <nav className={styles.nav}>
           <div className={styles.path}>
             <p
-              onClick={() => router.push(PATH.HOME)}
+              onClick={() => navigatable ? router.push(PATH.HOME) : router.reload()}
               className={styles.navPath}
               style={{ backgroundSmooth }}
             >
