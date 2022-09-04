@@ -3,6 +3,7 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineUser } from 'react-icons/ai'
 import { BiGridAlt, BiDice5, BiHomeAlt } from 'react-icons/bi'
 import { HiPlus } from 'react-icons/hi'
 import { CgArrowTopRightR } from 'react-icons/cg'
+import { GrPowerReset } from 'react-icons/gr'
 import {
   RiLockPasswordLine,
   RiUserFollowLine,
@@ -26,6 +27,16 @@ export default function ButtonWithIcon ({
   onlyIcon = false,
   backgroundColor = colors.background,
   color = colors.black
+}:
+{
+  text?: string
+  icon?: string
+  size?: number
+  border?: boolean
+  onlyIcon?: boolean
+  backgroundColor?: string
+  color?: string
+
 }) {
   return (
     <div className={styles.inputBig}>
@@ -53,6 +64,7 @@ export default function ButtonWithIcon ({
         {icon === 'noLiked' && <AiOutlineHeart size={size} />}
         {icon === 'delete' && <MdOutlineDeleteOutline size={size}/>}
         {icon === 'squareArrow' && <CgArrowTopRightR size={size}/>}
+        {icon === 'reset' && <GrPowerReset size={size}/>}
       </div>
       {!onlyIcon && <div className={styles.button}>{text}</div>}
     </div>
