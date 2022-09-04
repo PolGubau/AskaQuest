@@ -14,22 +14,26 @@ import getUserFromLocalStorage from 'src/hooks/getUserFromLocalStorage'
 import PATH from 'src/utils/path'
 import { useRouter } from 'next/router'
 import UserInterface from 'src/interfaces/user'
+import { bigAlert } from 'src/utils/notifications'
+
 export default function CreateQuestForm () {
   const router = useRouter()
+
   const [questions, setQuestions] = useState<QuestionInterface[]>([])
 
   const {
     con: { status, user }
   } = getUserFromLocalStorage()
 
+  const [title, setTitle] = useState('')
+  const [tags, setTags] = useState(['', '', ''])
+
   // user will be undefined until status is 1
   if (status !== 1) {
     return <div>Loading...</div>
   }
-  const { ID: creatorID } = user as UserInterface
 
-  const [title, setTitle] = useState('')
-  const [tags, setTags] = useState(['', '', ''])
+  const { ID: creatorID } = user as UserInterface
 
   const saveQuestions = (question: QuestionInterface) => {
     if (user) question.creator_id = Number(creatorID)
@@ -40,6 +44,11 @@ export default function CreateQuestForm () {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
+
+    if (questions.length === 0) {
+      bigAlert('Oupsss', 'You can not save a collection without questions', 'warning')
+      return false
+    }
 
     // 1. guardar la coleccion en la base de datos
     const collectionData = {
@@ -151,8 +160,10 @@ export default function CreateQuestForm () {
           <EachQuestionForm saveQuestion={saveQuestions} />
         </article>
 
-        <div className={styles.buttonContainer} onClick={handleSubmit}>
+        <div className={styles.buttonContainer} onClick={handleSubmit}
+>
           <StartButton
+            activate={questions.length}
             type="submit"
             text="Submit Collection"
             fontSize="1.2rem"
