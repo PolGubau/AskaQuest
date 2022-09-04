@@ -1,36 +1,27 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 import styles from './StartButton.module.css'
-import SquareLoader from 'src/components/loaders/SquaresLoader/SquareLoader'
 
 //
 export default function StartButton ({
+  activate = 1,
   text = 'Start',
   icon = 'arrow',
   type = 'button',
   outline = false,
-  fontSize = '1.5rem',
-  loadingProp = false
+  fontSize = '1.5rem'
 }) {
-  const [loading, setLoading] = useState(loadingProp)
-
   //
-  const handleClick = () => {
-    setLoading(true)
-  }
+
   //
   return (
       <button
         type={type}
-        style={{ outline: 'none', border: 'none', padding: 0 }}
-
-        onClick={handleClick}
+        style={{ outline: 'none', border: 'none', padding: 0, opacity: activate ? 1 : 0.5, disabled: !activate }}
         className={`
         ${styles.button} 
         ${outline ? styles.outline : styles.noOutline}`}>
 
-          {!loading
-            ? (
               <>
                 <p
                   className={styles.startButtonText}
@@ -42,10 +33,7 @@ export default function StartButton ({
                   {icon === 'arrow' && <FaArrowRight />}
                 </p>
               </>
-              )
-            : (
-              <SquareLoader squaresColor="#fff" />
-              )}
+
       </button>
   )
 }
