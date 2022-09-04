@@ -15,18 +15,17 @@ export default function getUserFromLocalStorage () {
     const user = localStorage.getItem('user')
     if (user) {
       const userRaw = JSON.parse(user)
-
       const liked = JSON.parse(userRaw.liked)
       const followers = JSON.parse(userRaw.followers)
       const following = JSON.parse(userRaw.following)
-      const collections_done = JSON.parse(userRaw.collections_done)
+      const collectionsDone = JSON.parse(userRaw.collections_done)
 
       const newUser: UserInterface = {
         ...userRaw,
         followers,
         following,
         liked,
-        collections_done
+        collections_done: collectionsDone
       }
       setCon({
         status: 1,
