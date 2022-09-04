@@ -12,7 +12,7 @@ export const topAlert = Swal.mixin({
   }
 })
 export const notificacionTop = (icon: SweetAlertIcon, title: string): void => {
-  topAlert.fire({ icon, title }).catch((err: Error) => console.log(err))
+  topAlert.fire({ icon, title })
 }
 
 export const alertCenter = Swal.mixin({
