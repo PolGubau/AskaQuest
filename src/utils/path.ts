@@ -1,5 +1,5 @@
 
-const DOMINIO = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://askaquest-gubaupol.vercel.app'
+const DOMINIO = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://askaquest.vercel.app'
 
 const PATH = {
   HOME: `${DOMINIO}`,
