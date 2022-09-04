@@ -53,7 +53,7 @@ export default function LoginForm ({ setLoading }: any) {
         const jsonUser = JSON.stringify(user)
 
         localStorage.setItem('user', jsonUser)
-        router.push(PATH.HOME).catch((err) => console.log(err))
+        router.push(PATH.HOME)
       }
     }
   }
