@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import styles from './NavSettings.module.css'
 import { IoIosSettings } from 'react-icons/io'
-import { deleteUser } from 'src/services/delete/deleteUser'
 import { useRouter } from 'next/router'
 import PATH from 'src/utils/path'
 import { colors } from 'src/styles/theme'
 import { handleLogout } from 'src/services/handleLogin/handleLogout'
+import ButtonWithIcon from 'src/components/Buttons/ButtonWithIcon/ButtonWithIcon'
 
 function SettingsPannel ({
   show = false,
@@ -24,35 +24,30 @@ function SettingsPannel ({
     handleLogout()
     void router.replace(PATH.SIGN_IN)
   }
-  const handleDeleteUser = () => {
-    deleteUser(PATH.API.USER_BY_ID, userID)
-    localStorage.clear()
-    void router.push(PATH.HOME)
-  }
+
   return (
     <>
       {show && (
         <>
           <div className={styles.container}>
             <p className={styles.title}>Settings</p>
-            <button
+            <div
               className={styles.option}
               onClick={async () => await router.push(PATH.HOME)}
             >
-              Go Home
-            </button>
-            <button
+              <ButtonWithIcon text='Go Home' icon='home'/>
+            </div>
+            <div
               className={styles.option}
               onClick={async () => await router.push(PATH.PROFILE + `/${userName}`)}
             >
-              Your Profile
-            </button>
-            <button className={styles.option} onClick={handleSignOut}>
-              Sign Out
-            </button>
-            <button className={styles.optionDanger} onClick={handleDeleteUser}>
-              Delete User
-            </button>
+              <ButtonWithIcon text='Your Profile' icon='user'/>
+
+            </div>
+            <div className={styles.option} onClick={handleSignOut}>
+            <ButtonWithIcon text='Sign out' icon='close'/>
+            </div>
+
           </div>
 
           <div
