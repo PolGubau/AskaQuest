@@ -144,13 +144,13 @@ export default function userPage ({
           <section>
             {collectionsByUser.length === 0
               ? (
-              <p>This user has not created anything 😥</p>
+                  you ? <p> Here will appear your collections! </p> : <p>This user has not created anything 😥</p>
                 )
               : (<>
-                <p>Collections made by {user.userName}</p>
-
-              <QuestGallery collections={collectionsByUser} />
+                  <p>Collections made by {user.userName}</p>
+                  <QuestGallery collections={collectionsByUser} />
                 </>)}
+
             {you && (
               <Link href={PATH.CREATE_QUEST}>
                 <a>
