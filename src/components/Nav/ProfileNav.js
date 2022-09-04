@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -17,18 +16,29 @@ export default function ProfileNav () {
   const [loading, setLoading] = useState(false)
   const { con } = getUserFromLocalStorage()
   const { user, status } = con
+
   switch (status) {
     case 1:{
       const { userName, avatar, ID } = user
+
+      const handleLinkToProfile = () => {
+        if (router.pathname === PATH.PROFILE) {
+          router.reload()
+          setLoading(true)
+        } else {
+          router.push(`/profile/${userName}`)
+        }
+      }
+
       return (
         <>
           <div className={styles.RightNav}>
             {loading && <SquareLoader />}
             {!loading && (
-              <Link href={`/profile/${userName}`}>
-                <a>
+
                   <div
-                    onClick={() => setLoading(true)}
+                    onClick={handleLinkToProfile}
+
                     className={styles.profileLink}
                     style={{ backgroundSmooth }}
                   >
@@ -48,8 +58,7 @@ export default function ProfileNav () {
                       className={styles.avatar}
                     />
                   </div>
-                </a>
-              </Link>
+
             )}
             <section className="settings">
               <NavSettings userID={ID}userName={userName}/>
