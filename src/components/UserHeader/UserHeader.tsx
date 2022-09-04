@@ -40,8 +40,8 @@ export default function UserHeader ({
       name = data.userName
       image = data.image ?? `https://api.multiavatar.com/${name}.svg`
     } else {
-      name = 'Deletted User'
-      image = 'https://api.multiavatar.com/Deletted.svg'
+      name = 'Deleted User'
+      image = 'https://api.multiavatar.com/Deleted.svg'
     }
   }
   return (
