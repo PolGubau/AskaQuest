@@ -10,10 +10,15 @@ export default function ProfileFollowers ({
   followers: string[] | null
   you: boolean
 }) {
+  if (typeof followers === 'string') {
+    followers = JSON.parse(followers)
+  }
   return (
     <>
-      {followers && followers.length > 0
-        ? (
+    {followers?.length === 0 && you ? <p>You have no followers yet 🥴</p> : <p>Be the first one to follow {userName}!</p>}
+
+      {followers && followers.length > 0 &&
+        (
         <div className={styles.container}>
           {you
             ? (<>
@@ -43,10 +48,8 @@ export default function ProfileFollowers ({
               .slice(0, 3)}
           </div>
         </div>
-          )
-        : (
-        `Be the first one to follow ${userName}!`
-          )}
+        )
+      }
     </>
   )
 }
