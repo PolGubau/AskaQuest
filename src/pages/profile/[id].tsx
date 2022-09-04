@@ -18,6 +18,7 @@ import getUserFromLocalStorage from 'src/hooks/getUserFromLocalStorage'
 import ProfileSignInPannel from 'src/components/Layout/ProfilePageFragments/SignInPannel/ProfileSignInPannel'
 import ProfileFollowers from 'src/components/Layout/ProfilePageFragments/ProfileFollowers/ProfileFollowers'
 import ProfileEditProfile from 'src/components/Layout/ProfilePageFragments/ProfileEditProfile/ProfileEditProfile'
+import LastCollectionsDone from 'src/components/Layout/ProfilePageFragments/LastCollectionsDone/LastCollectionsDone'
 
 export default function userPage ({
   user,
@@ -37,8 +38,6 @@ export default function userPage ({
   const [isFollowed, setIsFollowed] = useState(false)
 
   const { con } = getUserFromLocalStorage()
-
-  console.log(con)
 
   let userLoged: UserInterface | undefined
   if (con.status === 1) {
@@ -72,6 +71,7 @@ export default function userPage ({
 
   const dateToAgo = dateCreation ? new Date(dateCreation) : new Date()
 
+  const you = userLoged?.ID === ID
   return (
     <>
       <Nav
@@ -96,10 +96,9 @@ export default function userPage ({
               )}
               {/* Pannel for signin */}
 
-              {(userLoged == null) && <ProfileSignInPannel userName={userName} />}
-
+              {(userLoged === null) && <ProfileSignInPannel userName={userName} />}
               {/* userLoged is not You */}
-              {(userLoged != null) && userLoged?.ID !== ID && (
+              {(userLoged !== null) && you && (
                 <div className={styles.followersContainer}>
                   <div
                     onClick={handleFollowCall}
@@ -116,26 +115,26 @@ export default function userPage ({
                 </div>
               )}
               {/* If are you, edit button */}
-              {userLoged?.ID === ID && (
+              {you && userLoged && (
                 <ProfileEditProfile userLoged={userLoged} />
               )}
             </div>
-            <div>
               <div className={styles.rightHeader}>
+                <div className={styles.followersAndCollectionsDone}>
                 <ProfileFollowers
                   userName={userName}
                   followers={followers}
-                  you={userLoged?.ID === ID}
+                  you={you}
                 />
+                {you && userLoged && <LastCollectionsDone user={userLoged}/>}
+                </div>
                 <Image
                   className={styles.avatar}
                   alt={`${userName}&apos;s avatar`}
                   src={image ?? `https://api.multiavatar.com/${userName}.svg`}
                   width={200}
                   height={200}
-                />
-              </div>
-            </div>
+                /></div>
           </header>
           <section>
             {collectionsByUser.length === 0
@@ -145,13 +144,31 @@ export default function userPage ({
               : (
               <QuestGallery collections={collectionsByUser} />
                 )}
-            {userLoged?.ID === ID && (
+            {you && (
               <Link href={PATH.CREATE_QUEST}>
                 <a>
                   <AddNewButton />
                 </a>
               </Link>
             )}
+
+          </section>
+          <section>
+            {userLoged?.collections_done?.length === 0 ?? !userLoged?.collections_done
+              ? (
+              <p>This user has not done any collection...</p>
+                )
+              : (
+              <QuestGallery collections={userLoged.collections_done} />
+                )}
+            {you && (
+              <Link href={PATH.CREATE_QUEST}>
+                <a>
+                  <AddNewButton />
+                </a>
+              </Link>
+            )}
+
           </section>
         </main>
       </AppLayout>
