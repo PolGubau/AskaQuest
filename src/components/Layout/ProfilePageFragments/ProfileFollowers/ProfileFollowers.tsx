@@ -7,18 +7,21 @@ export default function ProfileFollowers ({
   you = false
 }: {
   userName: string
-  followers: string[]
+  followers: string[] | null
   you: boolean
 }) {
   return (
     <>
-      {followers.length > 0
+      {followers && followers.length > 0
         ? (
         <div className={styles.container}>
           {you
-            ? (
-            <p>{'Some of your followers:'}</p>
+            ? (<>
+              {(followers.length > 1) && <p>{`Some of your ${followers.length} followers:`}</p>}
+              { (followers.length === 1) && <p>{'Your follower:'}</p>}
+              </>
               )
+
             : (
             <p>{`Some of ${userName}'s followers:`}</p>
               )}
