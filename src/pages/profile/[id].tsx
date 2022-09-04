@@ -49,7 +49,10 @@ export default function userPage ({
   if (userLoged != null) {
     if (userLoged.ID !== ID) {
       // if there is only 1 follower its transformed to a number, lets pass it to an array
-      let followingArray: any[] = JSON.parse(userLoged.following)
+      let followingArray = userLoged.following
+      if (typeof followingArray === 'string') {
+        followingArray = JSON.parse(followingArray)
+      }
       if (typeof followingArray === 'number') {
         followingArray = [followingArray]
       }
