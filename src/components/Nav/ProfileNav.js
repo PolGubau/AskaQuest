@@ -10,6 +10,7 @@ import logo from 'src/assets/logo.svg'
 import { useState } from 'react'
 import SquareLoader from '../loaders/SquaresLoader/SquareLoader'
 import getUserFromLocalStorage from 'src/hooks/getUserFromLocalStorage'
+import ButtonWithIcon from '../Buttons/ButtonWithIcon/ButtonWithIcon'
 //
 export default function ProfileNav () {
   const router = useRouter()
@@ -74,16 +75,9 @@ export default function ProfileNav () {
       onClick={() => router.push(PATH.SIGN_IN)}
     >
       <div className={styles.nameProfile}>
-        <p className={styles.userName}>Anonymous</p>
-        <span>Click for Sign in</span>
+      <ButtonWithIcon icon='user' text='Click for Sign in'/>
       </div>
-      <Image
-        src={'https://api.multiavatar.com/a.svg' || logo}
-        alt={'Anonymous avatar'}
-        width={55}
-        height={55}
-        className={styles.avatar}
-      />
+
     </div>
   )
 }
