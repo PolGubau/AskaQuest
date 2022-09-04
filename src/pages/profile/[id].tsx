@@ -19,6 +19,7 @@ import ProfileSignInPannel from 'src/components/Layout/ProfilePageFragments/Sign
 import ProfileFollowers from 'src/components/Layout/ProfilePageFragments/ProfileFollowers/ProfileFollowers'
 import ProfileEditProfile from 'src/components/Layout/ProfilePageFragments/ProfileEditProfile/ProfileEditProfile'
 import LastCollectionsDone from 'src/components/Layout/ProfilePageFragments/LastCollectionsDone/LastCollectionsDone'
+import LastCollectionsDoneToGrid from 'src/components/Layout/ProfilePageFragments/LastCollectionsDone/LastCollectionsDoneToGrid/LastCollectionsDoneToGrid'
 
 export default function userPage ({
   user,
@@ -46,12 +47,16 @@ export default function userPage ({
 
   // check if you are this user
   if (userLoged != null) {
-    // if there is only 1 follower its transformed to a number, lets pass it to an array
-    let followingArray: any[] = JSON.parse(userLoged.following)
-    if (typeof followingArray === 'number') {
-      followingArray = [followingArray]
-    }
     if (userLoged.ID !== ID) {
+      // if there is only 1 follower its transformed to a number, lets pass it to an array
+      let followingArray: any[] = JSON.parse(userLoged.following)
+      if (typeof followingArray === 'number') {
+        followingArray = [followingArray]
+      }
+      if (!followingArray) {
+        followingArray = []
+      }
+      console.log(followingArray, user.ID)
       const isBeenFollowed: boolean = followingArray.find(
         (following: { ID: number }) => following.ID === Number(user.ID)
       )
@@ -98,7 +103,7 @@ export default function userPage ({
 
               {(userLoged === null) && <ProfileSignInPannel userName={userName} />}
               {/* userLoged is not You */}
-              {(userLoged !== null) && you && (
+              {(userLoged) && !you && (
                 <div className={styles.followersContainer}>
                   <div
                     onClick={handleFollowCall}
@@ -141,9 +146,11 @@ export default function userPage ({
               ? (
               <p>This user has not created anything 😥</p>
                 )
-              : (
+              : (<>
+                <p>Collections made by {user.userName}</p>
+
               <QuestGallery collections={collectionsByUser} />
-                )}
+                </>)}
             {you && (
               <Link href={PATH.CREATE_QUEST}>
                 <a>
@@ -154,20 +161,8 @@ export default function userPage ({
 
           </section>
           <section>
-            {userLoged?.collections_done?.length === 0 ?? !userLoged?.collections_done
-              ? (
-              <p>This user has not done any collection...</p>
-                )
-              : (
-              <QuestGallery collections={userLoged.collections_done} />
-                )}
-            {you && (
-              <Link href={PATH.CREATE_QUEST}>
-                <a>
-                  <AddNewButton />
-                </a>
-              </Link>
-            )}
+
+                <LastCollectionsDoneToGrid collections={user?.collections_done} you={you} userLoged={user}/>
 
           </section>
         </main>
