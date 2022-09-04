@@ -14,10 +14,12 @@ import Link from 'next/link'
 //
 export default function EachQuest ({
   collection,
-  userLoged
+  userLoged,
+  extraInfo = { times: 0, id: 0, per: 0 }
 }: {
   collection: CollectionInterface
   userLoged: UserInterface | undefined
+  extraInfo: {times: number, id: number, per: number}
 }) {
   const {
     ID,
@@ -49,7 +51,14 @@ export default function EachQuest ({
               : (
               <UserHeaderLoading />
                 )}
+                <div className={styles.rightHeader}>
             <LikesQuest collection={collection} />
+            {extraInfo.times > 0 && (
+              <div className={styles.times}>
+                <p>Played {extraInfo.times} times</p>
+                </div>
+            )}
+            </div>
           </div>
           <div>
             <h3 className={styles.title}>{title}</h3>
