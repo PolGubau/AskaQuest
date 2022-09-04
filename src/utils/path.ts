@@ -17,6 +17,7 @@ const PATH = {
     USERS: `${DOMINIO}/api/users`,
     USER_BY_ID: `${DOMINIO}/api/users/id`,
     USER_BY_USERNAME: `${DOMINIO}/api/users/userName`,
+    RESET_USER: `${DOMINIO}/api/users/reset`,
     //
     ALL_COLLECTIONS: `${DOMINIO}/api/collections`,
     COLLECTION_BY_ID: `${DOMINIO}/api/collections`,
