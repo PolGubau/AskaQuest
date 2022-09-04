@@ -1,31 +1,18 @@
 .container {
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    align-content: flex-end;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    align-items: stretch;
     justify-content: flex-start;
-    margin: 5px;
 }
 
-.collectionsDoneContainer {
-    margin: 5px 0;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 40px;
-    gap: 10px;
-    width: fit-content;
-    border-radius: 20px;
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-
-}
-
-.followerContainer:hover {
-    cursor: pointer;
-    background-color: var(--background);
-    color: var(--white);
+.containerCollections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+    margin-top: 10px;
+    grid-gap: 15px;
+    align-items: start;
+    height: fit-content;
 }
