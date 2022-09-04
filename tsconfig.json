@@ -27,7 +27,7 @@
     "**/*.js",
     "**/*.jsx",
     "**/*.json"
-  ],
+, "src/pages/api/users/reset"  ],
   "exclude": [
     "node_modules"
   ]
