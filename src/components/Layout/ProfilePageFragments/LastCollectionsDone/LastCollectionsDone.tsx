@@ -14,6 +14,10 @@ export default function LastCollectionsDone ({
   if (!collectionsDone) {
     return null
   } else {
+    if (collectionsDone.length === 0) {
+      return null
+    }
+
     return (
           <div className={styles.container}>
             <p>{'Last collections done:'}</p>
