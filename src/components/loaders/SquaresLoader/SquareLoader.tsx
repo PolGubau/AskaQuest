@@ -1,5 +1,4 @@
 import styles from './squaresLoader.module.css'
-import styled from 'styled-components'
 
 export default function SquareLoader ({
   squaresColor = '#0270e1',
@@ -10,34 +9,18 @@ export default function SquareLoader ({
   count?: number
   size?: number
 }) {
-  const Loader = styled.div`
-    size: ${size}px;
-    display: flex;
-    gap: 0.8rem;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
-    flex-direction: row;
-`
-  const Box = styled.div`
-  border-radius: 10%;
-  width: ${size}px;
-  height: ${size}px;
-  animation: rotate 2s infinite;
-  background-color: ${squaresColor};
-`
   return (
     <>
-      <Loader>
+      <div className={styles.loader}>
         {[...Array(count)].map((_, i) => (
-          <Box
+          <div
           key={i}
+          style={{ width: size, height: size, backgroundColor: squaresColor }}
           className={styles.box}
-        ></Box>
+        ></div>
         ))}
 
-      </Loader>
+      </div>
     </>
   )
 }
