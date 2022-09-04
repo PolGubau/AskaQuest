@@ -10,9 +10,8 @@ module.exports = {
   images: {
     domains: ['avatars.githubusercontent.com', 'api.multiavatar.com'],
     formats: ['image/webp']
-  }
-}
-module.exports = {
+  },
+
   async headers () {
     return [
       {
