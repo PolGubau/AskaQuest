@@ -12,7 +12,7 @@ export const updateUser = (endpoint: string, userUpdated: UserInterface) => {
     following,
     role,
     image,
-    collections_done
+    collections_done: collectionsDone
   }: UserInterface = userUpdated
 
   fetch(`${endpoint}/${userUpdated.ID}`, {
@@ -26,7 +26,7 @@ export const updateUser = (endpoint: string, userUpdated: UserInterface) => {
       password,
       followers,
       following,
-      collections_done,
+      collectionsDone,
       role,
       image,
       liked,
