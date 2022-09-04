@@ -13,10 +13,16 @@ export default function ProfileFollowers ({
   if (typeof followers === 'string') {
     followers = JSON.parse(followers)
   }
-  return (
-    <>
-    {followers?.length === 0 && you ? <p>You have no followers yet 🥴</p> : <p>Be the first one to follow {userName}!</p>}
+  console.log(followers)
 
+  if (followers?.length === 0) {
+    if (you) {
+      return (<p>You have no followers yet 🥴</p>)
+    } else {
+      return (<p>Be the first one to follow {userName}!</p>)
+    }
+  } else {
+    return <>
       {followers && followers.length > 0 &&
         (
         <div className={styles.container}>
@@ -26,7 +32,6 @@ export default function ProfileFollowers ({
               { (followers.length === 1) && <p>{'Your follower:'}</p>}
               </>
               )
-
             : (
             <p>{`Some of ${userName}'s followers:`}</p>
               )}
@@ -51,5 +56,6 @@ export default function ProfileFollowers ({
         )
       }
     </>
-  )
+  }
 }
+//
