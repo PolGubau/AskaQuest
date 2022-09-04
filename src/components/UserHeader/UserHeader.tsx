@@ -25,10 +25,10 @@ export default function UserHeader ({
   let loading = false
   if (you) {
     const {
-      con: { data }
+      con: { user }
     }: any = getUserFromLocalStorage()
-    name = data?.userName
-    image = data?.image
+    name = user?.userName
+    image = user?.image
   }
 
   if (searchById.state) {
