@@ -147,6 +147,9 @@ export default function ProfileEditProfile ({
       }
     })
   }
+  const handleResetUser = () => {
+    updateUser(PATH.API.RESET_USER, { ...userLoged })
+  }
   return (
     <>
       <div className={styles.conatiner}>
@@ -166,6 +169,9 @@ export default function ProfileEditProfile ({
                 </div>
                 <div className={styles.button} onClick={handleChangeEmail}>
                   <ButtonWithIcon icon="email" text="Change Email" />
+                </div>
+                <div className={styles.button} onClick={handleResetUser}>
+                  <ButtonWithIcon icon="delete" text="Reset Account" backgroundColor={colors.wrong}/>
                 </div>
                 <div className={styles.button} onClick={handleDeleteUser}>
                   <ButtonWithIcon icon="delete" text="Delete Account" backgroundColor={colors.wrong}/>
