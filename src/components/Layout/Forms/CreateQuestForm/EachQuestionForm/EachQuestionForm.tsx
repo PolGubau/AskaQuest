@@ -115,7 +115,7 @@ export default function EachQuestionForm ({ saveQuestion }: any) {
                   name="AnswerRadio"
                 />
                 <label htmlFor="Answer1radio">
-                  {question.answers[0].length > 1
+                  {question.answers[0].length > 0
                     ? question.answers[0]
                     : 'Answer 1'}
                 </label>
@@ -131,7 +131,7 @@ export default function EachQuestionForm ({ saveQuestion }: any) {
                 />
 
                 <label htmlFor="Answer2radio">
-                  {question.answers[1].length > 1
+                  {question.answers[1].length > 0
                     ? question.answers[1]
                     : 'Answer 2'}
                 </label>
@@ -146,7 +146,7 @@ export default function EachQuestionForm ({ saveQuestion }: any) {
                   name="AnswerRadio"
                 />
                 <label htmlFor="Answer3radio">
-                  {question.answers[2].length > 1
+                  {question.answers[2].length > 0
                     ? question.answers[2]
                     : 'Answer 3'}
                 </label>
