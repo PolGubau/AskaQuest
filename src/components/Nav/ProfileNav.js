@@ -3,8 +3,6 @@ import Image from 'next/image'
 import 'react-loading-skeleton/dist/skeleton.css'
 import PATH from 'src/utils/path'
 import styles from './ProfileNav.module.css'
-import { backgroundSmooth } from 'src/styles/theme'
-
 import NavSettings from 'src/components/Nav/NavSettings'
 import logo from 'src/assets/logo.svg'
 import { useState } from 'react'
@@ -41,7 +39,6 @@ export default function ProfileNav () {
                     onClick={handleLinkToProfile}
 
                     className={styles.profileLink}
-                    style={{ backgroundSmooth }}
                   >
                     <div className={styles.nameProfile}>
                       <p className={styles.userName}>{userName}</p>
@@ -71,7 +68,6 @@ export default function ProfileNav () {
   return (
     <div
       className={styles.profileLink}
-      style={{ backgroundSmooth }}
       onClick={() => router.push(PATH.SIGN_IN)}
     >
       <div className={styles.nameProfile}>
