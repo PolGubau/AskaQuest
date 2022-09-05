@@ -18,7 +18,11 @@ export default function QuestGallery ({ collections = [] }: any) {
             <EachQuest
               collection={collection}
               key={collection.ID}
-              userLoged={userLoged}
+              userLoged={userLoged} extraInfo={{
+                times: 0,
+                id: 0,
+                per: 0
+              }}
             />
           ))}
 
@@ -31,8 +35,11 @@ export default function QuestGallery ({ collections = [] }: any) {
                 <EachQuest
                   userLoged={undefined}
                   collection={offlineCollection}
-                  key={offlineCollection.ID}
-                />
+                  key={offlineCollection.ID} extraInfo={{
+                    times: 0,
+                    id: 0,
+                    per: 0
+                  }} />
               ))}
             </div>
           </div>
