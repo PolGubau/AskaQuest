@@ -9,9 +9,9 @@ import ErrorNoQuestions from 'src/components/Question/ErrorNoQuestions'
 import { bigAlert } from 'src/utils/notifications'
 import { useRouter } from 'next/router'
 
-import UserInterface from 'src/interfaces/User'
+import UserInterface from 'src/interfaces/user'
 import { CollectionInterface } from 'src/interfaces/Collection'
-import { QuestionInterface } from 'src/interfaces/Question'
+import { QuestionInterface } from 'src/interfaces/question'
 //
 export default function CollectionPage ({
   error = false,

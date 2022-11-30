@@ -4,8 +4,8 @@ import { CollectionInterface } from 'src/interfaces/Collection'
 import { handleLike } from 'src/services/handleLike/handleLike'
 import styles from './LikesQuest.module.css'
 import getUserFromLocalStorage from 'src/hooks/getUserFromLocalStorage'
-import UserInterface from 'src/interfaces/User'
-
+import UserInterface from 'src/interfaces/user'
+import { bigAlert } from 'src/utils/notifications'
 export default function LikesQuest ({
   collection
 }: {
@@ -38,8 +38,8 @@ export default function LikesQuest ({
 
   const handleLikeCall = (e: { preventDefault: () => void }) => {
     e.preventDefault()
-
-    if ((userLoged != null) && collection) {
+    if (!userLoged) return bigAlert('Oupsss', 'You need to be signed in to like a Quest', 'warning')
+    if ((userLoged) && collection) {
       handleLike(userLoged, collection, setLiked, setLikes)
     }
   }

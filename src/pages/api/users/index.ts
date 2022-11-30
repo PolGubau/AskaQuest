@@ -15,7 +15,7 @@ export default async function handler(
     case 'GET':
       try {
         const query =
-          'SELECT "ID", date_creation, "userName", password FROM public."Users";'
+          'SELECT * FROM public."Users";'
         const response = await conn.query(query)
         return res.json(response.rows)
       } catch (error) {

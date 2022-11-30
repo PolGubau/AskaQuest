@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: wrap;
+    background-color: var(--clean-background);
+    border: 1px solid var(--dark-background);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.container:hover {
+    cursor: pointer;
+    background-color: var(--background);
+
+}
+
+
+.name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--black);
+}

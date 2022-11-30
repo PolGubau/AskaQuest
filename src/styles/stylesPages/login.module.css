@@ -10,15 +10,17 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .formulario {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  width: 40%;
 }
+
 .message {
   margin-bottom: 15px;
 }
+
 .input {
   width: 100%;
   padding: 10px;
@@ -26,6 +28,7 @@
   border-radius: 0 10px 10px 0;
   border: 1px solid var(--background);
 }
+
 .inputError {
   width: 100%;
   padding: 10px;
@@ -33,6 +36,7 @@
   border-radius: 0 10px 10px 0;
   border: 1px solid var(--wrong);
 }
+
 .inputBig {
   height: 49px;
   margin-bottom: 10px;
@@ -43,6 +47,7 @@
   flex-wrap: nowrap;
   align-content: center;
 }
+
 .inputIcon {
   height: 49px;
   width: 49px;
@@ -53,6 +58,7 @@
   justify-content: center;
   align-content: center;
 }
+
 .SignInButton {
   background-color: var(--background);
   outline: none;
@@ -60,17 +66,20 @@
   border-radius: 10px;
   padding: 6px 12px;
 }
+
 .SignInButton:hover {
   background-color: var(--secondary);
   color: var(--white);
   cursor: pointer;
 }
+
 .buttonSection {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 15px;
 }
+
 .buttonsSectionContainer {
   display: flex;
   gap: 10px;
@@ -81,6 +90,7 @@
   align-content: center;
   align-items: center;
 }
+
 .CreateAccountButton {
   background-color: var(--clean-background);
   outline: none;
@@ -88,8 +98,19 @@
   border-radius: 10px;
   padding: 6px 12px;
 }
+
 .CreateAccountButton:hover {
   cursor: pointer;
   background-color: var(--secondary);
   color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .formulario {
+    width: 100%;
+  }
+
+  .buttonsSectionContainer {
+    width: 100%;
+  }
 }

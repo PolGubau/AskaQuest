@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { conn } from 'src/utils/database'
 
-import UserInterface from 'src/interfaces/User'
+import UserInterface from 'src/interfaces/user'
 
 export default async function handler (
   req: NextApiRequest,

@@ -2,6 +2,8 @@ import React from 'react'
 import { AiFillHeart, AiOutlineHeart, AiOutlineUser } from 'react-icons/ai'
 import { BiGridAlt, BiDice5, BiHomeAlt } from 'react-icons/bi'
 import { HiPlus } from 'react-icons/hi'
+import { CgArrowTopRightR } from 'react-icons/cg'
+import { GrPowerReset } from 'react-icons/gr'
 import {
   RiLockPasswordLine,
   RiUserFollowLine,
@@ -11,7 +13,8 @@ import { IoClose } from 'react-icons/io5'
 import {
   MdOutlineAlternateEmail,
   MdExpandLess,
-  MdExpandMore
+  MdExpandMore,
+  MdOutlineDeleteOutline
 } from 'react-icons/md'
 import styles from './ButtonWithIcon.module.css'
 import { colors } from 'src/styles/theme'
@@ -24,6 +27,16 @@ export default function ButtonWithIcon ({
   onlyIcon = false,
   backgroundColor = colors.background,
   color = colors.black
+}:
+{
+  text?: string
+  icon?: string
+  size?: number
+  border?: boolean
+  onlyIcon?: boolean
+  backgroundColor?: string
+  color?: string
+
 }) {
   return (
     <div className={styles.inputBig}>
@@ -49,6 +62,9 @@ export default function ButtonWithIcon ({
         {icon === 'less' && <MdExpandLess size={size} />}
         {icon === 'liked' && <AiFillHeart size={size} />}
         {icon === 'noLiked' && <AiOutlineHeart size={size} />}
+        {icon === 'delete' && <MdOutlineDeleteOutline size={size}/>}
+        {icon === 'squareArrow' && <CgArrowTopRightR size={size}/>}
+        {icon === 'reset' && <GrPowerReset size={size}/>}
       </div>
       {!onlyIcon && <div className={styles.button}>{text}</div>}
     </div>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import ButtonWithIcon from 'src/components/Buttons/ButtonWithIcon/ButtonWithIcon'
-import UserInterface from 'src/interfaces/User'
+import UserInterface from 'src/interfaces/user'
 import { updateUser } from 'src/services/update/updateUser'
 import PATH from 'src/utils/path'
 import Swal from 'sweetalert2'
 import styles from './ProfileEditProfile.module.css'
 import { useRouter } from 'next/router'
 import { colors } from 'src/styles/theme'
+import { deleteUser } from 'src/services/delete/deleteUser'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bcrypt = require('bcryptjs')
 
@@ -124,7 +125,31 @@ export default function ProfileEditProfile ({
       }
     })
   }
-
+  const handleDeleteUser = () => {
+    Swal.fire({
+      title: 'Are you sure you want to delete your account?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: colors.primary,
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your account has been deleted.',
+          'success'
+        )
+        deleteUser(PATH.API.USER_BY_ID, userLoged.ID)
+        localStorage.clear()
+        void router.push(PATH.HOME)
+      }
+    })
+  }
+  const handleResetUser = () => {
+    updateUser(PATH.API.RESET_USER, { ...userLoged })
+  }
   return (
     <>
       <div className={styles.conatiner}>
@@ -144,6 +169,12 @@ export default function ProfileEditProfile ({
                 </div>
                 <div className={styles.button} onClick={handleChangeEmail}>
                   <ButtonWithIcon icon="email" text="Change Email" />
+                </div>
+                <div className={styles.button} onClick={handleResetUser}>
+                  <ButtonWithIcon icon="delete" text="Reset Account" backgroundColor={colors.wrong}/>
+                </div>
+                <div className={styles.button} onClick={handleDeleteUser}>
+                  <ButtonWithIcon icon="delete" text="Delete Account" backgroundColor={colors.wrong}/>
                 </div>
 
                 <div

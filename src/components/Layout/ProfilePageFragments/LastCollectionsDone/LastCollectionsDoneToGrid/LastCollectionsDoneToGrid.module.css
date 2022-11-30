@@ -1,0 +1,18 @@
+.container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.containerCollection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+    margin-top: 10px;
+    grid-gap: 15px;
+    align-items: start;
+    height: fit-content;
+}

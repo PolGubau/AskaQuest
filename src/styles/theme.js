@@ -1,4 +1,3 @@
-import { addOpacityToColor } from './utils'
 
 export const breakpoints = {
   tablet: '960px',
@@ -17,12 +16,6 @@ export const colors = {
   background: '#96d5ff',
   right: '#88ff9c',
   wrong: '#ff8787'
-}
-export const backgroundSmooth = {
-  transition: 'background-color 0.2s ease-in-out',
-  '&:hover': {
-    backgroundColor: addOpacityToColor(colors.background, 0.1)
-  }
 }
 
 export const fontSizes = {

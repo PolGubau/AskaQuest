@@ -1,5 +1,4 @@
 .loader {
-  --size: 30px;
   display: flex;
   gap: 0.8rem;
   align-content: center;

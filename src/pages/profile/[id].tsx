@@ -5,7 +5,7 @@ import QuestGallery from 'src/components/QuestGallery/QuestGallery'
 import Nav from 'src/components/Nav'
 import Image from 'next/image'
 import styles from 'src/styles/stylesPages/profile.module.css'
-import UserInterface from 'src/interfaces/User'
+import UserInterface from 'src/interfaces/user'
 import { CollectionInterface } from 'src/interfaces/Collection'
 import { GetServerSidePropsContext } from 'next'
 import TimeAgo from 'timeago-react'
@@ -18,6 +18,8 @@ import getUserFromLocalStorage from 'src/hooks/getUserFromLocalStorage'
 import ProfileSignInPannel from 'src/components/Layout/ProfilePageFragments/SignInPannel/ProfileSignInPannel'
 import ProfileFollowers from 'src/components/Layout/ProfilePageFragments/ProfileFollowers/ProfileFollowers'
 import ProfileEditProfile from 'src/components/Layout/ProfilePageFragments/ProfileEditProfile/ProfileEditProfile'
+import LastCollectionsDone from 'src/components/Layout/ProfilePageFragments/LastCollectionsDone/LastCollectionsDone'
+import LastCollectionsDoneToGrid from 'src/components/Layout/ProfilePageFragments/LastCollectionsDone/LastCollectionsDoneToGrid/LastCollectionsDoneToGrid'
 
 export default function userPage ({
   user,
@@ -38,8 +40,6 @@ export default function userPage ({
 
   const { con } = getUserFromLocalStorage()
 
-  console.log(con)
-
   let userLoged: UserInterface | undefined
   if (con.status === 1) {
     userLoged = con.user
@@ -47,12 +47,19 @@ export default function userPage ({
 
   // check if you are this user
   if (userLoged != null) {
-    // if there is only 1 follower its transformed to a number, lets pass it to an array
-    let followingArray: any[] = JSON.parse(userLoged.following)
-    if (typeof followingArray === 'number') {
-      followingArray = [followingArray]
-    }
     if (userLoged.ID !== ID) {
+      // if there is only 1 follower its transformed to a number, lets pass it to an array
+      let followingArray = userLoged.following
+      if (typeof followingArray === 'string') {
+        followingArray = JSON.parse(followingArray)
+      }
+      if (typeof followingArray === 'number') {
+        followingArray = [followingArray]
+      }
+      if (!followingArray) {
+        followingArray = []
+      }
+      console.log(followingArray, user.ID)
       const isBeenFollowed: boolean = followingArray.find(
         (following: { ID: number }) => following.ID === Number(user.ID)
       )
@@ -72,6 +79,7 @@ export default function userPage ({
 
   const dateToAgo = dateCreation ? new Date(dateCreation) : new Date()
 
+  const you = userLoged?.ID === ID
   return (
     <>
       <Nav
@@ -96,10 +104,9 @@ export default function userPage ({
               )}
               {/* Pannel for signin */}
 
-              {(userLoged == null) && <ProfileSignInPannel userName={userName} />}
-
+              {(userLoged === null) && <ProfileSignInPannel userName={userName} />}
               {/* userLoged is not You */}
-              {(userLoged != null) && userLoged?.ID !== ID && (
+              {(userLoged) && !you && (
                 <div className={styles.followersContainer}>
                   <div
                     onClick={handleFollowCall}
@@ -116,42 +123,50 @@ export default function userPage ({
                 </div>
               )}
               {/* If are you, edit button */}
-              {userLoged?.ID === ID && (
+              {you && userLoged && (
                 <ProfileEditProfile userLoged={userLoged} />
               )}
             </div>
-            <div>
               <div className={styles.rightHeader}>
+                <div className={styles.followersAndCollectionsDone}>
                 <ProfileFollowers
                   userName={userName}
                   followers={followers}
-                  you={userLoged?.ID === ID}
+                  you={you}
                 />
+                {you && userLoged && <LastCollectionsDone user={userLoged}/>}
+                </div>
                 <Image
                   className={styles.avatar}
                   alt={`${userName}&apos;s avatar`}
                   src={image ?? `https://api.multiavatar.com/${userName}.svg`}
                   width={200}
                   height={200}
-                />
-              </div>
-            </div>
+                /></div>
           </header>
           <section>
             {collectionsByUser.length === 0
               ? (
-              <p>This user has not created anything 😥</p>
+                  you ? <p> Here will appear your collections! </p> : <p>This user has not created anything 😥</p>
                 )
-              : (
-              <QuestGallery collections={collectionsByUser} />
-                )}
-            {userLoged?.ID === ID && (
+              : (<>
+                  <p>Collections made by {user.userName}</p>
+                  <QuestGallery collections={collectionsByUser} />
+                </>)}
+
+            {you && (
               <Link href={PATH.CREATE_QUEST}>
                 <a>
                   <AddNewButton />
                 </a>
               </Link>
             )}
+
+          </section>
+          <section>
+
+                <LastCollectionsDoneToGrid collections={user?.collections_done} you={you} userLoged={user}/>
+
           </section>
         </main>
       </AppLayout>

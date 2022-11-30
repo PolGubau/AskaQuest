@@ -1,5 +1,5 @@
 import { CollectionInterface } from 'src/interfaces/Collection'
-import UserInterface from 'src/interfaces/User'
+import UserInterface from 'src/interfaces/user'
 import { bigAlert } from 'src/utils/notifications'
 import PATH from 'src/utils/path'
 import { updateCollection } from '../update/updateCollection'

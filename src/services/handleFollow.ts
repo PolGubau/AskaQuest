@@ -1,4 +1,4 @@
-import UserInterface from 'src/interfaces/User'
+import UserInterface from 'src/interfaces/user'
 import PATH from 'src/utils/path'
 import { updateUser } from './update/updateUser'
 
@@ -28,6 +28,12 @@ export const handleFollow = async (Profiled: UserInterface, Loged: UserInterface
   if (newUserProfiled.followers === null) {
     newUserProfiled.followers = []
   }
+  if (typeof newUserLoged.following === 'number') {
+    newUserLoged.following = [newUserLoged.following]
+  }
+  if (typeof newUserProfiled.followers === 'number') {
+    newUserProfiled.followers = [newUserProfiled.followers]
+  }
 
   // lets use isFollowed to know if we are following or unfollowing
   if (isFollowed) {
@@ -37,10 +43,20 @@ export const handleFollow = async (Profiled: UserInterface, Loged: UserInterface
   } else {
     // we need to follow
     newUserLoged.following.push(Profiled.ID)
+    console.log(newUserProfiled.followers)
     newUserProfiled.followers.push(Loged.ID)
   }
 
   window.localStorage.setItem('user', JSON.stringify(newUserLoged))
+
+  // const userLogedString = {
+  //   ...newUserLoged,
+  //   following: JSON.stringify(newUserLoged.following)
+  // }
+  // const userProfiledString = {
+  //   ...newUserProfiled,
+  //   followers: JSON.stringify(newUserProfiled.followers)
+  // }
 
   updateUser(PATH.API.USER_BY_ID, newUserLoged)
   updateUser(PATH.API.USER_BY_ID, newUserProfiled)
