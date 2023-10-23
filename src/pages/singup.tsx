@@ -1,15 +1,15 @@
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
-import AppLayout from 'src/components/Layout/AppLayout'
-import styles from 'src/styles/stylesPages/signup.module.css'
-import PATH from 'src/utils/path'
-import Logo from 'src/components/Logo/Logo'
-import SignUpForm from 'src/components/Layout/Forms/SignUpForm/SignUpForm'
-import Nav from 'src/components/Nav'
+import AppLayout from "src/components/Layout/AppLayout/AppLayout";
+import styles from "src/styles/stylesPages/signup.module.css";
+import PATH from "src/utils/path";
+import Logo from "src/components/Logo/Logo";
+import SignUpForm from "src/components/Layout/Forms/SignUpForm/SignUpForm";
+import Nav from "src/components/Nav";
 
 // auth
 const SignUp = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <>
@@ -27,7 +27,7 @@ const SignUp = () => {
               <button
                 className={styles.SignInButton}
                 onClick={(e) => {
-                  router.push(PATH.SIGN_IN).catch((err) => console.log(err))
+                  router.push(PATH.SIGN_IN).catch((err) => console.log(err));
                 }}
               >
                 Sign In
@@ -37,7 +37,7 @@ const SignUp = () => {
         </div>
       </AppLayout>
     </>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

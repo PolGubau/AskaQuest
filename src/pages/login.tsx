@@ -1,17 +1,17 @@
-import Logo from 'src/components/Logo/Logo'
-import AppLayout from 'src/components/Layout/AppLayout/index'
-import SquareLoader from 'src/components/loaders/SquaresLoader/SquareLoader'
-import styles from 'src/styles/stylesPages/login.module.css'
-import PATH from 'src/utils/path'
-import Nav from 'src/components/Nav'
-import LoginForm from 'src/components/Layout/Forms/loginForm/LoginForm'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import Head from 'next/head'
+import Logo from "src/components/Logo/Logo";
+import AppLayout from "src/components/Layout/AppLayout/AppLayout";
+import SquareLoader from "src/components/loaders/SquaresLoader/SquareLoader";
+import styles from "src/styles/stylesPages/login.module.css";
+import PATH from "src/utils/path";
+import Nav from "src/components/Nav";
+import LoginForm from "src/components/Layout/Forms/loginForm/LoginForm";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import Head from "next/head";
 
 const Login = () => {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
@@ -24,13 +24,11 @@ const Login = () => {
           <section>
             <Logo />
             <section className={styles.singupSection}>
-              {isLoading
-                ? (
+              {isLoading ? (
                 <SquareLoader />
-                  )
-                : (
+              ) : (
                 <LoginForm isLoading={isLoading} setLoading={setIsLoading} />
-                  )}
+              )}
             </section>
 
             <section className={styles.buttonSection}>
@@ -41,7 +39,7 @@ const Login = () => {
                   onClick={(e) => {
                     router
                       .push(PATH.CREATE_ACCOUNT)
-                      .catch((err) => console.log(err))
+                      .catch((err) => console.log(err));
                   }}
                 >
                   Create Account
@@ -52,7 +50,7 @@ const Login = () => {
         </div>
       </AppLayout>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

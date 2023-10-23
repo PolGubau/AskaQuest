@@ -1,34 +1,34 @@
-import BodyComponent from 'src/components/BodyComponent/BodyComponent'
-import AppLayout from 'src/components/Layout/AppLayout/index'
-import Nav from 'src/components/Nav/index'
-import { CollectionInterface } from 'src/interfaces/Collection'
+import BodyComponent from "src/components/BodyComponent/BodyComponent";
+import AppLayout from "src/components/Layout/AppLayout/AppLayout";
+import Nav from "src/components/Nav/index";
+import { CollectionInterface } from "src/interfaces/Collection";
 
-import PATH from 'src/utils/path'
+import PATH from "src/utils/path";
 
-export default function HomePage ({
-  collections
+export default function HomePage({
+  collections,
 }: {
-  collections: CollectionInterface[]
+  collections: CollectionInterface[];
 }): JSX.Element {
   return (
     <>
-      <Nav navigatable={false}/>
+      <Nav navigatable={false} />
       <AppLayout>
         <main className="main">
           <BodyComponent collections={collections} />
         </main>
       </AppLayout>
     </>
-  )
+  );
 }
 
-export async function getStaticProps (): Promise<{
+export async function getStaticProps(): Promise<{
   props: {
-    collections: CollectionInterface[]
-  }
+    collections: CollectionInterface[];
+  };
 }> {
   const collections = await fetch(PATH.API.ALL_COLLECTIONS).then(
     async (res) => await res.json()
-  )
-  return { props: { collections } }
+  );
+  return { props: { collections } };
 }
